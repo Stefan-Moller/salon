@@ -1,0 +1,9 @@
+config.php
+app/storage/logs/*.log
+public_html/js/vendors/*
+app/vendors/f1
+*_compiled.php
+*_manifest.php
+*sublime*
+*.log
+*.zip

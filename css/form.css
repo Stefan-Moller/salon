@@ -1,0 +1,196 @@
+form {
+  min-width: 297px;
+  --text-color:  #222;
+  --error-color: crimson;
+  --error-color-dark: #c81234;
+  --modified-color: cadetblue;
+  font-family: sans-serif;
+  background-color: whitesmoke;
+  /*padding: 1em;*/
+  color: #222;
+}
+form label {
+  display: block;
+  padding-bottom: 2px;
+  padding-right: 10px;
+}
+form label, legend {
+  font-size: 0.8em;
+}
+/*button {
+  cursor: pointer;
+  margin: 0.167em 1px;
+  padding: 2px 1em;
+}
+*/
+form footer {
+  padding: 0.5rem 1rem;
+}
+form fieldset {
+  padding: 0.5rem 1rem;  
+}
+.fullname label
+{
+  display: inline-block;
+  min-width: 100px;
+}
+.w100 {
+  width: 100%;
+}
+.required > label::after {
+  color: var(--error-color);
+  content: '*';
+  margin-left: 0.15em;
+}
+.card {
+  word-wrap: break-word;
+  background-color: white;
+  border: 0 solid rgba(0,0,0,.125);
+  border-radius: .35rem;
+  box-shadow: 0 2px 3px rgba(0,0,0,.16);
+  min-width: 230px;
+  padding:  0.67rem;
+  position: relative;
+  margin: 0 1rem;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  /* margin-bottom: -1rem; */
+}
+.field {
+  position: relative;
+  margin-bottom: 1rem;
+}
+.input {
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 0.25rem;
+  font-size: 0.85rem;
+  padding: 0.25rem 0.67rem;
+  line-height: 1;
+}
+.input:focus,
+.input:focus-visible {
+  border-color: #0a58ca;
+  box-shadow: 0 0 0 3px rgba(49,132,253,.5);        
+  outline: 0;
+}
+.input-group label {
+  display: block;
+  font-size: 1em;
+}
+.input-container {
+  margin-bottom: 0.5rem;
+}
+.form-control button {
+  margin: 2px;
+}
+.status-bar {
+  background-color: #ededed;
+  min-height: 26px;
+  padding: 1px 2px;
+}
+.status-bar.top {
+  margin-bottom: 0.67em;
+}
+.status-bar.bottom {
+  margin-top: 0.67em;
+}
+.status-bar span {
+  color: white;
+  display: none;
+  font-size: 12px;
+  text-align: center;
+  border-radius: 5px;
+  line-height: 1em;
+  padding: 3px;
+  margin: 3px 0 3px 3px;
+}
+.action-bar {
+  margin-top: 1rem;
+}
+.unhappy .show-if-unhappy {
+  display: inline-block;
+  background-color: var(--error-color);
+}
+.modified .show-if-modified {
+  display: inline-block;
+  background-color: var(--modified-color);
+}
+.field.modified {
+  color: var(--modified-color);
+}
+.field.unhappy {
+  color: var(--error-color);
+}
+.field.modified .input,
+.field.modified fieldset {
+  border-color: var(--modified-color);
+}
+.field.unhappy .input,
+.field.unhappy fieldset {
+  border-color: var(--error-color);
+}
+.field.unhappy .input:focus,
+.field.unhappy .input:focus-visible {
+  box-shadow: 0 0 0 3px rgb(255 108 108 / 50%);
+}
+.errors {
+  color: var(--error-color);
+}
+.error {
+  padding-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-top: 0.3em;
+  margin-bottom: 0.5em;
+  font-size: 0.8em;
+  font-style: italic;
+  line-height: 1em;
+  text-overflow: ellipsis;
+}
+.errors.summary {
+  color: darkred;
+  background-color: pink;
+  font-style: italic;
+  font-size: 0.96rem;
+  line-height: 1.25rem;
+  padding: 0.5rem 1rem;
+  height: auto;
+}
+
+
+/* DARK THEME */
+.dark {
+  background-color: #222;
+}
+.dark .card {
+  background-color: ghostwhite;
+}
+.dark #title {
+  margin-top: 0;
+}
+.dark .status-bar {
+  background-color: inherit;
+  display: none;
+}
+.dark :is(.unhappy, .modified) .status-bar {
+  display: block;
+  height: auto;
+  margin-bottom: 1em;
+  color: var(--error-color-dark);
+}
+.field.unhappy {
+  color: var(--error-color-dark);
+}
+.dark .show-if-unhappy {
+  background-color: var(--error-color-dark);
+}
+.dark .field.unhappy .input {
+  border-color: var(--error-color-dark);
+}
+.dark .status-bar .messages {
+  margin-bottom: 0.3em;
+}

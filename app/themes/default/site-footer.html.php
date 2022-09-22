@@ -1,0 +1,1 @@
+<footer>Site Footer &copy; <?=date('Y')?></footer>

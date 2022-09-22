@@ -1,0 +1,262 @@
+/* View Specific CSS */
+.content {
+  border: 7px solid gainsboro;
+}
+
+.calendar {
+  --row--height: 23px;
+  --station--col--width: 100px;
+  --divider--color: gainsboro;
+  --grid--color: silver;
+  --cell--color: white;
+  flex: 1;
+}
+
+.table {
+  display: flex;
+  background-color: var(--grid--color);
+  flex-direction: column;
+}
+
+.thead {
+  display: flex;
+  background-color: var(--grid--color);
+  border-bottom: 2px solid var(--divider--color);
+  width: fit-content;
+  position: sticky;
+  color: black;
+  z-index: 5;
+  top: 0;
+}
+
+.trhead {
+  display: flex;
+  position: sticky;
+  border-right: 2px solid var(--divider--color);
+  background-color: var(--grid--color);
+  flex-direction: column;
+  gap: 1px;
+  left: 0;
+}
+
+.tbody {
+  display: flex;
+  background-color: var(--grid--color);
+  width: fit-content;
+}
+
+.trmain {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.tr {
+  display: flex;
+  flex-direction: row;
+}
+
+.th {
+  flex: none;
+  display: flex;
+  white-space: nowrap;
+  flex-direction: column;
+  background-color: var(--cell--color);
+  justify-content: center;
+  align-items: center;
+  height: 3em;
+}
+
+.th + .th,
+.td + .td {
+  border-left: 1px solid var(--grid--color);
+}
+
+.trhead .min-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.trhead .hour-col, 
+.trhead .min-col, 
+.trmain .td {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--cell--color);
+  justify-content: center;
+  align-items: center;
+}
+
+.hour-col, .min-col {
+  width: 50px;
+}
+
+.station {
+  width: var(--station--col--width);
+}
+
+.min-group .td {
+  height: var(--row--height);
+}
+
+.trmain .td {
+  width: var(--station--col--width);
+  height: var(--row--height);
+}
+
+.button {
+  color: dimgrey;
+  background-color: #eee;
+  padding-left: 0.67rem;
+  padding-right: 0.67rem;
+  display: flex;
+  text-decoration: none;
+  justify-content: center;
+  font-weight: bold;
+  border-radius: 4px;
+  align-items: center;
+  min-height: 1.8rem;
+  margin: 0;
+  border-width: 1px;
+  border-color: #eee;
+  border-style: outset;
+}
+
+.button:visited, .button:focus {
+  color: dimgrey;
+}
+
+.button:hover {
+  color: dodgerblue;
+  opacity: 0.8;
+}
+
+.button.icon {
+  width: 2em;
+  height: 1.67em;
+  background-color: #eee;
+  padding: 0;
+}
+
+.button.icon img {
+  width: 80%;
+  height: 67%;
+}
+
+.today {
+  color: #222;
+  min-height: 1.67em;
+  display: flex;
+  align-items: center;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 0 1em;
+}
+
+.add {
+  margin-left: 1rem;
+}
+
+.select__display small,
+.select--option small {
+  color: grey;
+}
+
+.select--option.selected small,
+.select--option.focus small {
+  color: white;
+}
+
+.field.unhappy .select__display {
+  border-color: crimson;
+}
+
+.field.unhappy .select__display:focus,
+.field.unhappy .select__display:focus-visible {
+  box-shadow: 0 0 0 3px rgb(255 108 108 / 50%);      
+}
+
+.range-input > span {
+  font-size: 0.9rem;
+}
+
+.modal form {
+  width: 100%;
+}
+
+.modal header {
+  padding: 0.67rem;
+  background-color: gold;
+}
+
+.modal main {
+  padding: 1rem;
+}
+
+.modal footer {
+  padding: 0.67rem;
+  background-color: gold;
+}
+
+.modal-inner {
+  max-width: 480px;
+  left: max(2%, calc(50% - 240px));
+  top: 2rem;
+}
+
+#vanilla-calendar-1 {
+  border: 1px solid gainsboro;
+  display: block;
+  background: white;
+  padding: 0.67rem;
+}
+
+form label,
+#vanilla-calendar-1 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;   
+}
+
+.button:focus,
+.button:focus-visible,
+button:focus,
+button:focus-visible {
+  box-shadow: 0 0 0 3px rgba(49,132,253,.5); 
+  /*outline: 1px solid blue;*/
+  /*outline-offset: -2px;*/
+}
+
+.vanilla-calendar-month,
+.vanilla-calendar-year {
+  background: 0;
+  margin: 0 1px;
+  padding: 1px 0.15rem;
+}
+
+.vanilla-calendar-week {
+  grid-column-gap: 2px;
+  -webkit-column-gap: 2px;
+  -moz-column-gap: 2px;
+  column-gap: 2px;
+}
+
+.vanilla-calendar-days {
+  grid-column-gap: 2px;
+  -webkit-column-gap: 2px;
+  -moz-column-gap: 2px;
+  column-gap: 2px;
+}
+
+.vanilla-calendar-day__btn {
+  width: 2em;
+  height: 1.9em;
+  margin: 1px 0;
+}
+
+.vanilla-calendar-header__content {
+  padding: 0 7px;
+}
