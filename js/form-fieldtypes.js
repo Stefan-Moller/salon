@@ -61,7 +61,7 @@ F1.Form.FieldTypes = {
 		afterInit: function() {
 			this.input.addEventListener('change', this.onChange.bind(this));
 			const elInput = document.createElement('input');
-			elInput.type = 'hidden'; elInput.name = this.input.name + '_ymd';
+			elInput.type = 'hidden'; elInput.name = this.input.name; this.input.name =  '_' + this.input.name;
 			this.hidden_input = elInput; this.elm.appendChild(elInput);
 			// console.log('Calendar::afterInit(), input.val =', this.input.value );
 			if (this.input.value) this.setValue( this.input.value );

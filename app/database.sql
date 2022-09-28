@@ -135,3 +135,13 @@ INSERT INTO `settings` (`open_hours`, `slots_per_hour`, `updated_at`, `updated_b
 
 
 -- 2022-07-21 18:07:53
+
+
+CREATE VIEW view_appointments as SELECT a.date, a.start_hour, a.start_min, 
+       c.name as client, c.cell as client_cell, 
+       t.name as therapist, t.cell as therapist_cell, t.colour, 
+       a.station_id, a.notes, a.created_at, a.created_by
+FROM `appointments` as a
+LEFT JOIN `therapists` as t on t.id = a.therapist_id 
+LEFT JOIN `clients` as c on c.id = a.client_id
+ORDER BY a.date, a.start_hour, a.start_min;

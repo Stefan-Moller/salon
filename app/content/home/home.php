@@ -14,6 +14,10 @@
 $view->theme = 'salon';
 $view->title = 'Welcome to Cafe &amp; Salon Allure';
 
+$view->menu[ 'bookings' ] = 'Bookings';
+$view->menu[ 'contact' ] = 'Contact Us';
+
+
 
 // -------------
 // --- POST  ---

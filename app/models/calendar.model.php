@@ -1,7 +1,7 @@
-<?php //bookings.model.php
+<?php //calendar.model.php
 
 
-class TimeSlot {
+class CalendarTimeSlot {
 
   public function __construct( $station, $hour, $min )
   {
@@ -13,11 +13,11 @@ class TimeSlot {
 }
 
 
-class Model {
+class CalendarModel {
 
   private $db;
 
-  public function __construct( $db ) {
+  public function __construct( $db, $today ) {
     $this->db = $db;
     $this->settings = $this->getSettings();
     $this->stations = $this->getStations();
@@ -27,6 +27,7 @@ class Model {
     $this->open_hours = explode( ',', $this->settings->open_hours );
     $this->slots_per_hour = explode( ',', $this->settings->slots_per_hour );
     $this->timeslots = $this->getTimeSlots();
+    $this->appointments = $this->getAppointments( $today );
   }
 
   public function getSettings() {
@@ -56,10 +57,16 @@ class Model {
         for ( $k = 0; $k < count ( $this->slots_per_hour ); $k++ )
         {
           $slot_id = "{$station->id}:$j:$k";
-          $slot = new TimeSlot( $station->no, $j, $k );
+          $slot = new CalendarTimeSlot( $station->no, $j, $k );
           $timeslots[ $slot_id ] = $slot;
         }
     return $timeslots;
+  }
+
+  public function getAppointments( $date ) {
+    return $this->db->query('view_appointments')
+      ->where( 'date=?', $date )
+      ->getAll(); 
   }
   
 }

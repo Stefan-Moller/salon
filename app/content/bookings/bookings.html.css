@@ -93,6 +93,20 @@
   width: 50px;
 }
 
+.hour-group .hour-col {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.hour-group .min-group {
+  color: dimgrey;  
+}
+
+.trmain .td {
+  font-size: 0.8rem;
+  padding: 0 0.25rem;
+}
+
 .station {
   width: var(--station--col--width);
 }
@@ -203,7 +217,7 @@
 .modal-inner {
   max-width: 480px;
   left: max(2%, calc(50% - 240px));
-  top: 2rem;
+  top: 1rem;
 }
 
 #vanilla-calendar-1 {

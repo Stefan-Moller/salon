@@ -11,9 +11,13 @@
  * 
  */
 
+if ( ! $auth->logged_in() ) header( 'Location:login' );
+
 $view->theme = 'salon';
 $view->title = 'Bookings';
 
+$view->menu[ 'setup' ] = 'Setup';
+$view->menu[ 'logout' ] = 'Logout';
 
 $today = $http->get( 'today', date( 'Y-m-d' ) );
 
@@ -26,9 +30,6 @@ $prevday = date( 'Y-m-d', strtotime('-1 day', $datetime) );
 $db->connect( $app->dbConnection[ 'salon' ] );
 
 
-include __DIR__ . '/bookings.model.php';
-$cal = new Model( $db );
-
 
 // -------------
 // --- POST  ---
@@ -36,12 +37,39 @@ $cal = new Model( $db );
 
 if ($http->req->isPost) {
 
+  $error = false;
   $goto = $http->req->referer;
-  $do = $http->get('__action__');
+  $do = $http->get( '__action__' );
+
+  do {
+  
+    include $app->modelsDir . '/appointment.model.php';
+    $appointment = new AppointmentModel( $db );
+
+    try {
+
+      if ( $do == 'save' ) $appointment->save( $http->req->data );
+
+    } 
+
+    catch ( Exception $e ) {
+
+      $error = $e->getMessage();
+
+    }
+
+  } while(0);
+
+
+  if ( $error ) {
+    $session->flash( 'error', $error );
+    debug_log( 'POST Booking Error: ' . $error );
+  }
 
   header( 'Location:' . $goto );
 
 }
+
 
 
 // -----------
@@ -61,6 +89,10 @@ $view->useScriptFile( 'modal.js' );
 $view->useScriptFile( 'select.js' );
 $view->useScriptFile( 'form-fieldtypes.js' );
 $view->useScriptFile( 'form-validators.js' );
+
+
+include $app->modelsDir . '/calendar.model.php';
+$cal = new CalendarModel( $db, $today );
 
 
 include $view->getFile();

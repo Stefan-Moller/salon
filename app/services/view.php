@@ -23,18 +23,7 @@ $view = new View( [
 ] );
 
 
-$view->menu = $auth->logged_in()
-
-  ? [
-      'setup'  => 'Setup',
-      'logout' => 'Logout'
-    ]
-
-  : [
-      'home'     => 'Home',
-      'bookings' => 'Bookings',
-      'contact'  => 'Contact Us',
-    ];
+$view->menu = [ 'home' => 'Home' ];
 
 
 $app->view = $view;

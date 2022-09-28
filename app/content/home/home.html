@@ -6,7 +6,12 @@
 
     <header>
       <h1><?=$view->title?></h1>
+      <if expr="!$auth->logged_in()">
       <a href="login" class="button">Login</a>
+      </if>
+      <if expr="$auth->logged_in()">
+      <a href="logout" class="button">Log Out</a>
+      </if>
     </header>
 
     <div class="content">

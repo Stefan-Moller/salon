@@ -2,7 +2,7 @@
 
 html {
   background-color: #333;
-  color: black;
+  color: silver;
   overflow-y: scroll;
   font-family: sans-serif;
   font-size: 15px;
@@ -18,6 +18,10 @@ body > header {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;
+}
+
+main {
+  color: #222;
 }
 
 main > header,
@@ -39,6 +43,14 @@ body > footer
 main > header .left-side {
   display: flex;
   gap: 1px;  
+}
+
+body > footer {
+  color: #222;
+}
+
+main > footer {
+  color: silver;
 }
 
 nav {
@@ -80,6 +92,15 @@ button, input, optgroup, select, textarea {
   font-size: 100%;
   line-height: 1.15;
   margin: 0;
+}
+
+input, textarea, select {
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+textarea {
+  padding: 0.25rem;
 }
 
 button, input[type="submit"] {
@@ -165,6 +186,19 @@ button, ::file-selector-button {
 .button:hover {
   color: dodgerblue;
   opacity: 0.8;
+}
+
+.mb0 {
+  margin-bottom: 0;
+}
+
+.trim {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;  
+  width: 100%;
 }
 
 #logo {

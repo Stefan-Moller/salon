@@ -7,23 +7,24 @@
         <a class="modal-close" onclick="F1.Modal.close(this,event)">Close X</a>
       </header>
       <main>
+        <input type="hidden" name="id" value="">
         <p class="field required" data-type="Select">
           <label>Client</label>
           <select 
-            name="clientid" 
+            name="client_id" 
             data-locale="en" 
             data-search="true" 
             data-value="0691234321"
             data-placeholder="- Select a client -">
             <?php foreach( $cal->clients as $c ): $lbl = "{$c->name}<small> - {$c->cell}</small>"; ?>
-            <option value="<?=$c->cell?>" title="<?=$lbl?>"><?="{$c->name} - {$c->cell}"?></option>
+            <option value="<?=$c->id?>" title="<?=$lbl?>"><?="{$c->name} - {$c->cell}"?></option>
             <?php endforeach; ?>
           </select>
         </p>
         <p class="field required" data-type="Select">
           <label>Treatment</label>
           <select 
-            name="treatmentid" 
+            name="treatment_id" 
             data-locale="en" 
             data-search="true" 
             data-value="63"
@@ -38,7 +39,7 @@
             <p class="field required" data-type="Select">
               <label>Therapist</label>
               <select 
-                name="therapistid" 
+                name="therapist_id" 
                 data-locale="en" 
                 data-search="true" 
                 data-value="2"
@@ -54,7 +55,7 @@
               <label>Station</label>
               <!-- data-multiple="true"  -->
               <select 
-                name="stationid" 
+                name="station_id" 
                 data-locale="en"
                 data-search="true"
                 data-value="2"
@@ -83,7 +84,8 @@
               <label>Time</label>
               <div class="row" style="gap:0.67rem;align-items: flex-start;">
                 <div class="input-container">
-                  <select class="input" name="hour">
+                  <select class="input" name="start_hour">
+                    <option value="7">7</option>
                     <option value="8" selected="">8</option>
                     <option value="9" >9</option>
                     <option value="10">10</option>
@@ -100,7 +102,7 @@
                 </div>
                 <label style="padding:3px 0">:</label>
                 <div class="col input-container" style="flex:1">
-                  <select class="input" name="min">
+                  <select class="input" name="start_min">
                     <option value="0" selected="">00</option>
                     <option value="15" >15</option>
                     <option value="30" >30</option>
@@ -128,9 +130,18 @@
             </p>
           </div>
         </div>
+        <div class="row" style="gap:1rem;margin-top:1rem">
+          <div class="col" style="flex:1">
+            <p class="field mb0" data-type="Memo">
+              <label>Note</label>
+              <textarea name="notes"></textarea>
+            </p>
+          </div>
+        </div>        
       </main>
       <footer>
-        <button type="submit" class="button" onclick="F1.bookingForm.submit(event)">Submit</button>
+        <button type="submit" class="button" name="__action__" value="save"
+          onclick="F1.bookingForm.submit(event)">Submit</button>
       </footer>
     </form>
   </div>
