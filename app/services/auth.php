@@ -1,20 +1,64 @@
 <?php
 
-include $app->vendorsDir . '/f1/auth/auth.php';
-
 /**
  * app/services/auth.php
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * Date: 24 June 2022
+ * Date: 28 Sep 2022
  * 
- * Last update: 01 July 2022
+ * Last update: 28 September 2022
  * 
  */
 
-use F1\Auth;
+class Auth {
 
-$auth = new Auth();
+  public $app;
+  public $user;
+
+  const USER_ID = '__USER__';
+
+
+  public function __construct( $app ) {
+
+    $this->app = $app;
+    $this->user = isset( $app->session ) ? $app->session->get( self::USER_ID ) : null;
+
+  }
+
+
+  public function logged_in() {
+
+    return $this->user;
+
+  }
+
+
+  public function logout() {
+
+    $this->user = null;
+    $this->app->session->forget( self::USER_ID );
+
+  }
+
+
+  public function login( $username, $password ) {
+
+      $user = $this->app->db->query( 'users' )
+        ->where( 'username=?', $username )
+        ->getFirst();
+
+      $pass = !empty( $user ) and $user->password == $password;
+
+      if ( $pass ) $this->app->session->put( self::USER_ID, $user );
+      else $this->logout();
+
+      return $pass;
+  }
+
+}
+
+
+$auth = new Auth( $app );
 
 $app->auth = $auth;

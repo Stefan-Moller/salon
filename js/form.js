@@ -170,7 +170,7 @@ Form.prototype = {
     const elMsgs = document.createElement( 'div' );
     elMsgs.className = this.errorsClass + ' ' + this.summaryClass;
     elMsgs.innerHTML = errors.map( e => '<div class="error">'+e.message+'</div>' ).join('');
-    this.elm.insertBefore( elMsgs, this.elm.firstElementChild.nextElementSibling );
+    this.elm.insertBefore( elMsgs, this.elm.firstElementChild );
   },
 
   clearErrors: function() { clearErrors( this, '.' + this.summaryClass );

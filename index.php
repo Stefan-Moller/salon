@@ -4,7 +4,7 @@
  * ==    F1 Micro Framework       ==
  * ==     Front Controller        ==
  * ==   C. Moller - 19 Mar 2022   ==
- * ==  Last Update - 22 Sep 2022  ==
+ * ==  Last Update - 28 Sep 2022  ==
  ***********************************/
 
 // -----------------------------------------------------------------------
@@ -23,6 +23,7 @@ require 'config.php';
 
 include $app->servicesDir . '/debug.php';
 include $app->servicesDir . '/http.php';
+include $app->servicesDir . '/session.php';
 include $app->servicesDir . '/database.php';
 include $app->servicesDir . '/controller.php';
 include $app->servicesDir . '/auth.php';

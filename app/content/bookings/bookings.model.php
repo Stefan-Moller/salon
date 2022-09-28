@@ -1,4 +1,4 @@
-<?php //salon.model.php
+<?php //bookings.model.php
 
 
 class TimeSlot {

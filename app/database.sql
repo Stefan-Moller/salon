@@ -5,6 +5,28 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `roles` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `notes` text,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` int(11) NOT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `users` (`id`, `username`, `password`, `roles`, `name`, `email`, `notes`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
+(1, 'neels',  'password', 'super',  'Neels Moller', 'neels@tnc-it.co.za', NULL, '2022-09-27 21:40:22',  1,  NULL, NULL),
+(2, 'michelle', 'password', 'super',  'Michelle', 'info@mrprepaid.co.za', NULL, '2022-09-27 21:40:22',  1,  NULL, NULL),
+(3, 'riette', 'password', 'super',  'Riette Pretorius', 'riette@mrprepaid.co.za', NULL, '2022-09-27 21:40:22',  1,  NULL, NULL);
+
+
 DROP TABLE IF EXISTS `appointments`;
 CREATE TABLE `appointments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

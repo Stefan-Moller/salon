@@ -1,38 +1,18 @@
 <?php
 
 /**
- * ./app/content/salon/salon.php
+ * ./app/content/home/home.php
  * 
- * Salon page controller - 08 Jul 2022
+ * Home page controller - 23 Sep 2022
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 2.0.0 - 14 Jul 2022
+ * @version 1.0.0 - 23 Sep 2022
  * 
  */
 
-$app->menu = [
-  'salon' => 'Home',
-];
-
-
 $view->theme = 'salon';
-$view->title = 'Salon Allure Demo';
-
-
-$today = $http->get( 'today', date( 'Y-m-d' ) );
-
-
-$datetime = strtotime( $today );
-$nextday = date( 'Y-m-d', strtotime('+1 day', $datetime) );
-$prevday = date( 'Y-m-d', strtotime('-1 day', $datetime) );
-
-
-$db->connect( $app->dbConnection[ 'salon' ] );
-
-
-include __DIR__ . '/salon.model.php';
-$cal = new Model( $db );
+$view->title = 'Welcome to Cafe &amp; Salon Allure';
 
 
 // -------------
@@ -53,19 +33,10 @@ if ($http->req->isPost) {
 // --- GET ---
 // -----------
 
-$view->useScriptFile( 'vendors/vanilla-calendar.min.js' );
-$view->useStyleFile( 'vendors/vanilla-calendar.min.css' );
+$files = array_diff(scandir($app->photosDir . ''), array('.', '..'));
 
-$view->useStyleFile( 'form.css' );
-$view->useStyleFile( 'modal.css' );
-$view->useStyleFile( 'select.css' );
-
-$view->useScriptFile( 'form.js' );
-$view->useScriptFile( 'date.js' );
-$view->useScriptFile( 'modal.js' );
-$view->useScriptFile( 'select.js' );
-$view->useScriptFile( 'form-fieldtypes.js' );
-$view->useScriptFile( 'form-validators.js' );
-
+$view->useStyleFile ( 'vendors/f1/slides.css'   );
+$view->useScriptFile( 'vendors/jquery.min.js'   );
+$view->useScriptFile( 'vendors/f1/slideshow.js' );
 
 include $view->getFile();

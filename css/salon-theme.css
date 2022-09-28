@@ -1,22 +1,23 @@
 * { padding: 0; margin: 0; box-sizing: border-box; }
 
 html {
-  color: slategrey;
+  background-color: #333;
+  color: black;
   overflow-y: scroll;
+  font-family: sans-serif;
+  font-size: 15px;
 }
 
 h1,h2,h3 {
-  color: darkcyan;  
+  font-weight: normal;
 }
 
 body > header {
   display: flex;
   flex-wrap: wrap;
-  background: gold;
   justify-content: space-between;
   align-items: center;
-  /*height: 4.5rem;*/
-  padding: 1rem;
+  padding: 0.5rem 1rem;
 }
 
 main > header,
@@ -29,6 +30,7 @@ main > header,
 body > footer 
 {
   display: flex;
+  background-color: gainsboro;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
@@ -46,6 +48,7 @@ nav {
 }
 
 main .content {
+  flex-direction: column;  
   position: relative;
   overflow: auto;
   display: flex;
@@ -112,6 +115,7 @@ button, ::file-selector-button {
   opacity: 0.8;
 }
 
+.menu .active,
 .menu li:hover {
   opacity: 1;
 }
@@ -128,10 +132,45 @@ button, ::file-selector-button {
 
 .menu .active::after,
 .menu li:hover::after {
-  background-color: goldenrod;
+  background-color: salmon;
 }
 
 .menu a {
-  color: lightseagreen;;
+  color: cyan;
   text-decoration: none;
+}
+
+.button {
+  color: dimgrey;
+  background-color: #eee;
+  padding-left: 0.67rem;
+  padding-right: 0.67rem;
+  display: flex;
+  text-decoration: none;
+  justify-content: center;
+  font-weight: bold;
+  border-radius: 4px;
+  align-items: center;
+  min-height: 1.8rem;
+  margin: 0;
+  border-width: 1px;
+  border-color: #eee;
+  border-style: outset;
+}
+
+.button:visited, .button:focus {
+  color: dimgrey;
+}
+
+.button:hover {
+  color: dodgerblue;
+  opacity: 0.8;
+}
+
+#logo {
+  max-height: 5rem;
+}
+
+#back-to-top {
+  display: none;
 }
