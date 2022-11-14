@@ -1,6 +1,6 @@
-<?php //appointment.model.php
+<?php //Booking.model.php
 
-class AppointmentModel {
+class BookingModel {
 
   private $db;
 
@@ -9,6 +9,20 @@ class AppointmentModel {
 
     $this->db = $db;
 
+  }
+
+
+  public function getById( $id ) {
+    return $this->db->query('bookings')
+      ->where( 'id=?', $id )
+      ->getFirst(); 
+  }
+
+
+  public function getAll( $date ) {
+    return $this->db->query('view_bookings')
+      ->where( 'date=?', $date )
+      ->getAll(); 
   }
 
 
@@ -22,8 +36,8 @@ class AppointmentModel {
     if ( ! empty( $data[ 'id' ] ) )
     {
 
-      debug_log( 'Update Appointment: ' . print_r( $data, true ) );
-      $this->db->query( 'appointments' )
+      debug_log( 'Update Booking: ' . print_r( $data, true ) );
+      $this->db->query( 'bookings' )
         ->where( 'id=?', data[ 'id' ] )
         ->update( $data );
 
@@ -34,11 +48,11 @@ class AppointmentModel {
       $data[ 'status_id' ] = 1;
       $data[ 'created_by' ] = 1;
 
-      debug_log( 'Insert Appointment: ' . print_r( $data, true ) );
-      $this->db->insertInto( 'appointments', $data );
+      debug_log( 'Insert Booking: ' . print_r( $data, true ) );
+      $this->db->insertInto( 'bookings', $data );
 
     }
 
-  }
+  }  
   
 }
