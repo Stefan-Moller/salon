@@ -4,9 +4,11 @@ pre {
 }
 
 form {
-  width: 50vw;
+  background-color: whitesmoke;
+  width: calc(min(96vw, 360px));
   padding: 1rem;
   margin: 2rem auto;
+  color: #222;
 }
 
 fieldset {
@@ -23,6 +25,8 @@ fieldset a {
 
 .button {
   font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  width: auto;
 }
 
 .errors {
