@@ -17,7 +17,7 @@ class CalendarModel {
 
   private $db;
 
-  public function __construct( $db, $today ) {
+  public function __construct( $db ) {
     $this->db = $db;
     $this->settings = $this->getSettings();
     $this->stations = $this->getStations();
@@ -27,7 +27,6 @@ class CalendarModel {
     $this->open_hours = explode( ',', $this->settings->open_hours );
     $this->slots_per_hour = explode( ',', $this->settings->slots_per_hour );
     $this->timeslots = $this->getTimeSlots();
-    $this->appointments = $this->getAppointments( $today );
   }
 
   public function getSettings() {
@@ -61,12 +60,6 @@ class CalendarModel {
           $timeslots[ $slot_id ] = $slot;
         }
     return $timeslots;
-  }
-
-  public function getAppointments( $date ) {
-    return $this->db->query('view_appointments')
-      ->where( 'date=?', $date )
-      ->getAll(); 
   }
   
 }
