@@ -1,4 +1,22 @@
-<!DOCTYPE html>
+<?php
+  
+  http_response_code( 404 );
+
+  if ( in_array(
+    strrchr( $http->req->path, '.' ),
+    [
+      '.js',
+      '.css',
+      '.jpg',
+      '.png', 
+      '.svg',
+      '.ico',
+      '.gif',
+      '.pdf'
+    ]
+  ) ) { die(); }
+
+?><!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
