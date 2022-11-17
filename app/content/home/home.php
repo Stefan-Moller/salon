@@ -23,10 +23,10 @@ $view->menu[ 'contact' ] = 'Contact Us';
 // --- POST  ---
 // -------------
 
-if ($http->req->isPost) {
+if ( $http->req->isPost ) {
 
   $goto = $http->req->referer;
-  $do = $http->get('__action__');
+  $do = $http->get( '__action__' );
 
   header( 'Location:' . $goto );
 
@@ -37,10 +37,11 @@ if ($http->req->isPost) {
 // --- GET ---
 // -----------
 
-$files = array_diff(scandir($app->photosDir . ''), array('.', '..'));
+$files = array_diff( scandir( $app->photosDir . '' ), array( '.', '..' ) );
 
-$view->useStyleFile ( 'vendors/f1/slides.css'   );
-$view->useScriptFile( 'vendors/jquery.min.js'   );
-$view->useScriptFile( 'vendors/f1/slideshow.js' );
+$view->useStyleFile ( 'vendors/f1css/slides/slides.css' );
+
+$view->useScriptFile( 'vendors/jquery/jquery.min.js' );
+$view->useScriptFile( 'vendors/f1js/slideshow/slideshow.js' );
 
 include $view->getFile();

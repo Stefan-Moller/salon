@@ -69,10 +69,10 @@ if ( $http->req->isPost ) {
 // --- GET ---
 // -----------
 
-$view->useStyleFile( 'form.css' );
+$view->useStyleFile( 'vendors/f1css/form/form.css' );
 
-$view->useScriptFile( 'form.js' );
-$view->useScriptFile( 'form-validators.js' );
-// $view->useScriptFile( 'form-fieldtypes.js' );
+$view->useScriptFile( 'vendors/f1js/form/form.js' );
+$view->useScriptFile( 'vendors/f1js/form/form-validators.js' );
+// $view->useScriptFile( 'vendors/f1js/form/form-fieldtypes.js' );
 
 include $view->getFile();
