@@ -1,13 +1,14 @@
 /* View Specific CSS */
 .content {
-  border: 7px solid gainsboro;
+  border: 7px solid whitesmoke;
+  min-height: 100vh;
 }
 
 .calendar {
   --row--height: 23px;
   --station--col--width: 100px;
-  --divider--color: gainsboro;
-  --grid--color: silver;
+  --divider--color: #eee;
+  --grid--color: gainsboro;
   --cell--color: white;
   flex: 1;
 }
@@ -16,6 +17,7 @@
   display: flex;
   background-color: var(--grid--color);
   flex-direction: column;
+  gap: 1px;
 }
 
 .thead {
@@ -24,8 +26,9 @@
   border-bottom: 2px solid var(--divider--color);
   width: fit-content;
   position: sticky;
-  color: black;
+  color: #444;
   z-index: 5;
+  gap: 1px;
   top: 0;
 }
 
@@ -35,6 +38,7 @@
   border-right: 2px solid var(--divider--color);
   background-color: var(--grid--color);
   flex-direction: column;
+  z-index: 10;
   gap: 1px;
   left: 0;
 }
@@ -43,100 +47,140 @@
   display: flex;
   background-color: var(--grid--color);
   width: fit-content;
+  gap: 1px;
 }
 
 .trmain {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 1px;
 }
 
 .tr {
   display: flex;
   flex-direction: row;
+  gap: 1px;
 }
 
 .th {
   flex: none;
   display: flex;
-  white-space: nowrap;
   flex-direction: column;
-  background-color: var(--cell--color);
   justify-content: center;
   align-items: center;
+  white-space: nowrap;
+  background-color: var(--cell--color);
   height: 3em;
 }
 
+/*
 .th + .th,
 .td + .td {
   border-left: 1px solid var(--grid--color);
 }
+*/
 
-.trhead .min-group {
-  display: flex;
+.station-col-head{
+/*  display: flex;
   flex-direction: column;
-  gap: 1px;
-}
-
-.trhead .hour-col, 
-.trhead .min-col, 
-.trmain .td {
-  flex: none;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--cell--color);
-  justify-content: center;
   align-items: center;
+  justify-content: center;*/
+  height: 100%;
+  width: var(--station--col--width);
+  border: 3px outset #ffffff30;
+  border-radius: 3px;
+  padding: 1px 0 3px;
+  text-align: center;  
 }
 
 .hour-col, .min-col {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 50px;
+  gap: 1px;
 }
 
-.hour-group .hour-col {
+.hour-col {
+  background-color: var(--cell--color);
   font-weight: bold;
+}
+
+.tbody .hour-col {
   font-size: 1.5rem;
 }
 
-.hour-group .min-group {
-  color: dimgrey;  
+.time-slot {
+  background-color: var(--cell--color);
+  height: var(--row--height);
+  position: relative;
+  width: 100%;
 }
 
-.trmain .td {
-  font-size: 0.8rem;
-  padding: 0 0.25rem;
+.hour-group .time-slot {
+  line-height: var(--row--height);
+  text-align: center;
+  color: dimgrey;
 }
 
-.station {
+.station-col .time-slot {
+  overflow-y: visible;
+}
+
+.station-col .time-slot:hover:not(.booked) {
+  opacity: 0.5;
+}
+
+
+.station-col {
+  flex: none;
+  display: flex;
   width: var(--station--col--width);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;  
+  gap: 1px;
+}
+
+.booking {
+  border-radius: 8px;
+  border: 3px solid #fff8;
+  color: whitesmoke;
+  font-size: 0.8rem;
+  padding: 0.25rem;
+  cursor: pointer;
+  position: absolute;
+  width: 100%;
+  z-index: 5;
+}
+
+.booking * {
+  pointer-events: none;
+}
+
+.pop-over {
+  display: none;
+  background-color: whitesmoke;
+  box-shadow: 1px 1px 7px #0005;
+  transform: translateY(-50%);
+  position: absolute;
+  width: 320px;
+  padding: 1rem;
+  z-index: 1;
+  left: 100%;
+  top: 50%;
+}
+
+.pop-over.show {
+  display: block;
 }
 
 .min-group .td {
   height: var(--row--height);
 }
 
-.trmain .td {
-  width: var(--station--col--width);
-  height: var(--row--height);
-}
-
-.button {
-  color: dimgrey;
-  background-color: #eee;
-  padding-left: 0.67rem;
-  padding-right: 0.67rem;
-  display: flex;
-  text-decoration: none;
-  justify-content: center;
-  font-weight: bold;
-  border-radius: 4px;
-  align-items: center;
-  min-height: 1.8rem;
-  margin: 0;
-  border-width: 1px;
-  border-color: #eee;
-  border-style: outset;
-}
 
 .button:visited, .button:focus {
   color: dimgrey;
@@ -147,19 +191,25 @@
   opacity: 0.8;
 }
 
-.button.icon {
+#date-nav {
+  padding: 0;
+  display: flex;
+  gap: 5px;
+}
+
+#date-nav button {
   width: 2em;
   height: 1.67em;
   background-color: #eee;
   padding: 0;
 }
 
-.button.icon img {
+#date-nav .icon {
   width: 80%;
   height: 67%;
 }
 
-.today {
+#date-nav .date-view {
   color: #222;
   min-height: 1.67em;
   display: flex;
@@ -169,8 +219,31 @@
   padding: 0 1em;
 }
 
-.add {
-  margin-left: 1rem;
+#date-nav .date-bookings {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-radius: 50%;
+  background-color: steelblue;
+  width: 1.5rem;
+  height: 1.34rem;
+  text-align: center;
+  line-height: 1.34rem;  
+}
+
+.button.add {
+  color: white;
+  padding: 4px 10px;
+  font-weight: normal;
+  background-color: #333;
+  border-style: none;
+  font-size: 0.9rem;
+}
+
+select[name="view"],
+select[name="style"]  {
+  padding: 5px 10px;
+  width: auto;
 }
 
 .select__display small,
@@ -196,16 +269,12 @@
   font-size: 0.9rem;
 }
 
-.modal form {
-  width: 100%;
-}
-
 .modal header {
   padding: 0.67rem;
   background-color: gold;
 }
 
-.modal main {
+.modal-body {
   padding: 1rem;
 }
 
@@ -215,9 +284,10 @@
 }
 
 .modal-inner {
+  width: 96%;
   max-width: 480px;
   left: max(2%, calc(50% - 240px));
-  top: 1rem;
+  top: 3px;
 }
 
 #vanilla-calendar-1 {
@@ -273,4 +343,32 @@ button:focus-visible {
 
 .vanilla-calendar-header__content {
   padding: 0 7px;
+}
+
+.loading-indicator {
+  margin:0 1rem;
+  position:relative;
+}
+
+.loading .loading-indicator div {
+  border-top-color: cadetblue;
+}
+
+.loading  .loading-indicator::after {
+  position: absolute;
+  width: fit-content;
+  content: "Loading...";
+  color: cadetblue;
+  left: 100%;
+  top: 0;
+  display: block;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  padding: 0 3px;
+}
+
+#booking-view-modal p {
+  margin: 5px;
 }

@@ -12,17 +12,17 @@ class BookingModel {
   }
 
 
-  public function getById( $id ) {
-    return $this->db->query('bookings')
-      ->where( 'id=?', $id )
-      ->getFirst(); 
-  }
-
-
   public function getAll( $date ) {
-    return $this->db->query('view_bookings')
+    return $this->db->query( 'view_bookings' )
       ->where( 'date=?', $date )
       ->getAll(); 
+  }
+  
+
+  public function getById( $id ) {
+    return $this->db->query( 'view_bookings' )
+      ->where( 'id=?', $id )
+      ->getFirst(); 
   }
 
 
