@@ -28,6 +28,8 @@ class BookingModel {
 
   public function save( $request_data ) {
 
+    debug_log( 'Booking Model::save(), request_data =' . print_r( $request_data, true ) );
+
     // Strip away hidden data values starting with "_"
     $data = array_filter( (array) $request_data, 
       function( $v, $k ) { return strpos($k , '_') !== 0 and $k != 'today'; }, 
@@ -38,7 +40,7 @@ class BookingModel {
 
       debug_log( 'Update Booking: ' . print_r( $data, true ) );
       $this->db->query( 'bookings' )
-        ->where( 'id=?', data[ 'id' ] )
+        ->where( 'id=?', $data[ 'id' ] )
         ->update( $data );
 
     } else {
