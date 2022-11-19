@@ -1,17 +1,20 @@
 <?php
 
 /**
- * ./app/content/salon/salon.php
+ * ./app/content/bookings/bookings.php
  * 
- * Salon page controller - 08 Jul 2022
+ * Salon bookings page controller - 08 Jul 2022
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 2.0.0 - 17 Nov 2022
- *   - Update JS & CSS include paths to new locations.
- *   - Total re-write of the calendar grid rendering system.
- *   - Fix most of what broke since re-factoring JS scripts.
- * 
+ * @version 2.1.0 - 18 Nov 2022
+ *   - Change the date NAV date display to LONG format.
+ *   - Standardize log() and err() statement formatting.
+ *   - Fix "Edit Booking Modal Form". Fix initialization logic.
+ *   - Fix / improve "Duration" field validation + Initialization
+ *   - Add ValidatorTypes and multiple validators per field to Form JS
+ *   - Add "Click on time-slot" to add a new booking.
+ *   - Add an "ID" field to "Edit Booking Form" to fix the "duplicate on save" issue.
  */
 
 if ( ! $auth->logged_in() ) header( 'Location:login' );
@@ -129,7 +132,7 @@ $view->useScriptFile( 'vendors/f1js/form/form.js'     );
 $view->useScriptFile( 'vendors/f1js/fetch/fetch.js'   );
 $view->useScriptFile( 'vendors/f1js/modal/modal.js'   );
 $view->useScriptFile( 'vendors/f1js/select/select.js' );
-$view->useScriptFile( 'vendors/f1js/form/form-validators.js'    );
+$view->useScriptFile( 'vendors/f1js/form/form-validatortypes.js');
 $view->useScriptFile( 'vendors/vanilla/vanilla-calendar.min.js' );
 $view->useScriptFile( 'vendors/f1js/form/form-fieldtypes.js'    );
 

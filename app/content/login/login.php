@@ -72,7 +72,7 @@ if ( $http->req->isPost ) {
 $view->useStyleFile( 'vendors/f1css/form/form.css' );
 
 $view->useScriptFile( 'vendors/f1js/form/form.js' );
-$view->useScriptFile( 'vendors/f1js/form/form-validators.js' );
+// $view->useScriptFile( 'vendors/f1js/form/form-validatortypes.js' );
 // $view->useScriptFile( 'vendors/f1js/form/form-fieldtypes.js' );
 
 include $view->getFile();

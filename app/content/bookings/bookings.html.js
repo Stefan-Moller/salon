@@ -17,7 +17,7 @@ F1.deferred.push( function initPage() {
 
   /* Global Service Aliases */
 
-  const modal = F1.Modal; 
+  const Modal = F1.Modal; 
   const fetch = F1.fetch;
   const err = console.err;
   const log = console.log;
@@ -26,8 +26,9 @@ F1.deferred.push( function initPage() {
  
   /* Global Helper Function Aliases */
 
-  function padNum( numStr ) { return numStr.length > 1 ? numStr : '0' + numStr; }
+  function padNum( numStr ) { return numStr.toString().length > 1 ? numStr : '0' + numStr; }
   function ymd2dmy( ymdStr ) { return F1.Date.ymd2dmy( ymdStr ); }
+  function ymd2long ( ymdStr ) { return F1.Date.ymd2long( ymdStr ); }
   function formatYmd( dateObj ) { return F1.Date.formatYmd( dateObj ); }
   function prevDayYmd( todayYmd ) { return F1.Date.prevDayYmd( todayYmd ); }
   function nextDayYmd( todayYmd ) { return F1.Date.nextDayYmd( todayYmd ); }
@@ -43,7 +44,7 @@ F1.deferred.push( function initPage() {
   }
 
   function stashDebugInfo( bookings ) {
-    log( 'stashDebugInfo(), Mostly for debugging :::)' );
+    log( 'stashDebugInfo, Mostly for debugging :::)' );
     /* Data */
     F1.data = F1.data || {};
     F1.data.bookings = bookings;
@@ -59,58 +60,28 @@ F1.deferred.push( function initPage() {
     
   function mapBooking( bookingJsonStr ) {
     const booking = JSON.parse( bookingJsonStr );
-    // booking.date = ymd2dmy(booking.date);
     booking.time = padNum(booking.start_hour) + ':' + padNum(booking.start_min);
     return booking;
   }
 
-  // function showBooking( id ) {
-  //   log( 'showBooking:', id);
-  //   const results = F1.bookings.filter( booking => booking.id === id );
-  //   const booking = results ? results[0] : null;
-  //   if ( booking ) {
-  //     updateBookingViewModal( booking );
-  //     showModal( elBookingViewModal );
-  //   }
-  //   log( 'booking:', booking );
-  // };
-
-  function editBooking( id ) {
-    log( 'editBooking:', id );
-    if ( ! id ) { 
-      return F1.Modal.show( elModal, { form, reset: 1, focus: 1 } ); }
-    fetchBooking( id,
-      function( xhr ) {
-        const booking = JSON.parse( xhr.responseText );
-        const formData = mapBooking( booking );
-        F1.Modal.show( elModal, { form: bookingForm, init: formData, focus: 1 } );
-        hideLoadingIndicator();
-      },
-      function( xhr ) {
-        err( 'Get booking failed! Code: ', xhr.status, ', Message:', xhr.statusText );
-        hideLoadingIndicator();
-      }
-    );
-  }  
-
   function showLoadingIndicator() {
-    log( 'showLoadingIndicator()' );
+    log( 'showLoadingIndicator' );
     document.documentElement.classList.add( 'loading' );
   }
 
   function hideLoadingIndicator() {
-    log( 'hideLoadingIndicator()' );
+    log( 'hideLoadingIndicator' );
     document.documentElement.classList.remove( 'loading' );
   }
 
   function updateCalendarDateNav( dateYmd, bookings ) {
-    log( 'updateCalendarDateNav(), dateYmd =', dateYmd );
-    elDateNav.querySelector( '.date-view' ).innerText = dateYmd;
+    log( 'updateCalendarDateNav, dateYmd:', dateYmd );
+    elDateNav.querySelector( '.date-view' ).innerText = ymd2long( dateYmd );
     elDateNav.querySelector( '.date-bookings' ).innerText = bookings.length;
   }
 
   function updateCalendarDayView( bookings ) {
-    log( 'updateCalendarDayView(), bookings =', bookings );
+    log( 'updateCalendarDayView', bookings );
     bookings.forEach( function( booking ) {
       booking.slotID = 's' + booking.station_id + '-' + padNum(booking.start_hour) + 'h' + padNum(booking.start_min);
       const elSlot = document.getElementById( booking.slotID );
@@ -123,7 +94,7 @@ F1.deferred.push( function initPage() {
   }
 
   function clearCalendarDayView() {
-    log( 'clearCalendarDayView()' );
+    log( 'clearCalendarDayView' );
     querySelectorAll( '.booked' ).forEach(el => { 
       el.innerHTML = ''; 
       el.style.backgroundColor = null;
@@ -142,7 +113,7 @@ F1.deferred.push( function initPage() {
   }
 
   function renderBooking( booking ) {
-    log( 'renderBooking:', booking );
+    log( 'renderBooking', booking );
     const name = booking.client + ', ' + booking.therapist;
     return `
     <span id="booking_${booking.id}">
@@ -156,12 +127,12 @@ F1.deferred.push( function initPage() {
 
   function fetchBookings( dateYmd, success, fail ) {
     showLoadingIndicator();
-    log( 'Fetch Bookings:', dateYmd );
+    log( 'fetchBookings:', dateYmd );
     fetch( fetchUrl + '?do=getBookings&date=' + dateYmd, success, fail );
   }
 
   function fetchBookingsSuccess( fetchRequestObj ) {
-    log( 'fetchBookingsSuccess(),', fetchRequestObj.statusText );
+    log( 'fetchBookingsSuccess', fetchRequestObj.statusText );
     const bookings = JSON.parse( fetchRequestObj.responseText );
     updateCalendarDateNav( selectedDateYmd, bookings );
     updateCalendarDayView( bookings );
@@ -171,54 +142,48 @@ F1.deferred.push( function initPage() {
 
   function fetchBookingsError( fetchRequestObj ) {
     hideLoadingIndicator();
-    err( 'fetchBookingsError(), Code: ', fetchRequestObj.status, 
+    err( 'fetchBookingsError', fetchRequestObj.status, 
       ', Message:', fetchRequestObj.statusText );
   }
 
   function fetchBooking( id, success, fail ) {
     showLoadingIndicator();
-    log( 'Get Booking:', id );
+    log( 'fetchBooking, id:', id );
     fetch( fetchUrl + '?do=getBooking&id=' + id, success, fail );
   }
 
   function fetchBookingViewSuccess( fetchRequestObj ) {
-    log( 'fetchBookingViewSuccess(),  =', fetchRequestObj );
+    log( 'fetchBookingViewSuccess', fetchRequestObj );
     const booking = mapBooking( fetchRequestObj.responseText );
     const bookingHTML = renderBooking( booking );
-    F1.Modal.show( elBookingViewModal, { event, content: bookingHTML } ); 
+    Modal.show( elBookingViewModal, { content: bookingHTML, event } ); 
     elBookingViewModal.booking = booking;    
     hideLoadingIndicator(); 
   }
 
   function fetchBookingEditSuccess( fetchRequestObj ) {
-    log( 'fetchBookingEditSuccess(),  =', fetchRequestObj );
+    log( 'fetchBookingEditSuccess', fetchRequestObj );
     const booking = mapBooking( fetchRequestObj.responseText );
     log( 'booking =', booking );
-    F1.Modal.show( elBookingEditModal, {
-      form: bookingForm,
-      init: {
-        client_id: booking.client_id,
-        treatment_id: booking.treatment_id,
-        therapist_id: booking.therapist_id,
-        station_id: booking.station_id,
-        date: booking.date,
-        time: booking.start_hour + ':' + booking.start_min,
-        duration: booking.duration,
-        notes: booking.notes
-      },
-      focus: 1
-    } ); 
+    Modal.show( elBookingEditModal, { form: bookingForm, init: booking, focus: 1, event } ); 
     hideLoadingIndicator(); 
   }  
 
   function fetchBookingError( fetchRequestObj ) {
     hideLoadingIndicator();
-    err( 'fetchBookingError(), Code: ', fetchRequestObj.status, 
+    err( 'fetchBookingError', fetchRequestObj.status, 
       ', Message:', fetchRequestObj.statusText );
   }
 
 
   /* Global Event Handlers */
+
+  F1.onGotoToday = function( event ) {
+    log( 'onGotoToday', event );
+    clearCalendarDayView();
+    selectedDateYmd = getSelectedDateYmd();
+    fetchBookings( selectedDateYmd, fetchBookingsSuccess, fetchBookingsError );
+  }
 
   F1.onGotoNextDay = function( event ) {
     log( 'onGotoNextDay', event );
@@ -234,49 +199,21 @@ F1.deferred.push( function initPage() {
     fetchBookings( selectedDateYmd, fetchBookingsSuccess, fetchBookingsError );
   } 
 
-  F1.onGotoToday = function( event ) {
-    log( 'onGotoToday', event );
-    clearCalendarDayView();
-    selectedDateYmd = getSelectedDateYmd();
-    fetchBookings( selectedDateYmd, fetchBookingsSuccess, fetchBookingsError );
-  }
-
-  F1.onCalendarClick = function( event ) {
-    log( 'onCalendarClick:', event );
-    const el = event.target;
-    const clickedOnBooking = el.className === 'booking';
-    const slotId = clickedOnBooking ? el.parentElement.id : el.id;
-    let parts = slotId.split( '-' );
-    const stationId = parts.length ? parseInt( parts[0].replace( 's', '' ) ) : undefined;
-    parts = parts[1] ? parts[1].split( 'h' ) : [];
-    const startingHour = parseInt( parts[0] );
-    const startingMin = parseInt( parts[1] );
-    if ( clickedOnBooking ) {
-      const bookingId = el.dataset.booking;
-      log( 'Data:', { stationId, startingHour, startingMin, bookingId, el } );
-      fetchBooking( bookingId, fetchBookingViewSuccess, fetchBookingError );
-    }
-  };
-
   F1.onNewAppointment = function( event ) {
     log( 'onNewAppointment', event );
-    F1.Modal.show( elBookingEditModal, {
-      form: bookingForm,
-      reset: 1,
-      focus: 1,
-      event
-    } );
+    const init = { date: selectedDateYmd, duration: '0' };
+    Modal.show( elBookingEditModal, { form: bookingForm, init, focus: 1, event } );
   };
 
   F1.onEditAppointment = function( event ) {
     log( 'onEditAppointment', event );
-    F1.Modal.close( elBookingViewModal, event );
+    Modal.close( elBookingViewModal, event );
     fetchBooking( elBookingViewModal.booking.id, fetchBookingEditSuccess, fetchBookingError );
     elBookingViewModal.booking = null;
   };
 
   F1.onSubmitBooking = function( event ) {
-    log( 'onSubmitBooking(), event:', event );
+    log( 'onSubmitBooking', event );
     bookingForm.validate();
     const errors = bookingForm.getErrors();
     if ( errors.length > 0 ) { 
@@ -286,6 +223,34 @@ F1.deferred.push( function initPage() {
     }
   };
 
+  F1.onCalendarClick = function( event ) {
+    log( 'onCalendarClick', event );
+    const el = event.target;
+    const clickedOnBooking = el.className === 'booking';
+    const slotId = clickedOnBooking ? el.parentElement.id : el.id;
+    let parts = slotId.split( '-' );
+    const stationId = parts.length ? parseInt( parts[0].replace( 's', '' ) ) : undefined;
+    parts = parts[1] ? parts[1].split( 'h' ) : [];
+    const startingHour = parseInt( parts[0] );
+    const startingMin = parseInt( parts[1] );
+    let debugInfo = { stationId, startingHour, startingMin, el };
+    if ( clickedOnBooking ) {
+      const bookingId = el.dataset.booking;
+      log( 'onCalendarClick - clickedOnBooking', { bookingId, ...debugInfo } );
+      fetchBooking( bookingId, fetchBookingViewSuccess, fetchBookingError );
+    } else {
+      log( 'onCalendarClick - clickedOnEmptySlot', debugInfo );
+      const bookingBase = {
+        station_id: stationId,
+        start_hour: startingHour,
+        start_min: startingMin,
+        date: selectedDateYmd,
+        time: padNum( startingHour ) + ':' + padNum( startingMin ),
+        duration: '0'
+      }
+      Modal.show( elBookingEditModal, { form: bookingForm, init: bookingBase, focus: 1, event } );      
+    }
+  };
 
 
   /* ------- *
@@ -310,65 +275,28 @@ F1.deferred.push( function initPage() {
 });
 
 
-// Change the way times-slots are rendered. Change from rows to columns! - DONE
-// Render bookings over multiple time-slots - DONE
-// Better style booked time slots (color) - DONE
-// Add an event handler to make the TODAY button work - DONE
-// Add an indicator showing the number of bookings for the day - DONE
-// Click on booked cell and load full info from DB VIEW + Display - DONE
+
+// Fix - onCalendarClick() event to detect if we click on a booking element - DONE
+// Click on a cell and open a new booking with selected date & station! - DONE
+
+
+// Get Form JS to detect selected hidden fields and update them like
+// regular fields, but without validation or display update...? 
 
 
 // Save using AJAX!
 
 // Remember today after saving!
 
-// Fix - onCalendarClick() event to detect if we click on a booking element.
+// MRP - Don't duplicate appointment when time is changed
 
-// Click on a cell and open a new booking with selected date & station!
+// MRP - Check if time-slot is booked - Validate.
+
 
 // Click on date in Date Nav to open a calendar modal to select the current date
 
 // Add an event handler for selecting the date from the calendar modal.
 
+// MRP - Only creator can edit. Role system.
 
-// Check if time-slot is booked - Validate.
-
-// Don't duplicate appointment when time is changed
-
-// Only creator can edit. Role system.
-
-// Add delete button.
-
-
-
-// F1.fetchBooking = function( apid ) {
-// console.log('Get Booking:', apid);
-// showLoadingIndicator();
-// F1.fetch(
-//   F1.page + '?do=fetchBooking&id=' + apid, 
-//   function( xhr ) {
-//     const booking = JSON.parse( xhr.responseText );
-//     log( 'booking =', booking );
-//     F1.Modal.show( F1.elApmEditModal, {
-//       form: F1.bookingForm,
-//       init: {
-//         client_id: booking.client_id,
-//         treatment_id: booking.treatment_id,
-//         therapist_id: booking.therapist_id,
-//         station_id: booking.station_id,
-//         date: booking.date,
-//         time: booking.start_hour + ':' + booking.start_min,
-//         duration: booking.duration,
-//         notes: booking.notes
-//       },
-//       focus: 1
-//     } );  
-//     hideLoadingIndicator();
-//   }, 
-//   function( xhr ) {
-//     hideLoadingIndicator();
-//     err( 'Hugston we have a problem! XHR failed. Code: ', xhr.status,
-//     ', Message:', xhr.statusText );
-//   }
-// );
-// };
+// MRP - Add delete button.

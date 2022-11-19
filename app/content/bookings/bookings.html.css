@@ -73,6 +73,10 @@
   height: 3em;
 }
 
+input[disabled] {
+  background-color: gainsboro;
+}
+
 /*
 .th + .th,
 .td + .td {
@@ -213,15 +217,17 @@
   color: #222;
   min-height: 1.67em;
   display: flex;
+  font-size: 0.96em;
   align-items: center;
   border: 1px solid #eee;
   border-radius: 4px;
   padding: 0 1em;
+  width: 25ch;
 }
 
 #date-nav .date-bookings {
   color: white;
-  font-size: 0.9rem;
+  font-size: 0.85em;
   font-weight: bold;
   border-radius: 50%;
   background-color: steelblue;
@@ -240,10 +246,13 @@
   font-size: 0.9rem;
 }
 
+select {
+  width: auto;
+}
+
 select[name="view"],
 select[name="style"]  {
   padding: 5px 10px;
-  width: auto;
 }
 
 .select__display small,
