@@ -27,6 +27,12 @@ $app->debugLogFile = $app->storageDir . DIRECTORY_SEPARATOR . 'logs' .
 
 $debug = new Debug( $app->debugLevel, $app->debugLogFile );
 
+
+// `onError` handles critical erros.
+set_error_handler( [ $debug, 'onError' ] );
+
+
+// `onShutdown` handles non-critical exceptions.
 register_shutdown_function( [ $debug, 'onShutdown' ] );
 
 
