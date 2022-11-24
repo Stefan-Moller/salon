@@ -68,21 +68,22 @@ class BookingModel {
 
   public function validateAvailability( $booking ) {
 
+    debug_log( 'validateAvailability, start' );
+
     $start_hour = $booking->start_hour;
     $start = $booking->start_min + $start_hour * 60;
-    $end = $start_min + $booking->duration;
+    $end = $start + $booking->duration;
 
-    $query = $this->db->query( 'bookings' );
+    $q = $this->db->query( 'bookings' );
     
-    if ( isset( $booking->id ) ) {
-      $query->where( 'id<>?', $booking->id );
-    }
+    if ( isset( $booking->id ) ) $q->where( 'id<>?', $booking->id );
     
-    $bookedBookings = $query->where( 'date=?', $booking->date )
+    $bookedBookings = $q
+      ->where( 'date=?', $booking->date )
       ->where( 'station_id=?', $booking->station_id )
       ->getAll();
 
-    if ( count( $bookedBookings ) == 0 ) return false;
+    if ( count( $bookedBookings ) == 0 ) return true;
 
     foreach ( $bookedBookings as $index => $bookedBooking )
     {
@@ -165,7 +166,6 @@ class BookingModel {
       else {
         throw new \Exception( 'This booking clashes with another booking! Request aborted.' );
       }
-
     }
 
     // INSERT...
