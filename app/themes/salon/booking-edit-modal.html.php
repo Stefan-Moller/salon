@@ -1,4 +1,4 @@
-<!-- Appointment Edit Modal -->
+<!-- Edit Booking Modal -->
 <section id="booking-edit-modal" class="modal">
   <form class="modal-inner" method="post" novalidate>
     <header>
@@ -73,10 +73,10 @@
       </div>
       <div class="row" style="gap:1rem;margin-top:1rem">
         <div class="col" style="flex:1">
-          <span id="vanilla-calendar-1">- Calendar goes here... -</span>
+          <span id="booking-calendar">- Calendar goes here... -</span>
         </div>
         <div class="col" style="flex:1">
-          <p class="field required" data-control="#vanilla-calendar-1" data-name="date" data-type="Calendar">
+          <p class="field required" data-control="#booking-calendar" data-name="date" data-type="Calendar">
             <label>Date</label>
             <input class="input" name="date" type="text" value="" 
               placeholder="- Use calendar to select -" 

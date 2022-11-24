@@ -27,11 +27,11 @@ if ( $http->req->isPost ) {
   
   do {
 
-    if ( $http->get( 'submit' ) == 'Login' )
+    if ( $http->getPostVal( 'submit' ) == 'Login' )
     {
 
-      $username = $http->get( 'username' );
-      $password = $http->get( 'password' );
+      $username = $http->getPostVal( 'username' );
+      $password = $http->getPostVal( 'password' );
 
       $db->connect( $app->dbConnection[ 'salon' ] );
 

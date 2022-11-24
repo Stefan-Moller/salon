@@ -7,14 +7,8 @@
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 2.1.0 - 18 Nov 2022
- *   - Change the date NAV date display to LONG format.
- *   - Standardize log() and err() statement formatting.
- *   - Fix "Edit Booking Modal Form". Fix initialization logic.
- *   - Fix / improve "Duration" field validation + Initialization
- *   - Add ValidatorTypes and multiple validators per field to Form JS
- *   - Add "Click on time-slot" to add a new booking.
- *   - Add an "ID" field to "Edit Booking Form" to fix the "duplicate on save" issue.
+ * @version 2.3.0 - 24 Nov 2022
+ *
  */
 
 if ( ! $auth->logged_in() ) header( 'Location:login' );
@@ -25,7 +19,7 @@ $view->title = 'Bookings';
 $view->menu[ 'setup' ] = 'Setup';
 $view->menu[ 'logout' ] = 'Logout';
 
-$date = $http->get( 'date', date( 'Y-m-d' ) );
+$date = $http->getUrlParam( 'date', date( 'Y-m-d' ) );
 
 
 $datetime = strtotime( $date );
@@ -43,34 +37,56 @@ $db->connect( $app->dbConnection[ 'salon' ] );
 
 if ( $http->req->isAjax ) {
 
-  $aptData = null;
-  $do = $http->get( 'do' );
+  $error = false;
+  $bookingData = new stdClass;
+  $do = $http->req->isPost ? $http->getPostVal( '__action__' ) : $http->getUrlParam( 'do' );
+
+  debug_log( "\n\n\n*** New AJAX Request ***" );
+  debug_log( "Method = {$http->req->method}, Do = {$do}" );
+  debug_log( '$_REQUEST = ' . print_r( $_REQUEST, true ) );
 
   do {
 
-    if ( $do == 'getBookings' ) {
+    include $app->modelsDir . '/booking.model.php';
+    $bookingModel = new BookingModel( $db, $http, $auth );
 
-      include $app->modelsDir . '/booking.model.php';
+    try {
 
-      $bookingModel = new BookingModel( $db );
-      $aptData = $bookingModel->getAll( $date );
+      if ( $http->req->isPost ) {
 
-      break;
+        $bookingID = $http->getPostVal( 'id' );
+
+        if ( $do == 'deleteBooking' ) {
+          $bookingModel->delete( $bookingID );
+          $bookingData = "Booking {$bookingID} DELETED.";
+          break;
+        }
+
+        if ( $do == 'saveBooking' ) {
+          $bookingID = $bookingModel->save();
+          debug_log( 'After save. BookingID = ' . $bookingID );
+          $bookingData = $bookingModel->getById( $bookingID );
+          break;
+        }
+
+      }
+
+      if ( $do == 'getBookings' ) { $bookingData = $bookingModel->getAll( $date ); break; }
+      if ( $do == 'getBooking'  ) { $bookingData = $bookingModel->getById( $http->getUrlParam( 'id' ) ); break; }
+
     }
 
-    if ( $do == 'getBooking' ) {
-
-      include $app->modelsDir . '/booking.model.php';
-
-      $bookingModel = new BookingModel( $db );
-      $aptData = $bookingModel->getById( $http->get( 'id' ) );
-
-      break;
-    }
+    catch ( Exception $e ) { $error = $e->getMessage(); }
 
   } while ( 0 );
 
-  exit( $view->makeJsonResponse( $aptData ) );
+
+  if ( $error ) {
+    $bookingData->error = $error;
+    debug_log( "Ajax Request Exception! do = {$do}, message = {$error}" );
+  }
+
+  exit( $view->makeJsonResponse( $bookingData ) );
 
 }
 
@@ -84,16 +100,43 @@ if ( $http->req->isPost ) {
 
   $error = false;
   $goto = $http->req->referer;
-  $do = $http->get( '__action__' );
+  $do = $http->getPostVal( '__action__' );
 
   do {
   
     include $app->modelsDir . '/booking.model.php';
-    $bookingModel = new BookingModel( $db );
+    $bookingModel = new BookingModel( $db, $http, $auth );
 
     try {
 
-      if ( $do == 'save' ) $bookingModel->save( $http->req->data );
+      if ( $do == 'save' ) {
+
+        $bookingModel->save();
+
+        debug_log( 'SAVE Booking, goto = ' . $goto );
+        
+        $urlParts = explode( '?', $goto );
+
+        debug_log( 'SAVE Booking, urlParts = ' . print_r( $urlParts, true ) );
+
+        if ( count( $urlParts ) == 2 ) {
+
+          parse_str( $urlParts[1], $queryParams );
+          $queryParams[ 'date' ] = $http->getPostVal( 'date' );
+
+        } else {
+
+          $queryParams = [ 'date' => $http->getPostVal( 'date' ) ];
+
+        }
+
+        debug_log( 'SAVE Booking, queryParams = ' . print_r( $queryParams, true ) );
+
+        $queryString = '?' . http_build_query( $queryParams );
+
+        $goto = $urlParts[0] . $queryString;
+
+      }
 
     } 
 
@@ -108,7 +151,7 @@ if ( $http->req->isPost ) {
 
   if ( $error ) {
     $session->flash( 'error', $error );
-    debug_log( 'POST Booking Error: ' . $error );
+    debug_log( 'SAVE Booking Error: ' . $error );
   }
 
   header( 'Location:' . $goto );
@@ -129,7 +172,6 @@ $view->useStyleFile( 'vendors/vanilla/vanilla-calendar.min.css' );
 
 $view->useScriptFile( 'vendors/f1js/date/date.js'     );
 $view->useScriptFile( 'vendors/f1js/form/form.js'     );
-$view->useScriptFile( 'vendors/f1js/fetch/fetch.js'   );
 $view->useScriptFile( 'vendors/f1js/modal/modal.js'   );
 $view->useScriptFile( 'vendors/f1js/select/select.js' );
 $view->useScriptFile( 'vendors/f1js/form/form-validatortypes.js');

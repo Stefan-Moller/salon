@@ -1,4 +1,4 @@
-<!-- Appointment Modal -->
+<!-- View Booking Modal -->
 <section id="booking-view-modal" class="modal">
   <div class="modal-inner">
     <header>
@@ -7,9 +7,14 @@
     </header>
     <div class="modal-body"></div>
     <footer>
-      <p style="text-align:right">
-        <button class="button btn-edit" type="button" onclick="F1.onEditAppointment(event)">Edit</button>
-      </p>
+      <div class="actions-bar">
+        <div class="actions-left">
+          <button class="button btn-edit" type="button" onclick="F1.onEditBooking(event)">Edit</button>
+        </div>
+        <div class="actions-right">
+          <a href="javascript:void(0)" onclick="F1.onDeleteBooking(event)">Delete</a>
+        </div>
+      </div>
     </footer>
   </div>
 </section>

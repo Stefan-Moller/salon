@@ -2,14 +2,15 @@
 
   <include>site-header</include>
 
-  <main class="page">
+  <main class="page content">
 
     <header>
       <div class="left-side">
         <nav id="date-nav">
           <button type="button" class="button" onclick="F1.onGotoPrevDay(event)">
             <img class="icon" src="img/caret-left.svg"></button>
-          <span class="date-view">YYYY-MM-DD</span>
+          <button type="button" class="date-view" onclick="F1.onShowDateSelect(event)">
+            YYYY-MM-DD </button>
           <span class="date-bookings">0</span>
           <button type="button" class="button" onclick="F1.onGotoNextDay(event)">
             <img class="icon" src="img/caret-right.svg"></button>
@@ -18,7 +19,7 @@
         <div class="loading-indicator"><div></div><div></div><div></div><div></div></div>
       </div>
       <div class="right-side">
-        <button class="button add" type="button" onclick="F1.onNewAppointment(event)">
+        <button class="button add" type="button" onclick="F1.onNewBooking(event)">
           <i>+</i>&nbsp;New Appointment
         </button>
         <select name="view" class="button">
@@ -33,71 +34,67 @@
       </div>
     </header>
 
-    <div class="content">
+    <!-- Calendar Component -->
+    <div class="table calendar">
 
-      <!-- Calendar Component -->
-      <div class="table calendar">
+      <!-- Table Head -->
+      <div class="thead">
 
-        <!-- Table Head -->
-        <div class="thead">
-
-          <!-- Table Head Row Head -->
-          <div class="trhead">
-            <div class="tr">
-              <div class="th hour-col"><span>Hour</span></div>
-              <div class="th min-col"><span>Min</span></div>
-            </div>            
-          </div>
-
-          <!-- Table Head Row -->
-          <div class="trmain">
-            <div class="tr">
-              <?php foreach( $cal->stations as $station ): ?>
-              <div class="th">
-                <div class="station-col-head" style="background:<?=$station->colour?>">
-                  <p><?=$station->no?></p>
-                  <p><?=$station->name?></p>
-                </div>
-              </div>
-              <?php endforeach; ?>
-            </div>
-          </div>
+        <!-- Table Head Row Head -->
+        <div class="trhead">
+          <div class="tr">
+            <div class="th hour-col"><span>Hour</span></div>
+            <div class="th min-col"><span>Min</span></div>
+          </div>            
         </div>
 
-        <!-- Table Body -->
-        <div class="tbody">
-
-          <!-- Table Body Rows Head -->
-          <div class="trhead">
-            <?php foreach( $cal->open_hours as $hour ): ?>
-            <div class="tr hour-group">
-              <div class="td hour-col"><span><?=$hour?></span></div>
-              <div class="td min-col">
-              <?php foreach( $cal->slots_per_hour as $i => $min ): ?>
-                <div class="time-slot"><span><?=$min?></span></div>
-              <?php endforeach; ?>
+        <!-- Table Head Row -->
+        <div class="trmain">
+          <div class="tr">
+            <?php foreach( $cal->stations as $station ): ?>
+            <div class="th">
+              <div class="station-col-head" style="background:<?=$station->colour?>">
+                <p><?=$station->no?></p>
+                <p><?=$station->name?></p>
               </div>
             </div>
             <?php endforeach; ?>
           </div>
+        </div>
+      </div>
 
-          <!-- Table Body Rows -->
-          <div class="trmain" onclick="F1.onCalendarClick(event)">
-            <div class="tr">
-              <?php foreach( $cal->stations as $station ): ?>
-              <?php $station_id = 's'.$station->id; ?>
-              <div class="td station-col" id="<?=$station_id?>">
-                <?php foreach( $cal->open_hours as $hour ): ?>
-                <?php foreach( $cal->slots_per_hour as $min ): ?>
-                <?php $slot_id = $station_id.'-'.$hour.'h'.$min; ?>
-                <div class="time-slot" id="<?=$slot_id?>"></div>
-                <?php endforeach; ?>
-                <?php endforeach; ?>
-              </div>
-              <?php endforeach; ?>
+      <!-- Table Body -->
+      <div class="tbody">
+
+        <!-- Table Body Rows Head -->
+        <div class="trhead">
+          <?php foreach( $cal->open_hours as $hour ): ?>
+          <div class="tr hour-group">
+            <div class="td hour-col"><span><?=$hour?></span></div>
+            <div class="td min-col">
+            <?php foreach( $cal->slots_per_hour as $i => $min ): ?>
+              <div class="time-slot"><span><?=$min?></span></div>
+            <?php endforeach; ?>
             </div>
           </div>
+          <?php endforeach; ?>
+        </div>
 
+        <!-- Table Body Rows -->
+        <div class="trmain" onclick="F1.onDayViewGridClick(event)">
+          <div class="tr">
+            <?php foreach( $cal->stations as $station ): ?>
+            <?php $station_id = 's'.$station->id; ?>
+            <div class="td station-col" id="<?=$station_id?>">
+              <?php foreach( $cal->open_hours as $hour ): ?>
+              <?php foreach( $cal->slots_per_hour as $min ): ?>
+              <?php $slot_id = $station_id.'-'.$hour.'h'.$min; ?>
+              <div class="time-slot" id="<?=$slot_id?>"></div>
+              <?php endforeach; ?>
+              <?php endforeach; ?>
+            </div>
+            <?php endforeach; ?>
+          </div>
         </div>
 
       </div>
@@ -111,6 +108,8 @@
   </main>
 
   <include>site-footer</include>
+
+  <include>date-select-modal</include>
 
   <include>booking-view-modal</include>
 
