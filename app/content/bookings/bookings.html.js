@@ -14,7 +14,7 @@ F1.deferred.push( function initPage() {
 
   /* Global Variable Aliases */
 
-  const ajaxBaseUrl = F1.page;
+  const baseUrl = F1.page;
 
 
   /* Global Service Aliases */
@@ -167,7 +167,7 @@ F1.deferred.push( function initPage() {
 
   function fetchBookings( dateYmd, onSuccess ) {
     log( 'fetchBookings', dateYmd );
-    ajaxFetch( ajaxBaseUrl + '?do=getBookings&date=' + dateYmd, onSuccess );
+    ajaxFetch( baseUrl + '?do=getBookings&date=' + dateYmd, onSuccess );
   }
 
   function fetchBookingsSuccess( bookings ) {
@@ -180,7 +180,7 @@ F1.deferred.push( function initPage() {
 
   function fetchBooking( id, onSuccess ) {
     log( 'fetchBooking' );
-    ajaxFetch( ajaxBaseUrl + '?do=getBooking&id=' + id, onSuccess );
+    ajaxFetch( baseUrl + '?do=getBooking&id=' + id, onSuccess );
   }
 
   function fetchBookingToViewSuccess( booking ) {
@@ -206,7 +206,7 @@ F1.deferred.push( function initPage() {
     log( 'saveBooking', booking );
     const formData = new FormData( bookingFormCtrl.elm ).entries();
     const postData = { __action__: 'saveBooking', ...Object.fromEntries( formData ) };
-    ajaxSubmit( ajaxBaseUrl, postData, saveResp => saveBookingDone( saveResp, booking.elSlot ) );
+    ajaxSubmit( baseUrl, postData, saveResp => saveBookingDone( saveResp, booking.elSlot ) );
   }
 
   function saveBookingDone( savedResp, elCurrentlyBookedSlot ) {
@@ -233,7 +233,7 @@ F1.deferred.push( function initPage() {
     log( 'deleteBooking', booking );
     const id = booking.elm.dataset.booking;
     const postData = { __action__: 'deleteBooking', date: selectedDateYmd, id };
-    ajaxSubmit( ajaxBaseUrl, postData, deleteBookingSuccess );
+    ajaxSubmit( baseUrl, postData, deleteBookingSuccess );
   }
 
   function deleteBookingSuccess( requestResponse ) {
@@ -248,7 +248,7 @@ F1.deferred.push( function initPage() {
     clearDayViewContent();
     selectedDateYmd = date;
     urlParams.set( 'date', selectedDateYmd );
-    history.pushState( { page: 'bookings' }, '', '/bookings?' + urlParams.toString() );
+    history.pushState( { page: 'bookings' }, '', baseUrl + '?' + urlParams.toString() );
     fetchBookings( selectedDateYmd, fetchBookingsSuccess );
   }
 
@@ -275,7 +275,7 @@ F1.deferred.push( function initPage() {
     clearDayViewContent();
     selectedDateYmd = date;
     urlParams.set( 'date', selectedDateYmd );
-    history.pushState( { page: 'bookings' }, '', '/bookings?' + urlParams.toString() );
+    history.pushState( { page: 'bookings' }, '', baseUrl + '?' + urlParams.toString() );
     fetchBookings( selectedDateYmd, fetchBookingsSuccess );
   }
 
@@ -284,7 +284,7 @@ F1.deferred.push( function initPage() {
     clearDayViewContent();
     selectedDateYmd = nextDayYmd( selectedDateYmd );
     urlParams.set( 'date', selectedDateYmd );
-    history.pushState( { page: 'bookings' }, '', '/bookings?' + urlParams.toString() );    
+    history.pushState( { page: 'bookings' }, '', baseUrl + '?' + urlParams.toString() );    
     fetchBookings( selectedDateYmd, fetchBookingsSuccess );
   }
 
@@ -293,7 +293,7 @@ F1.deferred.push( function initPage() {
     clearDayViewContent();
     selectedDateYmd = prevDayYmd( selectedDateYmd );
     urlParams.set( 'date', selectedDateYmd );
-    history.pushState( { page: 'bookings' }, '', '/bookings?' + urlParams.toString() );    
+    history.pushState( { page: 'bookings' }, '', baseUrl + '?' + urlParams.toString() );    
     fetchBookings( selectedDateYmd, fetchBookingsSuccess );
   }
 
