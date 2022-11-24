@@ -1,3 +1,4 @@
+/*! Vanilla JS Calendar v1.4.9 | MIT License | github.com/uvarov-frontend/vanilla-calendar */
 class VanillaCalendar {
 	constructor(selector, option) {
 		this.HTMLElement = typeof selector === 'object' ? selector : document.querySelector(selector);
