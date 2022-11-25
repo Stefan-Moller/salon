@@ -9,7 +9,7 @@
 
 // ------------------------  EXAMPLE CONFIG NOTE: ------------------------------
 // Copy and rename this file to "config.php". Place it in the application's root 
-// folder, one level above the public_html folder. Don't include config.php in
+// folder, or one level above the public_html folder. Don't include config.php in
 // any version control commits for obvious reasons! Delete this note :).
 // -----------------------------------------------------------------------------
 
@@ -26,28 +26,32 @@ error_reporting( __ENV_PROD__ ? E_ALL : 0 );
 
 define( '__DS__', DIRECTORY_SEPARATOR );
 
-
 $app = new stdClass();
+
+$app->dbConnection = [
+  'salon' => [
+    'DBHOST' => 'localhost',
+    'DBNAME' => 'salon',
+    'DBUSER' => 'root',
+    'DBPASS' => 'root'
+  ]
+];
 
 $app->rootDir     = __DIR__;
 $app->sourceDir   = $app->rootDir   . __DS__ . 'app';
+$app->imagesDir   = $app->rootDir   . __DS__ . 'img';
+$app->modelsDir   = $app->sourceDir . __DS__ . 'models';
 $app->servicesDir = $app->sourceDir . __DS__ . 'services';
 $app->vendorsDir  = $app->sourceDir . __DS__ . 'vendors';
 $app->storageDir  = $app->sourceDir . __DS__ . 'storage';
 $app->contentDir  = $app->sourceDir . __DS__ . 'content';
 $app->themesDir   = $app->sourceDir . __DS__ . 'themes';
+$app->photosDir   = $app->imagesDir . __DS__ . 'photos';
 
-$app->host    = 'F1Site.localhost';
-$app->baseUri = 'public_html';
-$app->cssUri  = 'css';
-$app->jsUri   = 'js';
-
-$app->theme = 'default';
+$app->host     = 'salon.localhost';
+$app->baseUri  = '/';
 $app->homePage = 'home'; 
 
-$app->dbConnection = [
-  'DBHOST' => 'localhost',
-  'DBNAME' => 'f1s',
-  'DBUSER' => 'f1s_user',
-  'DBPASS' => 'root'
-];
+$app->title = 'Salon Allure System';
+
+$app->theme = 'default';
