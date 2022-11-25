@@ -52,3 +52,6 @@
  - Fix Delete not closing the view modal.
  - Fix bug where we keep on adding controllers to the debug array..
  - Add error support to ajax Delete functions.
+
+## 25 Nov 2022 - FIX - Ver 2.4.1
+ - Fix issues around F1.Modal and the ENTITY prop. bookingFormModalCtrl.ENTITY vs. elBookingFormModal.ENTITY

@@ -248,7 +248,7 @@ F1.deferred.push( function initPage() {
       logError( 'saveBookingDone', deleteResp.error );
       alert( deleteResp.error );
     } else {    
-      clearDayViewTimeSlot( elBookingViewModal.ENTITY.elm.parentElement );
+      clearDayViewTimeSlot( bookingViewModalCtrl.ENTITY.elm.parentElement );
       bookingViewModalCtrl.close();
     }
     hideLoadingIndicator();
@@ -321,9 +321,9 @@ F1.deferred.push( function initPage() {
   };
 
   F1.onEditBooking = function( event ) {
-    log( 'onEditBooking', event );
+    log( 'onEditBooking', bookingViewModalCtrl, event );
+    const id = bookingViewModalCtrl.ENTITY.id;
     bookingViewModalCtrl.close();
-    const id = elBookingViewModal.ENTITY.elm.dataset.booking;
     fetchBooking( id, fetchBookingToEditSuccess );
   };
 
@@ -331,7 +331,7 @@ F1.deferred.push( function initPage() {
     log( 'onDeleteBooking', event );
     if ( confirm( 'DELETE this booking... Are you sure?' ) ) {
       bookingFormModalCtrl.close();
-      deleteBooking( elBookingViewModal.ENTITY );
+      deleteBooking( bookingViewModalCtrl.ENTITY );
     }
   };
 
@@ -344,7 +344,7 @@ F1.deferred.push( function initPage() {
       log( 'onSubmitBooking, fieldErrors:', fieldErrors );
       return fieldErrors.pop().focus();
     } 
-    saveBooking( elBookingEditModal.ENTITY );
+    saveBooking( bookingFormModalCtrl.ENTITY );
   };
 
   F1.onDayViewGridClick = function( event ) {
