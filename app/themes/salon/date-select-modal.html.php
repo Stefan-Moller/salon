@@ -3,7 +3,7 @@
   <div class="modal-inner">
     <header>
       <h3>Date Select</h3>
-      <a class="modal-close" onclick="F1.Modal.close(this, event)">Close X</a>
+      <a class="modal-close">Close X</a>
     </header>
     <div class="modal-body"><span id="date-nav-calendar">Calendar goes here...</span></div>
     <footer>

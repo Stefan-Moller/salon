@@ -34,14 +34,21 @@
  - Add ajax POST request support.
  - Add delete button
 
-## 24 Nov 2022 - Ver 2.3.0
- - Beautify booking summary and detail views - DONE
- - Create a user with a lesser role, e.g. admin and validate against that to prevent unauthorized updates - DONE
- - MRP - Click on date in Date Nav to open a calendar modal to select the current date - DONE
- - Add an event handler for selecting the date from the calendar modal - DONE
- - Fix issue with unwanted REQUEST params making SAVE fail! - DONE
- - Make top part of calendar view sticky! Rrrr... - DONE
- - Server side validation and feedback system - DONE
- - MRP - Check if time-slot is booked - Validate - DONE
- - MRP - Only creator can edit. Role system - DONE
- - Use the current user's actual ID as created_by an updated_by - DONE
+## 24 Nov 2022 - FT - Ver 2.3.0
+ - Beautify booking summary and detail views.
+ - Create a user with a lesser role, e.g. admin and validate against that to prevent unauthorized updates.
+ - MRP - Click on date in Date Nav to open a calendar modal to select the current date.
+ - Add an event handler for selecting the date from the calendar modal.
+ - Fix issue with unwanted REQUEST params making SAVE fail!
+ - Make top part of calendar view sticky!
+ - Server side validation and feedback system.
+ - MRP - Check if time-slot is booked - Validate.
+ - MRP - Only creator can edit. Role system.
+ - Use the current user's actual ID as created_by an updated_by
+
+## 25 Nov 2022 - FT - Ver 2.4.0
+ - Totally refactor F1JS.Modal from Static Object to Class Type Service + Update code to reflect changes.
+ - Fix issue booking.model.verifyPermissions
+ - Fix Delete not closing the view modal.
+ - Fix bug where we keep on adding controllers to the debug array..
+ - Add error support to ajax Delete functions.

@@ -3,7 +3,7 @@
   <form class="modal-inner" method="post" novalidate>
     <header>
       <h3>Book Appointment</h3>
-      <a class="modal-close" onclick="F1.Modal.close(this,event)">Close X</a>
+      <a class="modal-close">Close X</a>
     </header>
     <div class="modal-body">
       <p class="field hidden">

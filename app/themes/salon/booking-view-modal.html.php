@@ -3,7 +3,7 @@
   <div class="modal-inner">
     <header>
       <h3>Appointment</h3>
-      <a class="modal-close" onclick="F1.Modal.close(this, event)">Close X</a>
+      <a class="modal-close">Close X</a>
     </header>
     <div class="modal-body"></div>
     <footer>

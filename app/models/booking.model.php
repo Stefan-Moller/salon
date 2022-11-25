@@ -47,14 +47,14 @@ class BookingModel {
   }
 
 
-  public function verifyUserPermissions( $booking ) {
+  public function verifyUserPermissions( $booking_id ) {
 
     $existingBooking =  $this->db->query( 'bookings' )
-      ->where( 'id=?', $booking->id )
+      ->where( 'id=?', $booking_id)
       ->getFirst(); 
 
     if ( ! $existingBooking ) {
-      throw new \Exception( 'It looks like booking no. ' . $booking->id  .
+      throw new \Exception( 'It looks like booking no. ' . $booking_id  .
       ' does not exist anymore! Request aborted.' );
     }
 
@@ -150,7 +150,7 @@ class BookingModel {
       debug_log( 'Update Booking...');
       debug_log( 'New booking data: ' . print_r( $bookingData, true ) );
 
-      $this->verifyUserPermissions( $bookingData );
+      $this->verifyUserPermissions( $bookingData->id );
 
       if ( $this->validateAvailability( $bookingData ) )
       {

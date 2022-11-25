@@ -19,7 +19,6 @@ F1.deferred.push( function initPage() {
 
   /* Global Service Aliases */
 
-  const Modal = F1.Modal; 
   const log = console.log;
   const logError = console.error;
   const urlParams = new URLSearchParams( window.location.search );
@@ -33,7 +32,6 @@ F1.deferred.push( function initPage() {
   function formatYmd( dateObj ) { return F1.Date.formatYmd( dateObj ); }
   function prevDayYmd( todayYmd ) { return F1.Date.prevDayYmd( todayYmd ); }
   function nextDayYmd( todayYmd ) { return F1.Date.nextDayYmd( todayYmd ); }
-  function makeDraggable( elModal ) { return F1.Modal.makeDraggable( elModal ); }
   function querySelector( selector ) { return document.querySelector( selector ); }
   function querySelectorAll( selector ) { return document.querySelectorAll( selector ); }
   
@@ -72,12 +70,12 @@ F1.deferred.push( function initPage() {
       : booking.station_name;
     return `
     <div class="booking-detail" data-booking="${booking.id}">
-      <h3><b>${booking.time}</b> - <b>${longDate}</b>
+      <h4><b>${booking.time}</b> - <b>${longDate}</b>
         &nbsp;<small>(${booking.duration}min)</small>
-      </h3>
+      </h4>
       <hr>
-      <p><b>${booking.client} - ${booking.client_cell}</b></p>
-      <p>${booking.therapist} - ${booking.therapist_cell} - ${station}</p>
+      <p>${booking.client} - ${booking.client_cell}</p>
+      <p>${station} - ${booking.therapist} - ${booking.therapist_cell}</p>
       <p>&nbsp;</p>
       <p class="notes">${booking.notes || ''}</p>
     </div>`;
@@ -165,16 +163,24 @@ F1.deferred.push( function initPage() {
     ajaxFetch( postUrl, onSuccess, { method: 'post', body } );
   }
 
-  function fetchBookings( dateYmd, onSuccess ) {
+  function fetchBookings( dateYmd, init ) {
     log( 'fetchBookings', dateYmd );
-    ajaxFetch( baseUrl + '?do=getBookings&date=' + dateYmd, onSuccess );
+    ajaxFetch( baseUrl + '?do=getBookings&date=' + dateYmd, 
+      fetchResp => fetchBookingsDone( fetchResp, init ) );
   }
 
-  function fetchBookingsSuccess( bookings ) {
-    log( 'fetchBookingsSuccess', bookings );
-    updateDateNavContent( selectedDateYmd, bookings );
-    updateDayViewContent( bookings );
-    stashDebugInfo( bookings );
+  function fetchBookingsDone( fetchResp, init ) {
+    log( 'fetchBookingsDone', fetchResp );
+    if ( fetchResp.error ) {
+      const errors = [];
+      logError( 'fetchBookingsDone', fetchResp.error );
+      alert( fetchResp.error );
+    } else {
+      const bookings = fetchResp;
+      updateDateNavContent( selectedDateYmd, bookings );
+      updateDayViewContent( bookings );
+      if ( init ) stashDebugInfo( bookings );
+    }
     hideLoadingIndicator(); 
   }
 
@@ -189,7 +195,7 @@ F1.deferred.push( function initPage() {
     booking.elSlot = findBookingSlotElm( booking );
     booking.elm = booking.elSlot.firstElementChild;
     const modalBodyHTML = renderBookingModalView( booking );
-    Modal.show( elBookingViewModal, { init: booking, body: modalBodyHTML } ); 
+    bookingViewModalCtrl.show( { data: booking, body: modalBodyHTML } ); 
     hideLoadingIndicator(); 
   }
 
@@ -198,7 +204,7 @@ F1.deferred.push( function initPage() {
     booking.time = padNum(booking.start_hour) + ':' + padNum(booking.start_min);
     booking.elSlot = findBookingSlotElm( booking );
     booking.elm = booking.elSlot.firstElementChild;
-    Modal.show( elBookingEditModal, { init: booking, form: bookingFormCtrl, focus: 1 } ); 
+    bookingFormModalCtrl.show( { data: booking } ); 
     hideLoadingIndicator();
   }
 
@@ -217,9 +223,8 @@ F1.deferred.push( function initPage() {
       bookingFormCtrl.addGlobalError( savedResp.error );
       bookingFormCtrl.showErrors();
     } else {
+      bookingFormModalCtrl.close();
       const savedBooking = savedResp;
-      Modal.close( elBookingEditModal, event );
-      elBookingEditModal.ENTITY = null;
       // If we changed the DAY of the appointment, so we need to go to a new DAY!
       if ( savedBooking.date !== selectedDateYmd ) return gotoDate( savedBooking.date );
       if ( elCurrentlyBookedSlot ) clearDayViewTimeSlot( elCurrentlyBookedSlot );
@@ -233,12 +238,19 @@ F1.deferred.push( function initPage() {
     log( 'deleteBooking', booking );
     const id = booking.elm.dataset.booking;
     const postData = { __action__: 'deleteBooking', date: selectedDateYmd, id };
-    ajaxSubmit( baseUrl, postData, deleteBookingSuccess );
+    ajaxSubmit( baseUrl, postData, deleteBookingDone );
   }
 
-  function deleteBookingSuccess( requestResponse ) {
-    log( 'deleteBookingSuccess', requestResponse );
-    clearDayViewTimeSlot( elBookingViewModal.ENTITY.elm.parentElement );
+  function deleteBookingDone( deleteResp ) {
+    log( 'deleteBookingDone', deleteResp );
+    if ( deleteResp.error ) {
+      const errors = [];
+      logError( 'saveBookingDone', deleteResp.error );
+      alert( deleteResp.error );
+    } else {    
+      clearDayViewTimeSlot( elBookingViewModal.ENTITY.elm.parentElement );
+      bookingViewModalCtrl.close();
+    }
     hideLoadingIndicator();
   }
 
@@ -249,12 +261,12 @@ F1.deferred.push( function initPage() {
     selectedDateYmd = date;
     urlParams.set( 'date', selectedDateYmd );
     history.pushState( { page: 'bookings' }, '', baseUrl + '?' + urlParams.toString() );
-    fetchBookings( selectedDateYmd, fetchBookingsSuccess );
+    fetchBookings( selectedDateYmd );
   }
 
   function onClickDay( event ) {
     log( 'onClickDay', event );
-    Modal.close( elDateSelectModal, event );
+    dateNavCalModalCtrl.close();
     const elClickedDay = event.target;
     const dateYmd = elClickedDay.dataset.calendarDay;
     gotoDate( dateYmd );
@@ -276,7 +288,7 @@ F1.deferred.push( function initPage() {
     selectedDateYmd = date;
     urlParams.set( 'date', selectedDateYmd );
     history.pushState( { page: 'bookings' }, '', baseUrl + '?' + urlParams.toString() );
-    fetchBookings( selectedDateYmd, fetchBookingsSuccess );
+    fetchBookings( selectedDateYmd );
   }
 
   F1.onGotoNextDay = function( event ) {
@@ -285,7 +297,7 @@ F1.deferred.push( function initPage() {
     selectedDateYmd = nextDayYmd( selectedDateYmd );
     urlParams.set( 'date', selectedDateYmd );
     history.pushState( { page: 'bookings' }, '', baseUrl + '?' + urlParams.toString() );    
-    fetchBookings( selectedDateYmd, fetchBookingsSuccess );
+    fetchBookings( selectedDateYmd );
   }
 
   F1.onGotoPrevDay = function( event ) {
@@ -294,24 +306,23 @@ F1.deferred.push( function initPage() {
     selectedDateYmd = prevDayYmd( selectedDateYmd );
     urlParams.set( 'date', selectedDateYmd );
     history.pushState( { page: 'bookings' }, '', baseUrl + '?' + urlParams.toString() );    
-    fetchBookings( selectedDateYmd, fetchBookingsSuccess );
+    fetchBookings( selectedDateYmd );
   }
 
-  F1.onShowDateSelect = function( event ) {
-    log( 'onShowSelect', event );
-    Modal.show( elDateSelectModal, { event } );
+  F1.onShowCalendarModal = function( event ) {
+    log( 'onShowCalendarModal', event );
+    dateNavCalModalCtrl.show();
   }
 
   F1.onNewBooking = function( event ) {
     log( 'onNewBooking', event );
     const newBookingBase = { date: selectedDateYmd, duration: '0', elm: undefined };
-    Modal.show( elBookingEditModal, { init: newBookingBase, 
-      form: bookingFormCtrl, focus: 1, event } );
+    bookingFormModalCtrl.show( { data: newBookingBase } );
   };
 
   F1.onEditBooking = function( event ) {
     log( 'onEditBooking', event );
-    Modal.close( elBookingViewModal, event );
+    bookingViewModalCtrl.close();
     const id = elBookingViewModal.ENTITY.elm.dataset.booking;
     fetchBooking( id, fetchBookingToEditSuccess );
   };
@@ -319,7 +330,7 @@ F1.deferred.push( function initPage() {
   F1.onDeleteBooking = function( event ) {
     log( 'onDeleteBooking', event );
     if ( confirm( 'DELETE this booking... Are you sure?' ) ) {
-      Modal.close( elBookingViewModal, event );
+      bookingFormModalCtrl.close();
       deleteBooking( elBookingViewModal.ENTITY );
     }
   };
@@ -362,19 +373,18 @@ F1.deferred.push( function initPage() {
         duration: '0',
         elSlot: elm
       }
-      Modal.show( elBookingEditModal, { init: newBookingBase, 
-        form: bookingFormCtrl, focus: 1, event } );      
+      bookingFormModalCtrl.show( { data: newBookingBase } );      
     }
   };
 
 
   /* Init */
 
-  function initDateNavCalendar( elDateNavCalendar, dateYmd ) {
+  function initDateNavCalendar() {
     const ctrl = new VanillaCalendar( elDateNavCalendar );
-    const dateYmdParts = dateYmd.split( '-' );
+    const dateYmdParts = selectedDateYmd.split( '-' );
     const month = parseInt( dateYmdParts[1] ) - 1
-    ctrl.settings.selected.dates = [ dateYmd ]; 
+    ctrl.settings.selected.dates = [ selectedDateYmd ]; 
     ctrl.settings.selected.month = month;    
     ctrl.actions.clickDay = onClickDay;
     ctrl._type = 'DateNavCalendar_Controller';
@@ -383,8 +393,22 @@ F1.deferred.push( function initPage() {
     return ctrl;
   }
 
-  function initBookingEditForm( elBookingEditForm ) {
+  function initBookingEditForm() {
     return new F1.Form( { elm: elBookingEditForm, onlyShowSummary: true } );
+  }
+
+  function initDateNavCalendarModal() {
+    return new F1.Modal( { elm: elDateSelectModal } );
+  }
+
+  function initBookingViewModal() {
+    return new F1.Modal( { elm: elBookingViewModal } );
+  }
+
+  function initBookingEditModal() {
+    return new F1.Modal( { elm: elBookingEditModal,
+      formController: bookingFormCtrl,
+      focusFormOnShow: 1  } );
   }
 
 
@@ -404,6 +428,9 @@ F1.deferred.push( function initPage() {
     F1.controllers = F1.controllers || [];
     F1.controllers.push( dateNavCalCtrl  );
     F1.controllers.push( bookingFormCtrl );
+    F1.controllers.push( bookingFormModalCtrl );
+    F1.controllers.push( bookingViewModalCtrl );
+    F1.controllers.push( dateNavCalModalCtrl );
   }
 
 
@@ -413,9 +440,7 @@ F1.deferred.push( function initPage() {
 
   window.onpopstate = onPopState;
 
-
   selectedDateYmd = getSelectedDateYmd();
-
 
   const elDateNav          = document.getElementById( 'date-nav' );
   const elDateNavCalendar  = document.getElementById( 'date-nav-calendar'  );
@@ -424,44 +449,22 @@ F1.deferred.push( function initPage() {
   const elBookingEditModal = document.getElementById( 'booking-edit-modal' );
   const elBookingEditForm  = elBookingEditModal.querySelector( 'form ');
 
-  const dateNavCalCtrl  = initDateNavCalendar( elDateNavCalendar, selectedDateYmd );
-  const bookingFormCtrl = initBookingEditForm( elBookingEditForm ); 
+  const dateNavCalCtrl  = initDateNavCalendar();
+  const dateNavCalModalCtrl = initDateNavCalendarModal();
 
+  const bookingFormCtrl = initBookingEditForm(); 
+  const bookingViewModalCtrl = initBookingViewModal();
+  const bookingFormModalCtrl = initBookingEditModal();
 
-  fetchBookings( selectedDateYmd, fetchBookingsSuccess );
-
-
-  makeDraggable( elBookingViewModal );
-  makeDraggable( elBookingEditModal );
+  fetchBookings( selectedDateYmd, 'init' );
 
 });
 
 
-// 22 Nov
-// ------
-// MRP - Super access account details:  michelle, password OR riette, password - DONE
-// MRP - Don't duplicate appointment when time is changed - DONE
-// AJAX STATE - Remember today after saving - DONE
-// MRP - Add delete button - DONE
-// SAVE, EDIT and DELETE using AJAX! - DONE
-
-
-// 23 Nov
-// ------
-// Beautify booking summary and detail views - DONE
-// Create a user with a lesser role, e.g. admin and validate against that to prevent unauthorized updates - DONE
-// MRP - Click on date in Date Nav to open a calendar modal to select the current date - DONE
-// Add an event handler for selecting the date from the calendar modal - DONE
-
-
-// 24 Nov
-// ------
-// Fix issue with unwanted REQUEST params making SAVE fail! - DONE
-// Make top part of calendar view sticky! Rrrr... - DONE
-// Server side validation and feedback system - DONE
-// MRP - Check if time-slot is booked - Validate - DONE
-// MRP - Only creator can edit. Role system - DONE
-// Use the current user's actual ID as created_by an updated_by - DONE
+// 25 Nov 2022
+// -----------
+// Re-factor F1.Modal and implement changes - DONE
+// Fix a bunch of bugs! - DONE
 
 
 // Data Model features in DB?  Get all table column names and auto-set update filter...?
