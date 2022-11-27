@@ -42,6 +42,5 @@ $files = array_diff( scandir( $app->photosDir . '' ), array( '.', '..' ) );
 $view->useStyleFile ( 'vendors/f1css/slides/slides.css' );
 
 $view->useScriptFile( 'vendors/jquery/jquery.min.js' );
-$view->useScriptFile( 'vendors/f1js/slideshow/slideshow.js' );
 
 include $view->getFile();

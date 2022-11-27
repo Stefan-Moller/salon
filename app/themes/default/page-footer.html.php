@@ -1,1 +1,0 @@
-<footer>Page Footer</footer>

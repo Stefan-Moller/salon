@@ -7,7 +7,7 @@
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 2.4.1 - FIX - 25 Nov 2022
+ * @version 2.5.0 - DEV - 27 Nov 2022
  *
  */
 
@@ -98,63 +98,8 @@ if ( $http->req->isAjax ) {
 
 if ( $http->req->isPost ) {
 
-  $error = false;
-  $goto = $http->req->referer;
-  $do = $http->getPostVal( '__action__' );
-
-  do {
-  
-    include $app->modelsDir . '/booking.model.php';
-    $bookingModel = new BookingModel( $db, $http, $auth );
-
-    try {
-
-      if ( $do == 'save' ) {
-
-        $bookingModel->save();
-
-        debug_log( 'SAVE Booking, goto = ' . $goto );
-        
-        $urlParts = explode( '?', $goto );
-
-        debug_log( 'SAVE Booking, urlParts = ' . print_r( $urlParts, true ) );
-
-        if ( count( $urlParts ) == 2 ) {
-
-          parse_str( $urlParts[1], $queryParams );
-          $queryParams[ 'date' ] = $http->getPostVal( 'date' );
-
-        } else {
-
-          $queryParams = [ 'date' => $http->getPostVal( 'date' ) ];
-
-        }
-
-        debug_log( 'SAVE Booking, queryParams = ' . print_r( $queryParams, true ) );
-
-        $queryString = '?' . http_build_query( $queryParams );
-
-        $goto = $urlParts[0] . $queryString;
-
-      }
-
-    } 
-
-    catch ( Exception $e ) {
-
-      $error = $e->getMessage();
-
-    }
-
-  } while ( 0 );
-
-
-  if ( $error ) {
-    $session->flash( 'error', $error );
-    debug_log( 'SAVE Booking Error: ' . $error );
-  }
-
-  header( 'Location:' . $goto );
+  http_response_code( 400 );
+  die( 'Bad Request' );
 
 }
 
@@ -164,19 +109,13 @@ if ( $http->req->isPost ) {
 // --- GET ---
 // -----------
 
-
 $view->useStyleFile( 'vendors/f1css/form/form.css'     );
 $view->useStyleFile( 'vendors/f1css/modal/modal.css'   );
 $view->useStyleFile( 'vendors/f1css/select/select.css' );
 $view->useStyleFile( 'vendors/vanilla/vanilla-calendar.min.css' );
 
-$view->useScriptFile( 'vendors/f1js/date/date.js'     );
-$view->useScriptFile( 'vendors/f1js/form/form.js'     );
-$view->useScriptFile( 'vendors/f1js/modal/modal.js'   );
-$view->useScriptFile( 'vendors/f1js/select/select.js' );
-$view->useScriptFile( 'vendors/f1js/form/form-validatortypes.js');
+
 $view->useScriptFile( 'vendors/vanilla/vanilla-calendar.min.js' );
-$view->useScriptFile( 'vendors/f1js/form/form-fieldtypes.js'    );
 
 
 include $app->modelsDir . '/calendar.model.php';

@@ -55,3 +55,9 @@
 
 ## 25 Nov 2022 - FIX - Ver 2.4.1
  - Fix issues around F1.Modal and the ENTITY prop. bookingFormModalCtrl.ENTITY vs. elBookingFormModal.ENTITY
+
+## 27 Nov 2022 - DEV - Ver 2.5.0
+ - Convert F1JS to ES6 modules.
+ - Replace old script includes with ES6 import statements.
+ - Rename vars and update F1JS module usage in bookings.html.js
+ - Remove unused code
