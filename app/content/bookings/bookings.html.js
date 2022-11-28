@@ -14,12 +14,6 @@ import { customValidatorTypes } from './js/vendors/f1js/form/form-validatortypes
 import { customFieldTypes } from './js/vendors/f1js/form/form-fieldtypes.js';
 
 
-
-Object.assign( F1, { DateTime, Modal, Form, Select, VanillaCalendar, 
-  customFieldTypes, customValidatorTypes } );
-
-
- 
 F1.deferred.push( function initPage() {
 
   console.log( '[Bookings Page Controller] Says Hi!' );
@@ -454,6 +448,10 @@ F1.deferred.push( function initPage() {
     /* Data */
     F1.data.bookings = info.bookings;
   }
+
+  Object.assign( F1, { DateTime, Modal, Form, Select, VanillaCalendar, 
+    customFieldTypes, customValidatorTypes } );
+
 
 
   /* ------- *

@@ -61,3 +61,9 @@
  - Replace old script includes with ES6 import statements.
  - Rename vars and update F1JS module usage in bookings.html.js
  - Remove unused code
+
+## 28 Nov 2022 - DEV - Ver 2.5.1
+ - Re-factor AJAX handling code in bookings.php
+ - Update code to reflect changes to the F1::Http service
+ - Update code to reflect changes to the F1:View service
+ - Move `bookings.view.sql` to `app/` folder

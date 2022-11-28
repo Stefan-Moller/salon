@@ -7,11 +7,12 @@
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 2.5.0 - DEV - 27 Nov 2022
+ * @version 2.5.1 - DEV - 28 Nov 2022
  *
  */
 
 if ( ! $auth->logged_in() ) header( 'Location:login' );
+
 
 $view->theme = 'salon';
 $view->title = 'Bookings';
@@ -23,8 +24,8 @@ $date = $http->getUrlParam( 'date', date( 'Y-m-d' ) );
 
 
 $datetime = strtotime( $date );
-$nextday = date( 'Y-m-d', strtotime('+1 day', $datetime) );
-$prevday = date( 'Y-m-d', strtotime('-1 day', $datetime) );
+$nextday = date( 'Y-m-d', strtotime( '+1 day', $datetime ) );
+$prevday = date( 'Y-m-d', strtotime( '-1 day', $datetime ) );
 
 
 $db->connect( $app->dbConnection[ 'salon' ] );
@@ -38,11 +39,15 @@ $db->connect( $app->dbConnection[ 'salon' ] );
 if ( $http->req->isAjax ) {
 
   $error = false;
+
   $bookingData = new stdClass;
-  $do = $http->req->isPost ? $http->getPostVal( '__action__' ) : $http->getUrlParam( 'do' );
+
+  $do = $http->request->isPost
+    ? $http->request->getPostVal( '__action__' )
+    : $http->request->getUrlParam( 'do' );
 
   debug_log( "\n\n\n*** New AJAX Request ***" );
-  debug_log( "Method = {$http->req->method}, Do = {$do}" );
+  debug_log( "Method = {$http->request->method}, Do = {$do}" );
   debug_log( '$_REQUEST = ' . print_r( $_REQUEST, true ) );
 
   do {
@@ -52,9 +57,17 @@ if ( $http->req->isAjax ) {
 
     try {
 
-      if ( $http->req->isPost ) {
+      // AJAX POST
+      if ( $http->request->isPost ) { 
 
-        $bookingID = $http->getPostVal( 'id' );
+        $bookingID = $http->request->getPostVal( 'id' );
+
+        if ( $do == 'saveBooking' ) {
+          $bookingID = $bookingModel->save();
+          $bookingData = $bookingModel->getById( $bookingID );
+          debug_log( 'After save. BookingID = ' . $bookingID );
+          break;
+        }
 
         if ( $do == 'deleteBooking' ) {
           $bookingModel->delete( $bookingID );
@@ -62,20 +75,28 @@ if ( $http->req->isAjax ) {
           break;
         }
 
-        if ( $do == 'saveBooking' ) {
-          $bookingID = $bookingModel->save();
-          debug_log( 'After save. BookingID = ' . $bookingID );
+      }
+
+      // AJAX GET
+      else {
+
+        if ( $do == 'getBooking'  ) {
+          $bookingID = $http->request->getUrlParam( 'id' );
           $bookingData = $bookingModel->getById( $bookingID );
           break;
         }
 
-      }
+        if ( $do == 'getBookings' ) {
+          $bookingData = $bookingModel->getAll( $date );
+          break;
 
-      if ( $do == 'getBookings' ) { $bookingData = $bookingModel->getAll( $date ); break; }
-      if ( $do == 'getBooking'  ) { $bookingData = $bookingModel->getById( $http->getUrlParam( 'id' ) ); break; }
+        }
+
+      }
 
     }
 
+    // AJAX ERROR
     catch ( Exception $e ) { $error = $e->getMessage(); }
 
   } while ( 0 );
@@ -86,7 +107,7 @@ if ( $http->req->isAjax ) {
     debug_log( "Ajax Request Exception! do = {$do}, message = {$error}" );
   }
 
-  exit( $view->makeJsonResponse( $bookingData ) );
+  exit( $http->response->json( $bookingData ) );
 
 }
 
@@ -109,13 +130,12 @@ if ( $http->req->isPost ) {
 // --- GET ---
 // -----------
 
-$view->useStyleFile( 'vendors/f1css/form/form.css'     );
-$view->useStyleFile( 'vendors/f1css/modal/modal.css'   );
-$view->useStyleFile( 'vendors/f1css/select/select.css' );
-$view->useStyleFile( 'vendors/vanilla/vanilla-calendar.min.css' );
+$view->includeStyle( 'css/vendors/f1css/form/form.css'     );
+$view->includeStyle( 'css/vendors/f1css/modal/modal.css'   );
+$view->includeStyle( 'css/vendors/f1css/select/select.css' );
+$view->includeStyle( 'css/vendors/vanilla/vanilla-calendar.min.css' );
 
-
-$view->useScriptFile( 'vendors/vanilla/vanilla-calendar.min.js' );
+$view->includeScript( 'js/vendors/vanilla/vanilla-calendar.min.js' );
 
 
 include $app->modelsDir . '/calendar.model.php';
