@@ -1,9 +1,9 @@
-  <?php foreach( $view->scripts as $scriptInfo ): ?>
-  <script src="js/<?=$scriptInfo[0]?>"<?=$scriptInfo[1]?' type="module"':''?>></script>
+  <?php foreach( $view->scripts as $scriptFileRef ): ?>
+  <script src="<?=$scriptFileRef?>"></script>
   <?php endforeach; ?>
 
   <script type="module">
-    <?php include $view->getScriptFile(); ?>
+    <?php include $view->getInlineScriptFile(); ?>
   </script>
 
   <script src="js/main.js"></script>
