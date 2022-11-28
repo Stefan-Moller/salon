@@ -7,7 +7,7 @@
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 1.0.0 - 24 Sep 2022
+ * @version 1.0.1 - 24 Sep 2022
  * 
  */
 
@@ -20,18 +20,18 @@ $view->title = 'User Authentication';
 // --- POST  ---
 // -------------
 
-if ( $http->req->isPost ) {
+if ( $http->request->isPost ) {
 
   $error = null;
-  $goto = $http->req->referer;
+  $goto = $http->request->referer;
   
   do {
 
-    if ( $http->getPostVal( 'submit' ) == 'Login' )
+    if ( $http->request->getPostVal( 'submit' ) == 'Login' )
     {
 
-      $username = $http->getPostVal( 'username' );
-      $password = $http->getPostVal( 'password' );
+      $username = $http->request->getPostVal( 'username' );
+      $password = $http->request->getPostVal( 'password' );
 
       $db->connect( $app->dbConnection[ 'salon' ] );
 
@@ -42,7 +42,7 @@ if ( $http->req->isPost ) {
 
       }
 
-      catch (Exception $e) {
+      catch ( Exception $e ) {
 
         $error = $e->getMessage();
 
@@ -69,10 +69,8 @@ if ( $http->req->isPost ) {
 // --- GET ---
 // -----------
 
-$view->useStyleFile( 'vendors/f1css/form/form.css' );
+$view->includeStyle( 'css/vendors/f1css/form/form.css' );
 
-$view->useScriptFile( 'vendors/f1js/form/form.js' );
-// $view->useScriptFile( 'vendors/f1js/form/form-validatortypes.js' );
-// $view->useScriptFile( 'vendors/f1js/form/form-fieldtypes.js' );
+$view->includeScript( 'js/vendors/f1js/form/form.js' );
 
 include $view->getFile();
