@@ -19,7 +19,7 @@ $app->themeDir = $app->themesDir . DIRECTORY_SEPARATOR . $app->theme;
 
 $app->controller = new Controller( [
   'controllersBaseDir' => $app->contentDir,
-  'controllerFilePath' => $http->req->path ?: $app->homePage,
+  'controllerFilePath' => $http->request->path ?: $app->homePage,
   'notFound' => $app->themeDir . DIRECTORY_SEPARATOR . '404.html',
-  'name' => $http->req->path ? end( $http->req->segments ) : $app->homePage
+  'name' => $http->request->path ? end( $http->request->segments ) : $app->homePage
 ] );

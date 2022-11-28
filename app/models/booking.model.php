@@ -18,7 +18,7 @@ class BookingModel {
 
   public function getPostVal( $key, $default = null ) {
 
-    return $this->http->getPostVal( $key, $default );
+    return $this->http->request->getPostVal( $key, $default );
 
   }
 

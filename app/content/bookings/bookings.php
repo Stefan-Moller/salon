@@ -20,7 +20,7 @@ $view->title = 'Bookings';
 $view->menu[ 'setup' ] = 'Setup';
 $view->menu[ 'logout' ] = 'Logout';
 
-$date = $http->getUrlParam( 'date', date( 'Y-m-d' ) );
+$date = $http->request->getUrlParam( 'date', date( 'Y-m-d' ) );
 
 
 $datetime = strtotime( $date );
@@ -36,7 +36,7 @@ $db->connect( $app->dbConnection[ 'salon' ] );
 // --- AJAX  ---
 // -------------
 
-if ( $http->req->isAjax ) {
+if ( $http->request->isAjax ) {
 
   $error = false;
 
@@ -117,7 +117,7 @@ if ( $http->req->isAjax ) {
 // --- POST  ---
 // -------------
 
-if ( $http->req->isPost ) {
+if ( $http->request->isPost ) {
 
   http_response_code( 400 );
   die( 'Bad Request' );

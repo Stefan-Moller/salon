@@ -90,6 +90,7 @@ F1.deferred.push( function initPage() {
   }
 
   function updateDateNavCalendar( dateYmd ) {
+    log( 'updateDateNavCalendar, dateYmd:', dateYmd );
     const dateYmdParts = dateYmd.split( '-' );
     const month = parseInt( dateYmdParts[1] ) - 1
     calCtrl_dateNavCal.settings.selected.dates = [ dateYmd ]; 
@@ -113,6 +114,7 @@ F1.deferred.push( function initPage() {
     log( 'updateDateNavContent, dateYmd:', dateYmd );
     elDateNav.querySelector( '.date-view' ).innerText = renderLongDate( dateYmd );
     elDateNav.querySelector( '.date-bookings' ).innerText = bookings.length;
+    updateDateNavCalendar( dateYmd );
   }
 
   function updateDayViewContent( bookings ) {
@@ -480,7 +482,11 @@ F1.deferred.push( function initPage() {
 });
 
 
+// 29 Nov
+// ------
+// Update the date nav modal's selected date when we change the date without the calendar! - DONE
+
 // TODO:
 // -----
 // Data Model features in DB?  Get all table column names and auto-set update filter...?
-// Improve Date Nav with a days ribbon accross the bottom.
+// Improve Date Nav with a days ribbon just below the date display.
