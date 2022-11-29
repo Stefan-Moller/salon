@@ -12,7 +12,7 @@
 
       <section class="login-form" aria-label="System Login Form">
 
-        <form method="POST" onsubmit="F1.loginForm.submit(event)" novalidate>
+        <form method="POST" onsubmit="F1.onSubmit(event)" novalidate>
           <if expr="$error = $session->getFlash('error')">
           <div class="errors"><?=$error?></div>  
           </if>

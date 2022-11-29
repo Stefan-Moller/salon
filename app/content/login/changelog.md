@@ -5,3 +5,9 @@
 
 ## 28 Nov 2022 - UPD - Ver 1.0.1
  - Update code to reflect changes to F1PHP VIEW and HTTP services.
+
+## 29 Nov 2022 - REL - Ver 2.0.0
+ - Update code to use ES6 module notation.
+  * Re-factor form.html.js to import F1JS Form via ES6 loader and
+    change format to be more consistent with the standard set by booking.html.js.
+

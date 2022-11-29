@@ -44,6 +44,10 @@ class Auth {
 
   public function login( $username, $password ) {
 
+    try {
+
+      if ( empty( $username ) ) return false;
+
       $user = $this->app->db->query( 'users' )
         ->where( 'username=?', $username )
         ->getFirst();
@@ -54,6 +58,11 @@ class Auth {
       else $this->logout();
 
       return $pass;
+
+    }
+
+    catch ( Exception $e ) { debug_log( $e->getMessage(), 'EXCPT' ); }
+
   }
 
 }

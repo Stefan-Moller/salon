@@ -7,7 +7,7 @@
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 1.0.1 - 24 Sep 2022
+ * @version 2.0.0 - REL - 29 Nov 2022
  * 
  */
 
@@ -70,7 +70,5 @@ if ( $http->request->isPost ) {
 // -----------
 
 $view->includeStyle( 'css/vendors/f1css/form/form.css' );
-
-$view->includeScript( 'js/vendors/f1js/form/form.js' );
 
 include $view->getFile();
