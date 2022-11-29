@@ -13,14 +13,7 @@ include $app->vendorsDir . '/f1/debug/debug.php';
 
 use F1\Debug;
 
-if ( __ENV_PROD__ )
-{
-  $app->debugLevel = __DEBUG_ON__ ? 2 : 1;
-}
-else
-{
-  $app->debugLevel = __DEBUG_ON__ ? 3 : 2;
-}
+$app->debugLevel = __DEBUG_ON__ ? __DEBUG_LV__ : 0;
 
 $app->debugLogFile = $app->storageDir . DIRECTORY_SEPARATOR . 'logs' .
   DIRECTORY_SEPARATOR . date( Debug::$shortDateFormat ) . '.log';
@@ -41,7 +34,7 @@ register_shutdown_function( [ $debug, 'onShutdown' ] );
 // 3rd party classes or any other isolated scope code blocks.
 //------------------------------------------------------------
 
-function debug_log( $str ) { global $debug; $debug->log( $str ); }
+function debug_log( $str, $type = null ) { global $debug; $debug->log( $str, $type ); }
 function debug_dump( $var, $title = '' ) { global $debug; $debug->dump( $var, $title ); }
 
 

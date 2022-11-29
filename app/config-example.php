@@ -14,8 +14,9 @@
 // -----------------------------------------------------------------------------
 
 
-define( '__DEBUG_ON__'   , true  );
-define( '__ENV_PROD__'   , false );
+define( '__DEBUG_LV__' , 0 );
+define( '__DEBUG_ON__' , false );
+define( '__ENV_PROD__' , true );
 
 ini_set( 'log_errors'    , __ENV_PROD__ ? 1 : 0 );
 ini_set( 'display_errors', __ENV_PROD__ ? 0 : 1 );
