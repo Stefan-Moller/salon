@@ -3,7 +3,7 @@
 /* View Specific JS */
 
 
-/* Import required F1JS plugins */
+/* Import required F1JS modules */
 
 import { DateTime } from './js/vendors/f1js/datetime/datetime.js';
 import { Select } from './js/vendors/f1js/select/select.js';
@@ -349,10 +349,10 @@ F1.deferred.push( function initPage() {
     log( 'onSubmitBooking', event );
     event.preventDefault();
     if ( ! formCtrl_bookingForm.validate() ) {
-      formCtrl_bookingForm.addGlobalError( 'Some field values are invalid.' );
+      // formCtrl_bookingForm.addGlobalError( 'Some field values are invalid.' );
       const fieldErrors = formCtrl_bookingForm.showErrors()
       log( 'onSubmitBooking, fieldErrors:', fieldErrors );
-      return fieldErrors.pop().focus();
+      return fieldErrors[0].focus();
     } 
     saveBooking( modalCtrl_bookingForm.ENTITY );
   };

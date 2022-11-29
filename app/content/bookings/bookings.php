@@ -104,7 +104,7 @@ if ( $http->request->isAjax ) {
 
   if ( $error ) {
     $bookingData->error = $error;
-    debug_log( "Ajax Request Exception! do = {$do}, message = {$error}" );
+    debug_log( "Ajax Request Exception! do = {$do}, message = {$error}", 'EXCPT' );
   }
 
   exit( $http->response->json( $bookingData ) );

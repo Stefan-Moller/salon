@@ -14,6 +14,8 @@
 $view->theme = 'salon';
 $view->title = 'Setup';
 
+$view->menu[ 'bookings' ] = 'Bookings';
+$view->menu[ 'logout' ] = 'Logout';
 
 // -----------
 // --- GET ---
