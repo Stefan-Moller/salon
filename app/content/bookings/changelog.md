@@ -68,3 +68,6 @@
  - Update code to reflect changes to the F1:View service
  - Move `bookings.view.sql` to `app/` folder
  - Fix bug where the nav calendar's date does not alays match the currently selected day's date.
+
+## 29 Nov 2022 - FIX - Ver 2.5.2
+ - Fix inline CSS regression causing the day-view grid to overflow on mobile.

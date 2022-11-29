@@ -15,6 +15,7 @@
 
 .table {
   display: flex;
+  overflow: auto;
   background-color: var(--grid--color);
   flex-direction: column;
   padding: 2px 0;
