@@ -5,7 +5,7 @@
 
 /* Import required F1JS modules */
 
-// import { Form } from './js/vendors/f1js/form/form.js';
+import { Form } from './js/vendors/f1js/form/form.js';
 
 
 F1.deferred.push(function initPage() {
