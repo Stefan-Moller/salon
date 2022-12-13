@@ -7,7 +7,7 @@
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 2.5.2 - FIX - 29 Nov 2022
+ * @version 3.0.0 - FT - 13 Dec 2022
  *
  */
 
@@ -17,8 +17,9 @@ if ( ! $auth->logged_in() ) header( 'Location:login' );
 $view->theme = 'salon';
 $view->title = 'Bookings';
 
+$view->menu[ 'bookings' ] = 'Bookings';
 $view->menu[ 'setup' ] = 'Setup';
-$view->menu[ 'logout' ] = 'Logout';
+$view->menu[ 'contact' ] = 'Contact Us';
 
 $date = $http->request->getUrlParam( 'date', date( 'Y-m-d' ) );
 

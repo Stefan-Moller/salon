@@ -1,38 +1,32 @@
 <include>doc-head</include>
 
-  <include>site-header</include>
+  <include>doc-header</include>
 
-  <main class="page">
+  <header class="main-header">
+    <h2><?=$view->title?></h2>
+    <if expr="!$auth->logged_in()">
+    <a href="login" class="button">Login</a>
+    </if>
+    <if expr="$auth->logged_in()">
+    <a href="logout" class="button">Log Out</a>
+    </if>
+  </header>
 
-    <header>
-      <h1><?=$view->title?></h1>
-      <if expr="!$auth->logged_in()">
-      <a href="login" class="button">Login</a>
-      </if>
-      <if expr="$auth->logged_in()">
-      <a href="logout" class="button">Log Out</a>
-      </if>
-    </header>
-
-    <div class="content">
-
-      <section class="slideshow" aria-label="Salon images slide show">
-        <button type="button" class="prev-slide">&lt;</button>
-        <ul class="slides" role="presentation">
-        <?php $i=0 ?>
-        <foreach expr="$files as $file">
-          <li class="slide slide<?=($i==0)?$i.' show':$i?>"><img src="img/photos/<?=$file?>" alt="Slide <?=$i?>"></li>
-        <?php $i++ ?>
-        </foreach>
-        </ul>
-        <button type="button" class="next-slide">&gt;</button>
-        <div class="indicators" style="bottom:1rem;right:2rem"></div>
-      </section>
-
+  <main>
+    <div class="slideshow" aria-label="Salon images slide show">
+      <button type="button" class="prev-slide">&lt;</button>
+      <ul class="slides" role="presentation">
+      <?php $i=0 ?>
+      <foreach expr="$files as $file">
+        <li class="slide slide<?=($i==0)?$i.' show':$i?>"><img src="img/photos/<?=$file?>" alt="Slide <?=$i?>"></li>
+      <?php $i++ ?>
+      </foreach>
+      </ul>
+      <button type="button" class="next-slide">&gt;</button>
+      <div class="indicators" style="bottom:1rem;right:2rem"></div>
     </div>
-
   </main>
 
-  <include>site-footer</include>
+  <include>doc-footer</include>
 
 <include>doc-foot</include>

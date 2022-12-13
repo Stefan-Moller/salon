@@ -71,3 +71,16 @@
 
 ## 29 Nov 2022 - FIX - Ver 2.5.2
  - Fix inline CSS regression causing the day-view grid to overflow on mobile.
+
+## 13 Dec 2022 - FT - Ver 3.0.0
+ - Major Update!
+ - Totally refactor the application and bookings page HTML and CSS.
+ - Change instances of `<img src="caret.svg">` to `<svg>`.
+ - Re-arrange HTML elements to allow `position: sticky` to work properly.
+ - Rename `Modal Dialog, Header and Footer templates` to a more consistent standard.
+ - Update views affected by Template and base HTML structure changes accross all pages.
+ - Re-design the `Bookings Day View Grid` and CSS according to reasearch done on another test project.
+ - Greatly improve the `Responsive Behaviour` of the bookings page header. Make the loading indicator `position:absolute` etc.
+ - Update bookings page inline JS to reflect changes in class names and HTML structure.
+ - `Create new F1CSS modules` where required and `move common CSS elements to F1CSS`.
+ - `Rename existing and Add more CSS vars` + Use CSS vars in more places.

@@ -5,8 +5,8 @@
  *  
  * @author  C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 1.0.0 - REL - 26 Nov 2022
- *   - Initial version
+ * @version 1.1.0 - FT - 10 Dec 2022
+ *   - Add `--scroll-bar-width` calculation code.
  *
  */
 
@@ -16,6 +16,13 @@ document.addEventListener( 'DOMContentLoaded', function() {
 
   F1.deferred.forEach( fn => fn() ); 
 
-  if ( F1.DEBUG ) console.log( 'Page initialized. F1:', F1, '\n\n' );
+  const elMain = document.querySelector( 'body > main' );
+  const scrollbarWidth = elMain.parentElement.clientWidth - elMain.clientWidth;
+
+  document.documentElement.style.setProperty( '--scrollbar-width', 
+    scrollbarWidth + 'px' );
+
+  if ( F1.DEBUG ) console.log( 'Page initialized.', 
+    { F1, scrollbarWidth, elMain }, '\n\n' );
 
 } );

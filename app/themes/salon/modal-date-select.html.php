@@ -1,5 +1,5 @@
 <!-- Date Select Modal -->
-<section id="date-select-modal" class="modal">
+<div id="date-select-modal" class="modal">
   <div class="modal-inner">
     <header>
       <h3>Date Select</h3>
@@ -12,4 +12,4 @@
       </div>
     </footer>
   </div>
-</section>
+</div>

@@ -1,13 +1,13 @@
 <?php
 
 /**
- * ./app/content/home/login.php
+ * ./app/content/login/login.php
  * 
  * Home page controller - 23 Sep 2022
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 2.0.0 - REL - 29 Nov 2022
+ * @version 3.0.0 - DEV - 13 Dec 2022
  * 
  */
 

@@ -1,153 +1,159 @@
 /* View Specific CSS */
-.content {
-  border: 3px solid gainsboro;
-  min-height: 100vh;
+
+.main-header {
+  background-color: var(--doc-color-primary);
 }
 
-.calendar {
-  --row--height: 23px;
-  --station--col--width: 110px;
-  --divider--color: #eee;
-  --grid--color: gainsboro;
-  --cell--color: white;
-  flex: 1;
+main {
+  --flexgrid-cell-color: white;
+  --flexgrid-lines-color: gainsboro;
+  --flexgrid-lines-width: 1px;
+  --flexgrid-row-height: 23px;
+  --flexgrid-col-width: 110px;
 }
 
-.table {
+main {
+  overflow: auto;    
+  position: relative;
+  background-color: var(--flexgrid-lines-color);
+  border: 3px solid var(--flexgrid-lines-color);
+}
+
+.date-select-group {
+  position: relative;
+  min-width: 15ch;
+}
+
+.bookings-count-badge {
+  position: absolute;
+  font-size: 0.8em;
+  font-weight: bold;
+  border-radius: 50%;
+  background-color: var(--doc-color-secondary);
+  width: 1.34rem;
+  height: 1.3rem;
+  text-align: center;
+  line-height: 1.34rem;
+  right: -0.3rem;
+  top: -0.45rem;
+}
+
+.today-button {
+  background-color: hsla(322.2, 80.9%, 43%); /* mediumvioletred */
+}
+
+.today-button:hover {
+  background-color: hsla(322.2, 80.9%, 48%);
+}
+
+.add-button {
+  background-color: var(--doc-color-secondary);
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.add-button:hover {
+  background-color: var(--doc-color-secondary-highlight);
+}
+
+@media (max-width: 380px) {
+  .date-select-group,
+  .date-nav-group,
+  .control-group,
+  .today-button,
+  .date-button { width: 100%; }
+}
+
+.flex-grid {
   display: flex;
-  overflow: auto;
-  background-color: var(--grid--color);
+  width: -moz-fit-content;
+  width: fit-content; /* Very important! */
+  gap: var(--flexgrid-lines-width);
+}
+
+.flex-col {
   flex-direction: column;
-  padding: 2px 0;
-  gap: 1px;
+  min-width: var(--flexgrid-col-width);
+  display: flex;
+  gap: var(--flexgrid-lines-width);
 }
 
-.thead {
-  display: flex;
-  background-color: var(--grid--color);
-  border-bottom: 2px solid var(--divider--color);
-  width: fit-content;
+.flex-grid label {
+  text-align: center;
+}
+
+.freeze-first-col > .flex-col:first-child {
+  border-right: var(--flexgrid-lines-width) solid var(--flexgrid-lines-color);
   position: sticky;
-  color: #444;
   z-index: 10;
-  gap: 1px;
-  top: 0;
-}
-
-.trhead {
-  display: flex;
-  position: sticky;
-  border-right: 2px solid var(--divider--color);
-  background-color: var(--grid--color);
-  flex-direction: column;
-  z-index: 15;
-  gap: 1px;
   left: 0;
 }
 
-.tbody {
-  display: flex;
-  background-color: var(--grid--color);
-  width: fit-content;
-  gap: 1px;
+.freeze-top-row > .flex-col > .flex-row:first-child {
+  border-bottom: var(--flexgrid-lines-width) solid var(--flexgrid-lines-color);
+  position: sticky;
+  z-index: 5;
+  top: 0;
 }
 
-.trmain {
+.col-header {
   display: flex;
-  flex-direction: row;
-  gap: 1px;
-}
-
-.tr {
-  display: flex;
-  flex-direction: row;
-  gap: 1px;
-}
-
-.th {
-  flex: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  height: 3rem;
   align-items: center;
-  white-space: nowrap;
-  background-color: var(--cell--color);
-  height: 3em;
+  justify-content: center;
+  color: var(--doc-color-dark-highlight);
 }
 
-input[disabled] {
-  background-color: gainsboro;
+.times-col {
+  background-color: var(--flexgrid-cell-color);  
+  min-width: 100px;
 }
 
-.actions-bar {
-  display: flex;
-  justify-content: space-between;
-}
-
-/*
-.th + .th,
-.td + .td {
-  border-left: 1px solid var(--grid--color);
-}
-*/
-
-.station-col-head{
+.times-col label {
+  background-color: var(--doc-color-secondary);  
   height: 100%;
-  width: var(--station--col--width);
-  border: 1px solid #ffffff50;
-  text-align: center;  
-  padding: 3px;
 }
 
-.hour-col, .min-col {
-  flex: none;
+.hour-group {
+  gap: var(--flexgrid-lines-width);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  gap: 1px;
 }
 
-.hour-col {
-  background-color: var(--cell--color);
-  font-weight: bold;
-}
-
-.tbody .hour-col {
+.hour-group .hour {
   font-size: 1.5rem;
 }
 
-.time-slot {
-  background-color: var(--cell--color);
-  height: var(--row--height);
-  position: relative;
+.hour {
+  font-weight: bold;
+}
+
+.min label {
+  justify-content: center;
+  align-items: center;
   width: 100%;
 }
 
-.hour-group .time-slot {
-  line-height: var(--row--height);
-  text-align: center;
-  color: dimgrey;
+.hour, .min {
+  gap: var(--flexgrid-lines-width);
+  color: var(--doc-color-light);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-grow: 1;
+  width: 50%;
 }
 
-.station-col .time-slot {
-  overflow-y: visible;
+.time-slot {
+  background-color: var(--flexgrid-cell-color);
+  min-height: var(--flexgrid-row-height);
+  position: relative;
+  overflow: visible;
+  display: flex;  
 }
 
 .station-col .time-slot:hover:not(.booked) {
   opacity: 0.5;
-}
-
-
-.station-col {
-  flex: none;
-  display: flex;
-  width: var(--station--col--width);
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;  
-  gap: 1px;
 }
 
 .booking {
@@ -159,7 +165,7 @@ input[disabled] {
   cursor: pointer;
   position: absolute;
   width: 100%;
-  z-index: 5;
+  z-index: 2;
 }
 
 .booking p {
@@ -172,10 +178,6 @@ input[disabled] {
   margin-top: 0.34em;
 }
 
-/*.booking-detail h3 {
-  color: #3a62a1;
-}*/
-
 .booking-detail hr {
   border: none;
   border-top: 1px solid gainsboro;
@@ -187,7 +189,7 @@ input[disabled] {
   margin: 0.25em;
 }
 
-.pop-over {
+/*.pop-over {
   display: none;
   background-color: whitesmoke;
   box-shadow: 1px 1px 7px #0005;
@@ -202,72 +204,7 @@ input[disabled] {
 
 .pop-over.show {
   display: block;
-}
-
-.min-group .td {
-  height: var(--row--height);
-}
-
-
-.button:visited, .button:focus {
-  color: dimgrey;
-}
-
-.button:hover {
-  color: dodgerblue;
-  opacity: 0.8;
-}
-
-#date-nav {
-  padding: 0;
-  display: flex;
-  gap: 5px;
-}
-
-#date-nav button {
-  width: 2em;
-  height: 1.67em;
-  background-color: #eee;
-  padding: 0;
-}
-
-#date-nav .icon {
-  width: 80%;
-  height: 67%;
-}
-
-#date-nav .date-view {
-  color: #222;
-  min-height: 1.67em;
-  display: flex;
-  font-size: 0.96em;
-  align-items: center;
-  border: 1px solid #eee;
-  border-radius: 4px;
-  padding: 0 1em;
-  width: 25ch;
-}
-
-#date-nav .date-bookings {
-  color: white;
-  font-size: 0.85em;
-  font-weight: bold;
-  border-radius: 50%;
-  background-color: steelblue;
-  width: 1.5rem;
-  height: 1.34rem;
-  text-align: center;
-  line-height: 1.34rem;  
-}
-
-.button.add {
-  color: white;
-  padding: 4px 10px;
-  font-weight: normal;
-  background-color: #333;
-  border-style: none;
-  font-size: 0.9rem;
-}
+}*/
 
 select {
   width: auto;
@@ -326,87 +263,6 @@ select[name="style"]  {
   top: 3px;
 }
 
-.vanilla-calendar_default {
-  border: 1px solid gainsboro;
-  border-radius: 4px;
-  display: block;
-  background: white;
-  padding: 0.67rem;
-}
-
-form label,
-.vanilla-calendar_default {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;   
-}
-
-.button:focus,
-.button:focus-visible,
-button:focus,
-button:focus-visible {
-  box-shadow: 0 0 0 3px rgba(49,132,253,.5); 
-  /*outline: 1px solid blue;*/
-  /*outline-offset: -2px;*/
-}
-
-.vanilla-calendar-month,
-.vanilla-calendar-year {
-  background: 0;
-  margin: 0 1px;
-  padding: 1px 0.15rem;
-}
-
-.vanilla-calendar-week {
-  grid-column-gap: 2px;
-  -webkit-column-gap: 2px;
-  -moz-column-gap: 2px;
-  column-gap: 2px;
-}
-
-.vanilla-calendar-days {
-  grid-column-gap: 2px;
-  -webkit-column-gap: 2px;
-  -moz-column-gap: 2px;
-  column-gap: 2px;
-}
-
-.vanilla-calendar-day__btn {
-  width: 2em;
-  height: 1.9em;
-  margin: 1px 0;
-}
-
-.vanilla-calendar-header__content {
-  padding: 0 7px;
-}
-
-.loading-indicator {
-  margin:0 1rem;
-  position:relative;
-}
-
 .loading .loading-indicator div {
   border-top-color: cadetblue;
 }
-
-.loading  .loading-indicator::after {
-  position: absolute;
-  width: fit-content;
-  content: "Loading...";
-  color: cadetblue;
-  left: 100%;
-  top: 0;
-  display: block;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  z-index: 1;
-  padding: 0 3px;
-}
-
-/*#booking-view-modal h3 {
-  color: #3a62a1;
-}*/
-

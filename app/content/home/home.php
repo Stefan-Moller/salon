@@ -7,14 +7,15 @@
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 1.0.0 - 23 Sep 2022
+ * @version 3.0.0 - DEV - 13 Dec 2022
  * 
  */
 
 $view->theme = 'salon';
-$view->title = 'Welcome to Cafe &amp; Salon Allure';
+$view->title = 'Welcome to ' . $app->title;
 
 $view->menu[ 'bookings' ] = 'Bookings';
+$view->menu[ 'setup' ] = 'Setup';
 $view->menu[ 'contact' ] = 'Contact Us';
 
 

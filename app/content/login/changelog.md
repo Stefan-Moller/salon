@@ -11,3 +11,7 @@
   * Re-factor form.html.js to import F1JS Form via ES6 loader and
     change format to be more consistent with the standard set by booking.html.js.
 
+## 13 Dec 2022 - DEV - Ver 3.0.0
+ - Refactor HTML according to the new bookings page look and layout.
+ - Fix broken CSS styles. e.g. The submit button color...
+ - Add more CSS vars to CSS

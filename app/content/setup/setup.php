@@ -14,7 +14,16 @@
 $view->theme = 'salon';
 $view->title = 'Setup';
 
+$submenu = [
+  'clients'    => 'Clients',
+  'therapists' => 'Therapists',
+  'treatments' => 'Treatments',
+  'stations'   => 'Stations',
+  'settings'   => 'Settings'
+];
+
 $view->menu[ 'bookings' ] = 'Bookings';
+$view->menu[ 'Setup'  ]  = $submenu;
 $view->menu[ 'logout' ] = 'Logout';
 
 // -----------

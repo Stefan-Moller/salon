@@ -3,8 +3,17 @@ pre {
   color:  whitesmoke;
 }
 
+.main-header {
+  background-color: var(--doc-color-primary);
+}
+
+main {
+  background-color: var(--doc-color-light);
+}
+
 form {
-  background-color: whitesmoke;
+  background-color: var(--doc-color-light-highlight);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: calc(min(96vw, 360px));
   padding: 1rem;
   margin: 2rem auto;
@@ -24,9 +33,15 @@ fieldset a {
 }
 
 .button {
+  border-color: var(--doc-color-secondary-highlight);
+  background-color: var(--doc-color-secondary);
   font-size: 0.9rem;
   padding: 0.5rem 1rem;
   width: auto;
+}
+
+.button:hover {
+  background-color: var(--doc-color-secondary-highlight);
 }
 
 .errors {

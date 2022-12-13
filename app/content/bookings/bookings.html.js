@@ -57,7 +57,7 @@ F1.deferred.push( function initPage() {
   function renderBookingSummary( booking ) {
     const slotCount = booking.duration / 15;
     const styles = `background-color:${booking.colour}; ` +
-     `height:calc(${slotCount}px + ${slotCount}*var(--row--height))`;
+     `height:calc(${slotCount}px + ${slotCount}*var(--flexgrid-row-height))`;
     const station = booking.station_name === 'STATION'
       ? 'STATION ' + booking.station_no
       : booking.station_name;
@@ -112,8 +112,8 @@ F1.deferred.push( function initPage() {
 
   function updateDateNavContent( dateYmd, bookings ) {
     log( 'updateDateNavContent, dateYmd:', dateYmd );
-    elDateNav.querySelector( '.date-view' ).innerText = renderLongDate( dateYmd );
-    elDateNav.querySelector( '.date-bookings' ).innerText = bookings.length;
+    elDateNav.querySelector( '.date-button span' ).innerText = renderLongDate( dateYmd );
+    elDateNav.querySelector( '.bookings-count-badge' ).innerText = bookings.length;
     updateDateNavCalendar( dateYmd );
   }
 

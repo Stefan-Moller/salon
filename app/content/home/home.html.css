@@ -1,12 +1,25 @@
 /* View Specific CSS */
+
+.main-header {
+  background-color: var(--doc-color-primary);
+}
+
+main {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
 .slideshow {
   width: 100%;
-  background-color: #333;
+  height: 100%;
+  position: relative;
 }
 
 .slideshow .slides {
   width: 100%;
-  height: 50vh;
+  height: 100%;
+  border-width: 1.34rem;
 }
 
 .slide img {
@@ -18,7 +31,7 @@
 
 .slideshow .prev-slide,
 .slideshow .next-slide {
-  color:  white;
+  color: var(--doc-color-light, white);
   height: 100%;
   font-size: 2rem;
 }

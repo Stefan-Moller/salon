@@ -1,43 +1,34 @@
 <include>doc-head</include>
 
-  <include>site-header</include>
+  <include>doc-header</include>
 
-  <main class="page">
+  <header class="main-header">
+    <h2><?=$view->title?></h2>
+  </header>
 
-    <header>
-      <h1><?=$view->title?></h1>
-    </header>
-
-    <div class="content">
-
-      <section class="login-form" aria-label="System Login Form">
-
-        <form method="POST" onsubmit="F1.onSubmit(event)" novalidate>
-          <if expr="$error = $session->getFlash('error')">
-          <div class="errors"><?=$error?></div>  
-          </if>
-          <fieldset>
-            <p class="field required">
-              <label>Username</label>
-              <input class="input" type="text" name="username" autocomplete="off">
-            </p>
-            <p class="field required">
-              <label>Password</label>
-              <input class="input" type="password" name="password" autocomplete="off">
-            </p>
-            <p><a href="lost-password">Lost your password?</a></p>
-          </fieldset>
-          <div class="buttons">
-            <input class="button" type="submit" name="submit" value="Login">
-          </div>
-        </form>
-
-      </section>
-
-    </div>
-
+  <main>
+    <form class="login-form" method="POST" aria-label="System Login Form"
+      onsubmit="F1.onSubmit(event)" novalidate>
+      <if expr="$error = $session->getFlash('error')">
+      <div class="errors"><?=$error?></div>  
+      </if>
+      <fieldset>
+        <p class="field required">
+          <label>Username</label>
+          <input class="input" type="text" name="username" autocomplete="off">
+        </p>
+        <p class="field required">
+          <label>Password</label>
+          <input class="input" type="password" name="password" autocomplete="off">
+        </p>
+        <p><a href="lost-password">Lost your password?</a></p>
+      </fieldset>
+      <div class="buttons">
+        <input class="button" type="submit" name="submit" value="Login">
+      </div>
+    </form>
   </main>
 
-  <include>site-footer</include>
+  <include>doc-footer</include>
 
 <include>doc-foot</include>

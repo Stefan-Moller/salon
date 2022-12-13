@@ -1,5 +1,5 @@
 <!-- Edit Booking Modal -->
-<section id="booking-edit-modal" class="modal">
+<div id="booking-edit-modal" class="modal">
   <form class="modal-inner" method="post" novalidate>
     <header>
       <h3>Book Appointment</h3>
@@ -146,4 +146,4 @@
         onclick="F1.onSubmitBooking(event)">Submit</button>
     </footer>
   </form>
-</section>
+</div>
