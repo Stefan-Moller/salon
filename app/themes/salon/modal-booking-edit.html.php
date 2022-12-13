@@ -18,7 +18,7 @@
           data-search="true" 
           data-value=""
           data-placeholder="- Select a client -">
-          <?php foreach( $cal->clients as $c ): $lbl = "{$c->name}<small> - {$c->cell}</small>"; ?>
+          <?php foreach( $view->model->clients as $c ): $lbl = "{$c->name}<small> - {$c->cell}</small>"; ?>
           <option value="<?=$c->id?>" title="<?=$lbl?>"><?="{$c->name} - {$c->cell}"?></option>
           <?php endforeach; ?>
         </select>
@@ -31,7 +31,7 @@
           data-search="true" 
           data-value=""
           data-placeholder="- Select a treatment -">
-          <?php foreach( $cal->treatments as $treatment ): ?>
+          <?php foreach( $view->model->treatments as $treatment ): ?>
           <option value="<?=$treatment->id?>"><?=$treatment->short_desc?></option>
           <?php endforeach; ?>
         </select>          
@@ -46,7 +46,7 @@
               data-search="true" 
               data-value=""
               data-placeholder="- Select a therapist -">
-              <?php foreach( $cal->therapists as $t ): $lbl = "{$t->name}<small> - {$t->cell}</small>"; ?>
+              <?php foreach( $view->model->therapists as $t ): $lbl = "{$t->name}<small> - {$t->cell}</small>"; ?>
               <option value="<?=$t->id?>" title="<?=$lbl?>"><?="{$t->name} - {$t->cell}"?></option>
               <?php endforeach; ?>
             </select>           
@@ -63,7 +63,7 @@
               data-value=""
               data-placeholder="- Select a station -">
               <!-- <optgroup title="Main Group"> -->
-              <?php foreach( $cal->stations as $s ): $lbl = "STATION {$s->no}<small> - {$s->name}</small>"; ?>
+              <?php foreach( $view->model->stations as $s ): $lbl = "STATION {$s->no}<small> - {$s->name}</small>"; ?>
               <option value="<?=$s->id?>" title="<?=$lbl?>"><?="STATION {$s->no} - {$s->name}"?></option>
               <?php endforeach; ?>
               <!-- </optgroup> -->

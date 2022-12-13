@@ -1,7 +1,7 @@
-<?php //calendar.model.php
+<?php namespace Models;
 
 
-class CalendarTimeSlot {
+class TimeSlot {
 
   public function __construct( $station, $hour, $min )
   {
@@ -13,7 +13,7 @@ class CalendarTimeSlot {
 }
 
 
-class CalendarModel {
+class DayViewModel {
 
   private $db;
 
@@ -56,7 +56,7 @@ class CalendarModel {
         for ( $k = 0; $k < count ( $this->slots_per_hour ); $k++ )
         {
           $slot_id = "{$station->id}:$j:$k";
-          $slot = new CalendarTimeSlot( $station->no, $j, $k );
+          $slot = new TimeSlot( $station->no, $j, $k );
           $timeslots[ $slot_id ] = $slot;
         }
     return $timeslots;

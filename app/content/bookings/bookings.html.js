@@ -482,10 +482,6 @@ F1.deferred.push( function initPage() {
 });
 
 
-// 29 Nov
-// ------
-// Update the date nav modal's selected date when we change the date without the calendar! - DONE
-
 // TODO:
 // -----
 // Data Model features in DB?  Get all table column names and auto-set update filter...?

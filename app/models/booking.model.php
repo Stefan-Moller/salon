@@ -1,4 +1,5 @@
-<?php //Booking.model.php
+<?php namespace Models;
+
 
 class BookingModel {
 

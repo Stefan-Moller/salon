@@ -7,7 +7,7 @@
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 3.0.0 - FT - 13 Dec 2022
+ * @version 3.1.0 - DEV - 13 Dec 2022
  *
  */
 
@@ -54,7 +54,7 @@ if ( $http->request->isAjax ) {
   do {
 
     include $app->modelsDir . '/booking.model.php';
-    $bookingModel = new BookingModel( $db, $http, $auth );
+    $bookingModel = new Models\BookingModel( $db, $http, $auth );
 
     try {
 
@@ -139,8 +139,8 @@ $view->includeStyle( 'css/vendors/vanilla/vanilla-calendar.min.css' );
 $view->includeScript( 'js/vendors/vanilla/vanilla-calendar.min.js' );
 
 
-include $app->modelsDir . '/calendar.model.php';
-$cal = new CalendarModel( $db, $date );
+include 'dayview.model.php';
+$view->model = new Models\DayViewModel( $db, $date );
 
 
 include $view->getFile();

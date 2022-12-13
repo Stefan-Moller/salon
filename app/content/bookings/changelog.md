@@ -84,3 +84,8 @@
  - Update bookings page inline JS to reflect changes in class names and HTML structure.
  - `Create new F1CSS modules` where required and `move common CSS elements to F1CSS`.
  - `Rename existing and Add more CSS vars` + Use CSS vars in more places.
+
+## 13 Dec 2022 - DEV - Ver 3.1.0
+ - Change `CalendarModel` to `DayViewModel` and move it to content/bookings.
+ - Change all model files' `namespace` to `Models`.
+ - Update affected code.

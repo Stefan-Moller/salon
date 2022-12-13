@@ -49,11 +49,11 @@
         </div>            
         <!-- /Time Labels Header -->
         <!-- Time Labels -->
-        <?php foreach( $cal->open_hours as $hour ): ?>
+        <?php foreach( $view->model->open_hours as $hour ): ?>
         <div class="flex-row row-header hour-group">
           <label class="hour"><?=$hour?></label>
           <div class="min">
-          <?php foreach( $cal->slots_per_hour as $i => $min ): ?>
+          <?php foreach( $view->model->slots_per_hour as $i => $min ): ?>
             <label class="time-slot"><?=$min?></label>
           <?php endforeach; ?>
           </div>
@@ -63,7 +63,7 @@
       </div>
       <!-- /Time Labels Column -->
       <!-- Station Columns -->
-      <?php foreach( $cal->stations as $station ): ?>
+      <?php foreach( $view->model->stations as $station ): ?>
       <?php $station_id = 's'.$station->id; ?>
       <!-- Station <?=$station->no?> Column -->
       <div class="flex-col station-col" id="<?=$station_id?>">
@@ -72,8 +72,8 @@
           <label><?=$station->no?><br><?=$station->name?></label>
         </div>
         <!-- Station Column Time Slots -->
-        <?php foreach( $cal->open_hours as $hour ): ?>
-        <?php foreach( $cal->slots_per_hour as $min ): ?>
+        <?php foreach( $view->model->open_hours as $hour ): ?>
+        <?php foreach( $view->model->slots_per_hour as $min ): ?>
         <?php $slot_id = $station_id.'-'.$hour.'h'.$min; ?>
         <div class="flex-row time-slot" id="<?=$slot_id?>"></div>
         <?php endforeach; ?>
