@@ -41,7 +41,7 @@ html {
   width: 100%;
 }
 
-.doc-header nav {
+.site-header nav {
   justify-content: space-between;
   width: 100%;
 }
@@ -75,7 +75,7 @@ h1 {
 
 @media (max-width:640px) {
   .brand h1 { display: none; }
-  .doc-header nav { justify-content: flex-start; }
+  .site-header nav { justify-content: flex-start; }
 }
 
 

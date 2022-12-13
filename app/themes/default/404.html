@@ -3,7 +3,7 @@
   http_response_code( 404 );
 
   if ( in_array(
-    strrchr( $http->req->path, '.' ),
+    strrchr( __FILE__ , '.' ),
     [
       '.js',
       '.css',

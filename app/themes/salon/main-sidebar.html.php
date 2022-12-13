@@ -1,1 +1,0 @@
-<aside class="main-sidebar">Main Sidebar</aside>

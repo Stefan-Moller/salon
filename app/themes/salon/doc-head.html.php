@@ -15,7 +15,7 @@
   <?php foreach( $view->styles as $styleFileRef ): ?>
   <link rel="stylesheet" type="text/css" href="<?=$styleFileRef?>">
   <?php endforeach; ?>
-  <link rel="stylesheet" type="text/css" href="css/salon-theme.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
   <style><?php include $view->getInlineStylesFile(); ?></style>
   <script src="js/vendors/f1js/f1.js"></script>
   <script>F1.DEBUG = <?=__DEBUG_ON__?>; F1.page = '<?=$view->name?>';</script>

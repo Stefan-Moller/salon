@@ -23,8 +23,8 @@ $submenu = [
 ];
 
 $view->menu[ 'bookings' ] = 'Bookings';
-$view->menu[ 'Setup'  ]  = $submenu;
-$view->menu[ 'logout' ] = 'Logout';
+$view->menu[ 'setup'    ] = [ 'Setup', $submenu ];
+$view->menu[ 'contact'  ] = 'Contact Us';
 
 // -----------
 // --- GET ---
