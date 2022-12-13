@@ -263,6 +263,6 @@ select[name="style"]  {
   top: 3px;
 }
 
-.loading .loading-indicator div {
+.loading .loading-indicator i {
   border-top-color: cadetblue;
 }
