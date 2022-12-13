@@ -28,7 +28,7 @@ class BookingModel {
 
     debug_log( 'Booking Model::getBookingData()' );
 
-    $booking = new stdClass();
+    $booking = new \stdClass();
     
     $id = $this->getPostVal( 'id' );
     if ( $id ) $booking->id = $id;
