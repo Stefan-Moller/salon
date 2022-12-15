@@ -2,38 +2,34 @@
 
   <include>site-header</include>
 
-  <header class="main-header">
-    <nav id="date-nav" class="flex">
-      <div class="date-nav-group flex">
-        <button class="button prev-day" type="button" onclick="F1.onGotoPrevDay(event)">&lt;</button>
-        <div class="date-select-group">
-          <button class="button date-button" type="button" onclick="F1.onShowCalendarModal(event)">
-            <span class="trim">YYYY-MM-DD</span>
-          </button>
-          <div class="loading-indicator"><i></i><i></i><i></i><i></i></div>
-          <div class="bookings-count-badge">0</div>
-        </div>
-        <button class="button next-day" type="button" onclick="F1.onGotoNextDay(event)">&gt;</button>
+  <header id="main-header" class="main-header">
+    <nav class="date-nav flex">
+      <button class="button prev-day" type="button" onclick="F1.onGotoPrevDay(event)">&lt;</button>
+      <div class="date-nav-group">
+        <button class="button date-button" type="button" onclick="F1.onShowCalendarModal(event)">
+          <span class="trim">YYYY-MM-DD</span>
+        </button>
+        <div class="loading-indicator"><i></i><i></i><i></i><i></i></div>
+        <div class="bookings-count-badge">0</div>
       </div>
+      <button class="button next-day" type="button" onclick="F1.onGotoNextDay(event)">&gt;</button>
       <button class="button today-button" type="button" onclick="F1.onGotoToday(event)">
        <span>Today</span>
       </button>
     </nav>
-    <div class="control-group flex wrap">
+    <div class="control-group flex">
       <button class="button add-button" type="button" onclick="F1.onNewBooking(event)">
-        <i>+</i>&nbsp;New Appointment
+        <span class="trim"><i>+</i>&nbsp;New Appointment</span>
       </button>
-      <div class="flex">
-        <select name="view" class="button">
-          <option selected>Day</option>
-          <option>Week</option>
-          <option>Month</option>
-        </select>
-        <select name="style" class="button">
-          <option selected>Grid</option>
-          <option>List</option>
-        </select>
-      </div>
+      <select name="view" class="button">
+        <option selected>Day</option>
+        <option>Week</option>
+        <option>Month</option>
+      </select>
+      <select name="style" class="button">
+        <option selected>Grid</option>
+        <option>List</option>
+      </select>
     </div>
   </header>
 

@@ -112,8 +112,8 @@ F1.deferred.push( function initPage() {
 
   function updateDateNavContent( dateYmd, bookings ) {
     log( 'updateDateNavContent, dateYmd:', dateYmd );
-    elDateNav.querySelector( '.date-button span' ).innerText = renderLongDate( dateYmd );
-    elDateNav.querySelector( '.bookings-count-badge' ).innerText = bookings.length;
+    elHeader.querySelector( '.date-button span' ).innerText = renderLongDate( dateYmd );
+    elHeader.querySelector( '.bookings-count-badge' ).innerText = bookings.length;
     updateDateNavCalendar( dateYmd );
   }
 
@@ -431,7 +431,7 @@ F1.deferred.push( function initPage() {
     /* Data */
     F1.data.bookings = info.bookings;
     /* Components */
-    F1.components.elDateNav = elDateNav;
+    F1.components.elHeader = elHeader;
     F1.components.elDateSelectModal = elDateSelectModal;
     F1.components.elBookingViewModal = elBookingViewModal;
     F1.components.elBookingEditModal = elBookingEditModal;
@@ -464,7 +464,7 @@ F1.deferred.push( function initPage() {
 
   selectedDateYmd = getSelectedDateYmd();
 
-  const elDateNav          = document.getElementById( 'date-nav' );
+  const elHeader           = document.getElementById( 'main-header' );
   const elDateNavCalendar  = document.getElementById( 'date-nav-calendar'  );
   const elDateSelectModal  = document.getElementById( 'date-select-modal'  );
   const elBookingViewModal = document.getElementById( 'booking-view-modal' );

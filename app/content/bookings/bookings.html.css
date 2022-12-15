@@ -14,14 +14,32 @@ main {
 
 main {
   overflow: auto;    
-  position: relative;
   background-color: var(--flexgrid-lines-color);
   border: 3px solid var(--flexgrid-lines-color);
 }
 
-.date-select-group {
+.main-header {
+  flex-wrap: nowrap;
+}
+
+.prev-day,
+.next-day {
+  min-width:2.3rem;
+}
+
+.date-nav {
+  width: 50%;
+}
+
+.date-nav-group {
   position: relative;
-  min-width: 15ch;
+  min-width: 10ch;
+  max-width: 24ch;
+}
+
+.date-button {
+  overflow: hidden;
+  width: 100%;
 }
 
 .bookings-count-badge {
@@ -40,28 +58,36 @@ main {
 
 .today-button {
   background-color: hsla(322.2, 80.9%, 43%); /* mediumvioletred */
+  min-width: 3.5rem;
 }
 
 .today-button:hover {
   background-color: hsla(322.2, 80.9%, 48%);
 }
 
+.control-group {
+  overflow: hidden;
+}
+
 .add-button {
   background-color: var(--doc-color-secondary);
-  padding-left: 1rem;
-  padding-right: 1rem;
+  min-width: 6ch;
+  overflow: hidden;
+  padding-left: 0;
 }
 
 .add-button:hover {
   background-color: var(--doc-color-secondary-highlight);
 }
 
-@media (max-width: 380px) {
-  .date-select-group,
-  .date-nav-group,
-  .control-group,
-  .today-button,
-  .date-button { width: 100%; }
+.add-button span {
+  margin-left: 0.5rem;
+}
+
+@media (max-width: 520px) {
+  .date-nav { width: 100%; }
+  .main-header { flex-wrap: wrap; }
+  .home { display: none; }
 }
 
 .flex-grid {
@@ -212,7 +238,7 @@ select {
 
 select[name="view"],
 select[name="style"]  {
-  padding: 5px 10px;
+  height: 100%;
 }
 
 .select__display small,

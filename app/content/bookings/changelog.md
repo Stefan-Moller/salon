@@ -89,3 +89,16 @@
  - Change `CalendarModel` to `DayViewModel` and move it to content/bookings.
  - Change all model files' `namespace` to `Models`.
  - Update affected code.
+
+## 15 Dec 2022 - DEV - Ver 3.2.0
+ - Change the brand Google Font from `Passions Conflict` to `Cookie`
+ - Try out and test `CSS Grid` on headers, but eventually revert to flexbox again.
+ - `Test and perfect` all headers's `responsive behaviour` using only flexbox.
+ - Get the `date select` and `add new button` to `shrink` with text ellipsis!
+ - Prevent the `page header` from stacking to `3 rows` on any size screen!
+ - Hide the `main menu home link` on smaller screens.
+ - Reduce the `header logo size` on smaller screens.
+ - Improve the FieldValidator class. Change from `array args` to `object args`!
+ - Improve the built-in Required validation to use a 'zeroIsBad' option.
+ - `Drop the GreaterThan validator` on Duration Fields in favour of the 
+   newly updated Required validator.
