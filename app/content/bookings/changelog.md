@@ -110,3 +110,8 @@
   - Change 404 page back link to use `app->baseUri` instead of `/`
   - Use `body.window` to identify a 100vh layout view.
 
+## 16 Dec 2022 - DEV - Ver 3.4.0
+  - Refactor the `booking form` HTML and styles to be more responsive.
+  - Shorten the `brand title text` even more on small screens.
+  - Change CSS `@media` breakpoints
+

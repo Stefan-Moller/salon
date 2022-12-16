@@ -87,7 +87,6 @@ main {
 @media (max-width: 520px) {
   .main-header { flex-wrap: wrap; }
   .date-nav { width: 100%; }
-  /*.home { display: none; }*/
 }
 
 .flex-grid {
@@ -133,6 +132,10 @@ main {
 .times-col {
   background-color: var(--flexgrid-cell-color);  
   min-width: 100px;
+}
+
+@media (max-width: 520px) {
+  .times-col { min-width: 80px; }
 }
 
 .times-col label {
@@ -241,6 +244,14 @@ select[name="style"]  {
   height: 100%;
 }
 
+.select {
+  min-width: 180px;
+}
+
+.select__display {
+  white-space: nowrap;
+}
+
 .select__display small,
 .select--option small {
   color: grey;
@@ -260,21 +271,30 @@ select[name="style"]  {
   box-shadow: 0 0 0 3px rgb(255 108 108 / 50%);      
 }
 
-.range-input > span {
-  font-size: 0.9rem;
+.form-group {
+  max-width: 220px;
+}
+
+.time-input {
+  display: flex;
+  width: 100%;
+  gap: 3px;
+}
+
+.range-input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 3px;
+}
+
+.range-input > label {
+  font-size: 0.8rem;
 }
 
 .modal header {
   padding: 0.67rem;
   background-color: gold;
-}
-
-.modal-body {
-  padding: 1rem;
-}
-
-#date-select-modal .modal-body {
-  padding: 0;
 }
 
 .modal footer {
@@ -284,9 +304,18 @@ select[name="style"]  {
 
 .modal-inner {
   width: 96%;
-  max-width: 480px;
+  max-width: 460px;
   left: max(2%, calc(50% - 240px));
   top: 3px;
+}
+
+.modal .calendar {
+  flex: 1;
+}
+
+.modal .form-body,
+.modal .booking-detail {
+  padding: 1rem;
 }
 
 .loading .loading-indicator i {

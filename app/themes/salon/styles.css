@@ -73,10 +73,7 @@ html {
 #mobile-menu-control:checked ~ .menu {
   background-color: var(--doc-color-dark-highlight);
   padding: var(--doc-padding);
-  padding-top: 4rem;
-  height: 100vh;
-  width: 75vw;
-  right: 0;
+  padding-top: 5rem;
 }
 
 .menu li {
@@ -91,18 +88,17 @@ html {
   .brand img { width: 4rem; }
   .brand h1 { font-size: 3rem; }
   .menu a { font-size: 0.9em; }
-  .home { display: none; }
 }
 
-@media (max-width:520px) {
+@media (max-width:580px) {
   .brand img { width: 3.5rem; }
-  .brand h1 { display: none; }
+  .brand h1 { display: block; font-size: 2.67rem; }
 }
 
-@media (max-width:360px) {
-  .brand img { width: 3.5rem; }
+@media (max-width:320px) {
+  .brand h1 span { display: none; }
+  .site-footer { display: none; }
 }
-
 
 /* Button */
 
@@ -181,11 +177,14 @@ textarea {
 
 /* Vanilla Calendar */
 
+.modal .calendar {
+  border: 1px solid var(--doc-color-muted);
+  border-radius: 4px;  
+}
+
 .vanilla-calendar_default {
   background: var(--doc-color-light-highlight);
-  border: 1px solid var(--doc-color-muted);
   padding: var(--doc-padding);
-  border-radius: 4px;
   user-select: none;   
   display: block;
 }
