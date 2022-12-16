@@ -46,13 +46,6 @@ html {
   width: 100%;
 }
 
-.menu a {
-  background-color: var(--doc-color-dark-highlight);
-  font-size: 0.96rem;
-  border-radius: 4px;
-  font-weight: bold;
-}
-
 .brand img {
   border: 1px solid #aaa;
   border-radius: 4px;
@@ -70,17 +63,44 @@ html {
   width: 0;
 }
 
+.menu a {
+  background-color: var(--doc-color-dark-highlight);
+  font-size: 0.96rem;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+#mobile-menu-control:checked ~ .menu {
+  background-color: var(--doc-color-dark-highlight);
+  padding: var(--doc-padding);
+  padding-top: 4rem;
+  height: 100vh;
+  width: 75vw;
+  right: 0;
+}
+
+.menu li {
+  z-index: 30;
+}
+
 .back-to-top {
   display: none;
 }
 
-
 @media (max-width:767px) {
   .brand img { width: 4rem; }
+  .brand h1 { font-size: 3rem; }
+  .menu a { font-size: 0.9em; }
+  .home { display: none; }
+}
+
+@media (max-width:520px) {
+  .brand img { width: 3.5rem; }
   .brand h1 { display: none; }
-  .site-header nav { justify-content: flex-start; }
-  .site-header .menu a { font-size: 0.8rem; padding: 0.67rem 0.5rem 0.9rem; }
-  .site-header .menu a:after { bottom: 0.7rem; }
+}
+
+@media (max-width:360px) {
+  .brand img { width: 3.5rem; }
 }
 
 

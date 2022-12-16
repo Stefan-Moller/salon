@@ -7,12 +7,12 @@
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 3.0.0 - DEV - 13 Dec 2022
+ * @version 3.0.1 - UPD - 16 Dec 2022
  * 
  */
 
 $view->theme = 'salon';
-$view->title = 'Welcome to ' . $app->title;
+$view->title = 'Welcome';
 
 $view->menu[ 'bookings' ] = 'Bookings';
 $view->menu[ 'setup' ] = 'Setup';

@@ -102,3 +102,11 @@
  - Improve the built-in Required validation to use a 'zeroIsBad' option.
  - `Drop the GreaterThan validator` on Duration Fields in favour of the 
    newly updated Required validator.
+
+## 16 Dec 2022 - FT - Ver 3.3.0
+  - Implement a basic `mobile menu` with `hamburger button` toggle.
+  - Further improve the responsive behaviour of the site header.
+  - Shorten home page header title to "Welcome" only.
+  - Change 404 page back link to use `app->baseUri` instead of `/`
+  - Use `body.window` to identify a 100vh layout view.
+

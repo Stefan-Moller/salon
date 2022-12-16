@@ -9,3 +9,7 @@
 ## 13 Dec 2022 - DEV - Ver 3.0.0
  - Refactor HTML according to the new bookings page look and layout.
  - Add more CSS vars to CSS
+
+## 16 Dec 2022 - DEV - Ver 3.0.1
+ - Shorten page header title to "Welcome" only.
+

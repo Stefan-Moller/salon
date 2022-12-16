@@ -21,4 +21,4 @@
   <script>F1.DEBUG = <?=__DEBUG_ON__?>; F1.page = '<?=$view->name?>';</script>
 </head>
 
-<body>
+<body class="window">

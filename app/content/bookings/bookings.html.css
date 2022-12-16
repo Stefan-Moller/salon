@@ -85,9 +85,9 @@ main {
 }
 
 @media (max-width: 520px) {
-  .date-nav { width: 100%; }
   .main-header { flex-wrap: wrap; }
-  .home { display: none; }
+  .date-nav { width: 100%; }
+  /*.home { display: none; }*/
 }
 
 .flex-grid {
