@@ -15,3 +15,8 @@
  - Refactor HTML according to the new bookings page look and layout.
  - Fix broken CSS styles. e.g. The submit button color...
  - Add more CSS vars to CSS
+
+## 17 Dec 2022 - DEV - Ver 4.0.0 
+ - Completely re-factor HTML and CSS again.
+ - Use new form CSS classes and HTML markup.
+   e.g `.form-rows` and `.form-row`

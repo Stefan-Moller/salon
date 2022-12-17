@@ -1,7 +1,4 @@
 /* View Specific CSS */
-pre {
-  color:  whitesmoke;
-}
 
 .main-header {
   background-color: var(--doc-color-primary);
@@ -20,18 +17,6 @@ form {
   color: #222;
 }
 
-fieldset {
-  border: none;
-}
-
-fieldset a {
-  line-height: 2rem;
-}
-
-.buttons {
-  padding: 1rem;
-}
-
 .button {
   border-color: var(--doc-color-secondary-highlight);
   background-color: var(--doc-color-secondary);
@@ -45,5 +30,5 @@ fieldset a {
 }
 
 .errors {
-  margin-bottom: 1rem;
+  font-size: 0.96em;
 }

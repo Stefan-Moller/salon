@@ -271,10 +271,6 @@ select[name="style"]  {
   box-shadow: 0 0 0 3px rgb(255 108 108 / 50%);      
 }
 
-.form-group {
-  max-width: 220px;
-}
-
 .time-input {
   display: flex;
   width: 100%;
@@ -313,7 +309,10 @@ select[name="style"]  {
   flex: 1;
 }
 
-.modal .form-body,
+.modal-body.form-rows {
+  padding: 0 1rem;
+}
+
 .modal .booking-detail {
   padding: 1rem;
 }

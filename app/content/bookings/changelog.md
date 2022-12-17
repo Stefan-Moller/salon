@@ -112,10 +112,15 @@
 
 ## 16 Dec 2022 - DEV - Ver 3.4.0
   - Refactor the `booking form` HTML and styles to be more responsive.
+    - Make form rows more prominent and stand-alone.
   - Shorten the `brand title text` even more on small screens.
   - Change CSS `@media` breakpoints
 
 ## 17 Dec 2022 - DEV - Ver 3.4.1
   - Remove `two column selects` row from the booking form.
   - Set tabindex="0" in some inputs to see if it fixes tab order on mobile.
+
+## 17 Dec 2022 - DEV - Ver 3.4.2
+  - Fix booking form HTML indentation.
+  - Update other pages (like the Login page) that use form HTML layout and CSS. 
 

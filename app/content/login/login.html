@@ -7,23 +7,29 @@
   </header>
 
   <main>
-    <form class="login-form" method="POST" aria-label="System Login Form"
+    <form id="login-form" method="POST" aria-label="System Login Form"
       onsubmit="F1.onSubmit(event)" novalidate>
       <if expr="$error = $session->getFlash('error')">
-      <div class="errors"><?=$error?></div>  
-      </if>
-      <fieldset>
-        <p class="field required">
+      <div class="form-row">
+        <div class="errors"><?=$error?></div>
+      </div>
+      </if>        
+      <div class="form-row">
+        <div class="field required">
           <label>Username</label>
           <input class="input" type="text" name="username" autocomplete="off">
-        </p>
-        <p class="field required">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field required">
           <label>Password</label>
           <input class="input" type="password" name="password" autocomplete="off">
-        </p>
-        <p><a href="lost-password">Lost your password?</a></p>
-      </fieldset>
-      <div class="buttons">
+        </div>
+      </div>
+      <div class="form-row">
+        <a href="lost-password">Lost your password?</a>
+      </div>
+      <div class="form-row">
         <input class="button" type="submit" name="submit" value="Login">
       </div>
     </form>
