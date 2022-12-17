@@ -57,6 +57,8 @@
                 <?php endforeach; ?>
               </select>           
             </div>
+          </div>
+          <div class="form-row">
             <div class="field required" data-type="Select">
               <label>Station</label>
               <!-- data-multiple="true"  -->
@@ -82,7 +84,7 @@
               <div class="form-row">
                 <div class="date-input field required" data-control="#booking-calendar" data-name="date" data-type="Calendar">
                   <label>Date</label>
-                  <input class="input" name="date" type="text" value="" 
+                  <input class="input" name="date" type="text" value="" tabindex="0" 
                     placeholder="- Use calendar to select -" autocomplete="off">
                 </div>
               </div>
@@ -90,7 +92,7 @@
                 <div class="field required" data-name="time" data-type="Time">
                   <label>Time</label>
                   <div class="time-input">
-                    <select class="input" name="start_hour">
+                    <select class="input" name="start_hour" tabindex="0">
                       <option value="07">07</option>
                       <option value="08">08</option>
                       <option value="09">09</option>
@@ -106,7 +108,7 @@
                       <option value="19">19</option>
                     </select>
                     <span> : </span>
-                    <select class="input" name="start_min">
+                    <select class="input" name="start_min" tabindex="0">
                       <option value="00">00</option>
                       <option value="15">15</option>
                       <option value="30">30</option>
@@ -119,7 +121,7 @@
                 <div class="field required" data-type="Duration">
                   <label>Duration</label>
                   <span class="range-input">
-                    <input class="input" name="duration" type="range" value="0" min="0" max="120" step="15" list="dur">
+                    <input class="input" name="duration" type="range" value="0" min="0" max="120" step="15" list="dur" tabindex="0">
                     <label class="duration_disp">15min</label>
                     <datalist id="dur">
                     <option value="15"  label="15min"></option>
