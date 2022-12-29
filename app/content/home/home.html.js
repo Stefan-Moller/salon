@@ -2,10 +2,7 @@
 
 /* View Specific JS */
 
-
-/* Import required F1 plugins */
-
-import { SlideShow } from './js/vendors/f1js/slideshow/slideshow.js';
+import { SlideShow } from './js/vendors/f1js/slideshow.js';
 
 
 F1.deferred.push(function initPage() {

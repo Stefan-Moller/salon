@@ -13,3 +13,8 @@
 ## 16 Dec 2022 - DEV - Ver 3.0.1
  - Shorten page header title to "Welcome" only.
 
+## 29 Dec 2022 - DEV - Ver 3.1.0
+ - Update JS ES6 imports to refelct the new JS vendors structure.
+ - Update home.php controller...
+  * Move `$goto` and `$error` globals in under `$response`.
+  * Add more css file includes.

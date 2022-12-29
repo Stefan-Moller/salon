@@ -1,5 +1,9 @@
 <?php define( '__APP_START__', microtime( true ) );
 
+$mem_usage = memory_get_usage();
+$mem_kb = round( $mem_usage / 1024 ) . 'KB';
+
+
 /***********************************
  * ==    F1 Micro Framework       ==
  * ==     Front Controller        ==
@@ -30,6 +34,8 @@ include $app->servicesDir . '/auth.php';
 include $app->servicesDir . '/view.php';
 
 
-// $debug->dump( $app );
+$debug->log( "Mem: {$mem_kb}, Time: 0ms", 'START' );
 
 include $app->controller->getFile();
+
+// $debug->dump( $app );

@@ -20,3 +20,9 @@
  - Completely re-factor HTML and CSS again.
  - Use new form CSS classes and HTML markup.
    e.g `.form-rows` and `.form-row`
+
+## 29 Dec 2022 - DEV - Ver 4.1.0
+ - Update JS ES6 imports to refelct the new JS vendors structure.
+ - Update login.php controller...
+  * Move `$goto` and `$error` globals in under `$response`.
+  * Add more css file includes.

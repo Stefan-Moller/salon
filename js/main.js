@@ -22,6 +22,11 @@ document.addEventListener( 'DOMContentLoaded', function() {
   document.documentElement.style.setProperty( '--scrollbar-width', 
     scrollbarWidth + 'px' );
 
+  document.querySelectorAll('.menu a').forEach(function(el) {
+    if (el.getAttribute('href') === F1.page || (!el.getAttribute('href') && F1.page === 'home'))
+      el.parentElement.classList.add('active');
+  });
+
   if ( F1.DEBUG ) console.log( 'Page initialized.', 
     { F1, scrollbarWidth, elMain }, '\n\n' );
 

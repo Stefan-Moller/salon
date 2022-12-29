@@ -7,7 +7,7 @@
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 3.0.1 - UPD - 16 Dec 2022
+ * @version 3.1.0 - DEV - 29 Dec 2022
  * 
  */
 
@@ -26,10 +26,40 @@ $view->menu[ 'contact' ] = 'Contact Us';
 
 if ( $http->request->isPost ) {
 
-  $goto = $http->request->referer;
+  $response = new stdClass;
+
+  $response->goto = $http->request->referer;
+  
   $do = $http->request->getPostVal( '__action__' );
 
-  header( 'Location:' . $goto );
+  do {
+
+    if ( $do == 'something' ) {
+
+      try {
+
+        debug_log( 'I did something :).' );
+
+      }
+
+      catch ( Exception $e ) {
+
+        $response->error = $e->getMessage();
+
+      }
+
+      break;     
+
+    }
+
+    $response->error = 'I do not understand :/';
+
+  } while (0);
+
+
+  if ( isset( $response->error ) ) $session->flash( 'error', $response->error );
+
+  header( 'Location:' . $response->goto );
 
 }
 
@@ -40,8 +70,12 @@ if ( $http->request->isPost ) {
 
 $files = array_diff( scandir( $app->photosDir . '' ), array( '.', '..' ) );
 
-$view->includeStyle( 'css/vendors/f1css/slides/slides.css' );
+$view->addStyle( 'css/vendors/f1css/reset.css'  );
+$view->addStyle( 'css/vendors/f1css/layout.css' );
+$view->addStyle( 'css/vendors/f1css/menu.css'   );
+$view->addStyle( 'css/vendors/f1css/slides.css' );
+$view->addStyle( 'app/themes/salon/styles.css'  );
 
-$view->includeScript( 'js/vendors/jquery/jquery.min.js' );
+$view->addScript( 'js/vendors/jquery/jquery.min.js' );
 
 include $view->getFile();

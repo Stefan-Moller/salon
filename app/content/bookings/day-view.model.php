@@ -16,9 +16,12 @@ class TimeSlot {
 class DayViewModel {
 
   private $db;
+  private $view;
 
-  public function __construct( $db ) {
+  public function __construct( $db, $view )
+  {
     $this->db = $db;
+    $this->view = $view;
     $this->settings = $this->getSettings();
     $this->stations = $this->getStations();
     $this->clients = $this->getClients();
@@ -27,29 +30,15 @@ class DayViewModel {
     $this->open_hours = explode( ',', $this->settings->open_hours );
     $this->slots_per_hour = explode( ',', $this->settings->slots_per_hour );
     $this->timeslots = $this->getTimeSlots();
+
+    $datetime = strtotime( $view->data->date );
+    $this->nextday = date( 'Y-m-d', strtotime( '+1 day', $datetime ) );
+    $this->prevday = date( 'Y-m-d', strtotime( '-1 day', $datetime ) );
   }
 
-  public function getSettings() {
-    return $this->db->query('settings')->getFirst();
-  }
 
-  public function getStations() {
-    return $this->db->query('stations')->getAll();
-  }
-
-  public function getClients() {
-    return $this->db->query('clients')->getAll();
-  }
-
-  public function getTreatments() {
-    return $this->db->query('treatments')->getAll();
-  }
-
-  public function getTherapists() {
-    return $this->db->query('therapists')->getAll();
-  }
-
-  public function getTimeSlots() {
+  public function getTimeSlots()
+  {
     $timeslots = [];
     foreach ( $this->stations as $station )
       for ( $j = 0; $j < count( $this->open_hours ); $j++ )
@@ -60,6 +49,36 @@ class DayViewModel {
           $timeslots[ $slot_id ] = $slot;
         }
     return $timeslots;
+  }
+
+
+  public function getSettings()
+  {
+    return $this->db->query( 'settings' )->getFirst();
+  }
+
+
+  public function getStations()
+  {
+    return $this->db->query( 'stations' )->getAll();
+  }
+
+
+  public function getTreatments()
+  {
+    return $this->db->query( 'treatments' )->getAll();
+  }
+
+
+  public function getTherapists()
+  {
+    return $this->db->query( 'therapists' )->getAll();
+  }
+
+
+  public function getClients()
+  {
+    return $this->db->query( 'clients' )->getAll();
   }
   
 }

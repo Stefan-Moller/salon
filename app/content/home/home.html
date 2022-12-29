@@ -4,11 +4,11 @@
 
   <header class="main-header">
     <h2><?=$view->title?></h2>
-    <if expr="!$auth->logged_in()">
-    <a href="login" class="button">Login</a>
-    </if>
-    <if expr="$auth->logged_in()">
+    <if x="$auth->logged_in()">
     <a href="logout" class="button">Log Out</a>
+    </if>
+    <if x="!$auth->logged_in()">
+    <a href="login" class="button">Login</a>
     </if>
   </header>
 
@@ -17,7 +17,7 @@
       <button type="button" class="prev-slide">&lt;</button>
       <ul class="slides" role="presentation">
       <?php $i=0 ?>
-      <foreach expr="$files as $file">
+      <foreach x="$files as $file">
         <li class="slide slide<?=($i==0)?$i.' show':$i?>"><img src="img/photos/<?=$file?>" alt="Slide <?=$i?>"></li>
       <?php $i++ ?>
       </foreach>

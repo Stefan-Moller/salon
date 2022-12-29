@@ -1,5 +1,5 @@
 <!-- View Booking Modal -->
-<div id="booking-view-modal" class="modal">
+<div id="view-booking-modal" class="modal">
   <div class="modal-inner">
     <header>
       <h3>Appointment</h3>

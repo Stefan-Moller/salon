@@ -7,7 +7,7 @@
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 4.0.0 - DEV - 17 Dec 2022
+ * @version 4.1.0 - DEV - 29 Dec 2022
  * 
  */
 
@@ -22,8 +22,9 @@ $view->title = 'User Authentication';
 
 if ( $http->request->isPost ) {
 
-  $error = null;
-  $goto = $http->request->referer;
+  $response = new stdClass;
+
+  $response->goto = $http->request->referer;
   
   do {
 
@@ -37,14 +38,14 @@ if ( $http->request->isPost ) {
 
       try {
 
-        if ( $auth->login( $username, $password ) ) $goto = 'bookings';
-        else $error = 'User or password invalid.';
+        if ( $auth->login( $username, $password ) ) $response->goto = 'bookings';
+        else $response->error = 'User or password invalid.';
 
       }
 
       catch ( Exception $e ) {
 
-        $error = $e->getMessage();
+        $response->error = $e->getMessage();
 
       }
 
@@ -52,14 +53,14 @@ if ( $http->request->isPost ) {
 
     }
 
-    $error = 'You said what? I no understand :/';
+    $response->error = 'You said what? I no understand :/';
 
   } while(0);
 
 
-  if ( $error ) $session->flash( 'error', $error );
+  if ( isset( $response->error ) ) $session->flash( 'error', $response->error );
 
-  header( 'Location:' . $goto );
+  header( 'Location:' . $response->goto );
 
 }
 
@@ -69,6 +70,10 @@ if ( $http->request->isPost ) {
 // --- GET ---
 // -----------
 
-$view->includeStyle( 'css/vendors/f1css/form/form.css' );
+$view->addStyle( 'css/vendors/f1css/reset.css'  );
+$view->addStyle( 'css/vendors/f1css/layout.css' );
+$view->addStyle( 'css/vendors/f1css/menu.css'   );
+$view->addStyle( 'css/vendors/f1css/form.css' );
+$view->addStyle( 'app/themes/salon/styles.css'  );
 
 include $view->getFile();

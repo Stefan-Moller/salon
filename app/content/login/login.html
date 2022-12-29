@@ -9,7 +9,7 @@
   <main>
     <form id="login-form" method="POST" aria-label="System Login Form"
       onsubmit="F1.onSubmit(event)" novalidate>
-      <if expr="$error = $session->getFlash('error')">
+      <if x="$error = $session->getFlash('error')">
       <div class="form-row">
         <div class="errors"><?=$error?></div>
       </div>
@@ -26,7 +26,7 @@
           <input class="input" type="password" name="password" autocomplete="off">
         </div>
       </div>
-      <div class="form-row">
+      <div class="form-row lost-password">
         <a href="lost-password">Lost your password?</a>
       </div>
       <div class="form-row">

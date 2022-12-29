@@ -27,6 +27,30 @@ class Auth {
   }
 
 
+  public function login( $username, $password ) {
+
+    try {
+
+      if ( empty( $username ) ) return false;
+
+      $user = $this->app->db->query( 'users' )
+        ->where( 'username=?', $username )
+        ->getFirst();
+
+      $loginSuccess = $user ? $user->password == $password : false;
+
+      if ( $loginSuccess ) $this->app->session->put( self::USER_ID, $user );
+      else $this->logout();
+
+      return $loginSuccess;
+
+    }
+
+    catch ( Exception $e ) { debug_log( $e->getMessage(), 'EXCPT' ); }
+
+  }
+
+
   public function logged_in() {
 
     return $this->user;
@@ -38,30 +62,6 @@ class Auth {
 
     $this->user = null;
     $this->app->session->forget( self::USER_ID );
-
-  }
-
-
-  public function login( $username, $password ) {
-
-    try {
-
-      if ( empty( $username ) ) return false;
-
-      $user = $this->app->db->query( 'users' )
-        ->where( 'username=?', $username )
-        ->getFirst();
-
-      $pass = !empty( $user ) and $user->password == $password;
-
-      if ( $pass ) $this->app->session->put( self::USER_ID, $user );
-      else $this->logout();
-
-      return $pass;
-
-    }
-
-    catch ( Exception $e ) { debug_log( $e->getMessage(), 'EXCPT' ); }
 
   }
 

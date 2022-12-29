@@ -43,10 +43,12 @@ html {
 
 .site-header nav {
   justify-content: space-between;
+  min-height: 5rem;
   width: 100%;
 }
 
 .brand img {
+  user-select: none;
   border: 1px solid #aaa;
   border-radius: 4px;
   width: 5rem;
@@ -54,12 +56,14 @@ html {
 }
 
 .brand h1 {
+  user-select: none;
   white-space: nowrap;
-  font-family: 'Cookie';
+  font-family: 'Cookie', 'Passions Conflict';
   font-weight: normal;
   font-style: italic;
-  font-size: 3.5rem;
-  max-height: 3.5rem;
+  font-size: 3rem;
+  max-height: 3rem;
+  line-height: 3rem;
   width: 0;
 }
 
@@ -68,6 +72,7 @@ html {
   font-size: 0.96rem;
   border-radius: 4px;
   font-weight: bold;
+  user-select: none;
 }
 
 #mobile-menu-control:checked ~ .menu {
@@ -85,12 +90,14 @@ html {
 }
 
 @media (max-width:767px) {
+  .site-header nav { min-height: 4rem; }  
   .brand img { width: 4rem; }
-  .brand h1 { font-size: 3rem; }
+  .brand h1 { font-size: 2.8rem; }
   .menu a { font-size: 0.9em; }
 }
 
 @media (max-width:580px) {
+  .site-header nav { min-height: 3.5rem; }  
   .brand img { width: 3.5rem; }
   .brand h1 { display: block; font-size: 2.67rem; }
 }
@@ -133,6 +140,15 @@ html {
 
 /* .button:visited, 
    .button:focus { color: dimgrey; } */
+
+.button-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.button-sm {
+  padding: 3px;
+}
 
 
 form label {

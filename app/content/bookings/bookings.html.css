@@ -35,6 +35,7 @@ main {
   position: relative;
   min-width: 10ch;
   max-width: 24ch;
+  width: 100%;
 }
 
 .date-button {
@@ -50,6 +51,7 @@ main {
   background-color: var(--doc-color-secondary);
   width: 1.34rem;
   height: 1.3rem;
+  user-select: none;
   text-align: center;
   line-height: 1.34rem;
   right: -0.3rem;
@@ -124,6 +126,7 @@ main {
 .col-header {
   display: flex;
   height: 3rem;
+  user-select: none;
   align-items: center;
   justify-content: center;
   color: var(--doc-color-dark-highlight);
@@ -140,6 +143,7 @@ main {
 
 .times-col label {
   background-color: var(--doc-color-secondary);  
+  user-select: none;
   height: 100%;
 }
 
@@ -288,13 +292,17 @@ select[name="style"]  {
   font-size: 0.8rem;
 }
 
+.modal {
+  --modal-spacing: 0.67rem;
+}
+
 .modal header {
-  padding: 0.67rem;
+  padding: var(--modal-spacing);
   background-color: gold;
 }
 
 .modal footer {
-  padding: 0.67rem;
+  padding: var(--modal-spacing);
   background-color: gold;
 }
 
@@ -305,16 +313,16 @@ select[name="style"]  {
   top: 3px;
 }
 
+.modal form {
+  padding: var(--modal-spacing);
+}
+
 .modal .calendar {
   flex: 1;
 }
 
-.modal-body.form-rows {
-  padding: 0 1rem;
-}
-
 .modal .booking-detail {
-  padding: 1rem;
+  padding: var(--modal-spacing);
 }
 
 .loading .loading-indicator i {

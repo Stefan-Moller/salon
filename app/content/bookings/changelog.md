@@ -104,23 +104,46 @@
    newly updated Required validator.
 
 ## 16 Dec 2022 - FT - Ver 3.3.0
-  - Implement a basic `mobile menu` with `hamburger button` toggle.
-  - Further improve the responsive behaviour of the site header.
-  - Shorten home page header title to "Welcome" only.
-  - Change 404 page back link to use `app->baseUri` instead of `/`
-  - Use `body.window` to identify a 100vh layout view.
+ - Implement a basic `mobile menu` with `hamburger button` toggle.
+ - Further improve the responsive behaviour of the site header.
+ - Shorten home page header title to "Welcome" only.
+ - Change 404 page back link to use `app->baseUri` instead of `/`
+ - Use `body.window` to identify a 100vh layout view.
 
 ## 16 Dec 2022 - DEV - Ver 3.4.0
-  - Refactor the `booking form` HTML and styles to be more responsive.
-    - Make form rows more prominent and stand-alone.
-  - Shorten the `brand title text` even more on small screens.
-  - Change CSS `@media` breakpoints
+ - Refactor the `booking form` HTML and styles to be more responsive.
+  * Make form rows more prominent and stand-alone.
+ - Shorten the `brand title text` even more on small screens.
+ - Change CSS `@media` breakpoints
 
 ## 17 Dec 2022 - DEV - Ver 3.4.1
-  - Remove `two column selects` row from the booking form.
-  - Set tabindex="0" in some inputs to see if it fixes tab order on mobile.
+ - Remove `two column selects` row from the booking form.
+ - Set tabindex="0" in some inputs to see if it fixes tab order on mobile.
 
 ## 17 Dec 2022 - DEV - Ver 3.4.2
-  - Fix booking form HTML indentation.
-  - Update other pages (like the Login page) that use form HTML layout and CSS. 
+ - Fix booking form HTML indentation.
+ - Update other pages (like the Login page) that use form HTML layout and CSS.
 
+
+## 29 Dec 2022 - DEV - Ver 4.0.0
+ - Add `Client CRUD` support and icons to the Booking Form!
+ - Add `user-select:none` CSS to most labels on the booking page.
+ - Add memory and speed `performace tracking` to debug logs.
+ - Add new ClientModel class to models dir!
+ - Improve / change the PHP View Service...
+  * Fetch `Include Files` from both `Theme` and `View` dirs,
+  * Rename view methods `includeS...File()` to `addS...File()`.
+ - Move bookings page modals from the themes dir into content/bookings.
+ - Rename the `dayview.model.php` to `day-view.model.php`.
+ - Refactor bookings.php controller while adding client model actions.
+ - Improve `SelectJS` to accept an `onchange` event handler via HTML attribute.
+ - Improve `FormJS`...
+  * add an `afterInit` event handler,
+  * improve the `showErrors()` method.
+ - Change the `Vendor Libs` structure and some vendor lib file names.
+ - Drop menu.js script from the `main-menu` template.
+ - Fix a mojar bug in the PHP Auth Service.
+ - Re-factor the `doc-head template`.
+  * All style includes must now be specified in code.
+  * Modify doc-head scripts and script includes.
+ - Update views affected by changes.

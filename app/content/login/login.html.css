@@ -9,10 +9,11 @@ main {
 }
 
 form {
+  --form-spacing: 1.34rem;
   background-color: var(--doc-color-light-highlight);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: calc(min(96vw, 360px));
-  padding: 1rem;
+  padding: var(--form-spacing);
   margin: 2rem auto;
   color: #222;
 }
@@ -21,7 +22,7 @@ form {
   border-color: var(--doc-color-secondary-highlight);
   background-color: var(--doc-color-secondary);
   font-size: 0.9rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem var(--form-spacing);
   width: auto;
 }
 
@@ -29,6 +30,7 @@ form {
   background-color: var(--doc-color-secondary-highlight);
 }
 
-.errors {
-  font-size: 0.96em;
+.errors,
+.lost-password {
+  font-size: 0.9rem;
 }
