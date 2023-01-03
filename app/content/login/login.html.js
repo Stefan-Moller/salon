@@ -11,7 +11,7 @@ F1.deferred.push(function initPage() {
   
   const log = console.log;
   const logError = console.error;
-  const loginForm = new Form( { selector: 'form' });
+  const loginForm = new Form({ selector: 'form' });
 
 
   F1.onSubmit = function( event ) {
@@ -20,7 +20,7 @@ F1.deferred.push(function initPage() {
     const errors = loginForm.getErrors();
     if ( errors.length > 0 ) { 
       event.preventDefault();
-      loginForm.showErrors({ showSummary: 1 });
+      loginForm.showErrors({ showErrorSummary: true });
       errors[0].focus();
     }
   };

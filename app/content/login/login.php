@@ -7,7 +7,7 @@
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 4.1.0 - DEV - 29 Dec 2022
+ * @version 4.1.1 - FIX - 03 Jan 2023
  * 
  */
 

@@ -26,3 +26,6 @@
  - Update login.php controller...
   * Move `$goto` and `$error` globals in under `$response`.
   * Add more css file includes.
+
+## 03 Jan 2023 - FIX - Ver 4.1.1
+ - Fix regression. Change form option name from `showSummary` to `showErrorSummary`
