@@ -3,7 +3,7 @@
   <div class="modal-inner">
     <form method="post" novalidate>
       <header>
-        <h3>Edit Client</h3>
+        <h3 class="modal-title">Edit Client</h3>
         <a class="modal-close">Close X</a>
       </header>
       <div class="modal-body form-rows">

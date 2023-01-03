@@ -196,6 +196,7 @@ main {
   font-size: 0.75em;
   padding: 0.25em 0.5em;
   cursor: pointer;
+  overflow: hidden;
   position: absolute;
   width: 100%;
   z-index: 2;

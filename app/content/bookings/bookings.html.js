@@ -2,13 +2,12 @@
 
 /* View Specific JS */
 
-import DateTime from './js/vendors/f1js/datetime.js';
-import Select from './js/vendors/f1js/select.js';
-import Modal from './js/vendors/f1js/modal.js';
 import Form from './js/vendors/f1js/form.js';
-
-import validatorTypes from './js/vendors/f1js/form-validatortypes.js';
+import Modal from './js/vendors/f1js/modal.js';
+import Select from './js/vendors/f1js/select.js';
+import DateTime from './js/vendors/f1js/datetime.js';
 import fieldTypes from './js/vendors/f1js/form-fieldtypes.js';
+import validatorTypes from './js/vendors/f1js/form-validatortypes.js';
 
 
 F1.deferred.push( function initPage() {
@@ -34,14 +33,11 @@ F1.deferred.push( function initPage() {
   const DT = new DateTime();
 
  
-  /* Global Helper Function Aliases */
-
-  function padNum( numStr ) { return numStr.toString().length > 1 ? numStr : '0' + numStr; }
-  function querySelector( selector ) { return document.querySelector( selector ); }
-  function querySelectorAll( selector ) { return document.querySelectorAll( selector ); }
-  
-
   /* Local Functions */
+
+  function padNum( numStr ) {
+    return numStr.toString().length > 1 ? numStr : '0' + numStr;
+  }
     
   function getSelectedDateYmd() {
     return urlParams.get( 'date' ) || DT.formatYmd( new Date() );
@@ -94,6 +90,11 @@ F1.deferred.push( function initPage() {
     formCtrl.elm.parentElement.insertBefore( elSummary, formCtrl.elm );
   }
 
+  function updateClientModal( modalCtrl ) {
+    const elDelete = modalCtrl.elm.querySelector( 'footer a' );
+    elDelete.classList.toggle( 'hidden',  modalCtrl.title === 'Add Client' );
+  }
+
   function updateDateNavCalendar( dateYmd ) {
     log( 'updateDateNavCalendar, dateYmd:', dateYmd );
     const dateYmdParts = dateYmd.split( '-' );
@@ -103,6 +104,17 @@ F1.deferred.push( function initPage() {
     calCtrl_dateNavCal.update();
   }
 
+  function updateBookingsCount( bookings ) {
+    elHeader.querySelector( '.bookings-count-badge' ).innerText = bookings.length;    
+  }
+
+  function updateDateNavContent( dateYmd, bookings ) {
+    log( 'updateDateNavContent, dateYmd:', dateYmd );
+    elHeader.querySelector( '.date-button span' ).innerText = renderLongDate( dateYmd );
+    updateDateNavCalendar( dateYmd );
+    updateBookingsCount( bookings );
+  }
+  
   function updateDayViewBookingSlot( elBookingSlot, booking ) {
     log( 'Update Booking Slot', elBookingSlot, booking );
     booking.time = padNum(booking.start_hour) + ':' + padNum(booking.start_min);
@@ -113,13 +125,6 @@ F1.deferred.push( function initPage() {
     elBookingSlot.classList.add( 'booked' );
     elBooking.dataset.booking = booking.id;
     elBooking.ENTITY = booking;
-  }
-
-  function updateDateNavContent( dateYmd, bookings ) {
-    log( 'updateDateNavContent, dateYmd:', dateYmd );
-    elHeader.querySelector( '.date-button span' ).innerText = renderLongDate( dateYmd );
-    elHeader.querySelector( '.bookings-count-badge' ).innerText = bookings.length;
-    updateDateNavCalendar( dateYmd );
   }
 
   function updateDayViewContent( bookings ) {
@@ -134,7 +139,7 @@ F1.deferred.push( function initPage() {
 
   function clearDayViewContent() {
     log( 'clearDayViewContent' );
-    querySelectorAll( '.booked' ).forEach( elSlot => clearDayViewTimeSlot( elSlot ) );
+    document.querySelectorAll( '.booked' ).forEach( elSlot => clearDayViewTimeSlot( elSlot ) );
     updateDebugInfo( { bookings: [] } );
   }
 
@@ -231,25 +236,27 @@ F1.deferred.push( function initPage() {
     log( 'saveBooking', booking );
     const formData = new FormData( formCtrl_bookingForm.elm ).entries();
     const postData = { __action__: 'saveBooking', ...Object.fromEntries( formData ) };
-    ajaxSubmit( baseUrl, postData, saveResp => saveBookingDone( saveResp, booking.elSlot ) );
+    ajaxSubmit( baseUrl, postData, saveResp => saveBookingDone( saveResp, booking.elSlot, !booking.id ) );
   }
 
-  function saveBookingDone( savedResp, elCurrentlyBookedSlot ) {
+  function saveBookingDone( savedResp, elCurrentlyBookedSlot, isNewBooking ) {
     log( 'saveBookingDone', savedResp );
     if ( savedResp.error ) {
       const errors = [];
       logError( 'saveBookingDone', savedResp.error );
       formCtrl_bookingForm.addFormError( savedResp.error );
       formCtrl_bookingForm.showErrors();
-    } else {
-      modalCtrl_bookingForm.close();
-      const savedBooking = savedResp;
-      /* If we changed the DAY of the appointment, so we need to go to a new DAY! */
-      if ( savedBooking.date !== selectedDateYmd ) return gotoDate( savedBooking.date );
-      if ( elCurrentlyBookedSlot ) clearDayViewTimeSlot( elCurrentlyBookedSlot );
-      const elNewBookingSlot = findBookingSlotElm( savedBooking );
-      updateDayViewBookingSlot( elNewBookingSlot, savedBooking );
+      return hideLoadingIndicator();
     }
+    modalCtrl_bookingForm.close();
+    const savedBooking = savedResp;
+    /* If we changed the DAY of the appointment, so we need to go to a new DAY! */
+    if ( savedBooking.date !== selectedDateYmd ) return gotoDate( savedBooking.date );
+    if ( elCurrentlyBookedSlot ) clearDayViewTimeSlot( elCurrentlyBookedSlot );
+    const elNewBookingSlot = findBookingSlotElm( savedBooking );
+    updateDayViewBookingSlot( elNewBookingSlot, savedBooking );
+    if ( isNewBooking ) { F1.data.bookings.push( savedBooking );
+      updateBookingsCount( F1.data.bookings ); }
     hideLoadingIndicator();
   }
 
@@ -265,11 +272,14 @@ F1.deferred.push( function initPage() {
       const errors = [];
       logError( 'deleteBookingDone', deleteResp.error );
       alert( deleteResp.error );
-    } else {    
-      clearDayViewTimeSlot( modalCtrl_bookingView.ENTITY.elm.parentElement );
-      modalCtrl_bookingView.close();
+      return hideLoadingIndicator();
     }
-    hideLoadingIndicator();
+    const bookingID = modalCtrl_bookingView.ENTITY.id;
+    clearDayViewTimeSlot( modalCtrl_bookingView.ENTITY.elm.parentElement );
+    F1.data.bookings = F1.data.bookings.filter( booking => booking.id !== bookingID );
+    updateBookingsCount( F1.data.bookings );
+    modalCtrl_bookingView.close();
+    hideLoadingIndicator();    
   }
 
   function fetchClient( id, onSuccess ) {
@@ -279,7 +289,8 @@ F1.deferred.push( function initPage() {
 
   function fetchClientToEditSuccess( client ) {
     log( 'fetchClientToEditSuccess', client );
-    modalCtrl_clientForm.show( { data: client } ); 
+    const afterShow = updateClientModal;
+    modalCtrl_clientForm.show({ data: client, title: 'Edit Client', afterShow }); 
     hideLoadingIndicator();
   }
 
@@ -427,7 +438,6 @@ F1.deferred.push( function initPage() {
   F1.onDeleteBooking = function( event ) {
     log( 'onDeleteBooking', event );
     if ( confirm( 'DELETE this booking... Are you sure?' ) ) {
-      modalCtrl_bookingView.close();
       deleteBooking( modalCtrl_bookingView.ENTITY );
     }
   };
@@ -442,7 +452,9 @@ F1.deferred.push( function initPage() {
   F1.onNewClient = function( event ) {
     log( 'onNewClient', event );
     const newClientBase = {};
-    modalCtrl_clientForm.show( { data: newClientBase } );
+    const afterShow = updateClientModal;
+    modalCtrl_clientForm.show( { data: newClientBase, 
+      title: 'Add Client', afterShow } );
   };
 
   F1.onEditClient = function( event ) {
@@ -556,7 +568,7 @@ F1.deferred.push( function initPage() {
   function initClientEditModal() {
     return new Modal( { elm: elEditClientModal,
       formController: formCtrl_clientForm,
-      focusFormOnShow: 1  } );
+      focusFormOnShow: 1 } );
   }
 
 
@@ -575,6 +587,7 @@ F1.deferred.push( function initPage() {
     F1.components.elEditClientBtn = elEditClientBtn;
     F1.components.elClientField = elClientField;
     /* Controllers */
+    F1.controllers.formCtrl_clientForm = formCtrl_clientForm;
     F1.controllers.formCtrl_bookingForm = formCtrl_bookingForm;
     F1.controllers.modalCtrl_dateNavCal = modalCtrl_dateNavCal;
     F1.controllers.modalCtrl_bookingView = modalCtrl_bookingView;
