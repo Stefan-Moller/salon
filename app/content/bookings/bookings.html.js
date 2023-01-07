@@ -6,8 +6,8 @@ import Form from './js/vendors/f1js/form.js';
 import Modal from './js/vendors/f1js/modal.js';
 import Select from './js/vendors/f1js/select.js';
 import DateTime from './js/vendors/f1js/datetime.js';
-import fieldTypes from './js/vendors/f1js/form-fieldtypes.js';
-import validatorTypes from './js/vendors/f1js/form-validatortypes.js';
+import fieldTypes from './js/vendors/f1js/form__fieldtypes.js';
+import validatorTypes from './js/vendors/f1js/form__validatortypes.js';
 
 
 F1.deferred.push( function initPage() {

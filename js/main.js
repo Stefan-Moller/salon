@@ -10,6 +10,9 @@
  *
  */
 
+import Menu from './vendors/f1js/menu.js';
+
+
 document.addEventListener( 'DOMContentLoaded', function() {
 
   if ( F1.DEBUG ) console.log( 'DOM content loaded. Run init code...' );
@@ -18,16 +21,13 @@ document.addEventListener( 'DOMContentLoaded', function() {
 
   const elMain = document.querySelector( 'body > main' );
   const scrollbarWidth = elMain.parentElement.clientWidth - elMain.clientWidth;
+  document.documentElement.style.setProperty( '--scrollbar-width', scrollbarWidth + 'px' );
 
-  document.documentElement.style.setProperty( '--scrollbar-width', 
-    scrollbarWidth + 'px' );
-
-  document.querySelectorAll('.menu a').forEach(function(el) {
-    if (el.getAttribute('href') === F1.page || (!el.getAttribute('href') && F1.page === 'home'))
-      el.parentElement.classList.add('active');
-  });
+  const menuCtrl = new Menu();
+  menuCtrl.setActive( F1.page );
+  menuCtrl.initSubmenus();
 
   if ( F1.DEBUG ) console.log( 'Page initialized.', 
-    { F1, scrollbarWidth, elMain }, '\n\n' );
+    { F1, scrollbarWidth, elMain, menuCtrl }, '\n\n' );
 
 } );

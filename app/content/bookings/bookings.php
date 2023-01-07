@@ -7,7 +7,7 @@
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 4.0.0 - DEV - 29 Dec 2022
+ * @version 5.0.0 - FT - 07 Jan 2023
  *
  */
 
@@ -29,9 +29,22 @@ $view->data->date = $http->request->getUrlParam( 'date', date( 'Y-m-d' ) );
 $view->theme = 'salon';
 $view->title = 'Bookings';
 
+$submenu1 = new MenuItem( 'Setup', 'submenu', 'submenu__wrapper admin-submenu', [
+  'clients'    => 'Clients',
+  'therapists' => 'Therapists',
+  'treatments' => 'Treatments',
+  'stations'   => 'Stations',
+  'settings'   => 'Settings'
+] );
+
+$submenu2 = new MenuItem( 'User', 'submenu', 'submenu__wrapper user-submenu', [
+  'profile' => 'Profile',
+  'logout'  => 'Logout',
+] );
+
 $view->menu[ 'bookings' ] = 'Bookings';
-$view->menu[ 'setup' ] = 'Setup';
-$view->menu[ 'contact' ] = 'Contact Us';
+$view->menu[ 'setup'    ] = $submenu1;
+$view->menu[ 'user'     ] = $submenu2;
 
 
 $db->connect( $app->dbConnection[ 'salon' ] );
@@ -161,18 +174,25 @@ if ( $http->request->isPost ) {
 // --- GET ---
 // -----------
 
-include 'day-view.model.php';
-$view->model = new Models\DayViewModel( $db, $view );
+$app->f1css = 'css/vendors/f1css/';
+$view->addStyle( $app->f1css . 'reset.css'            );
+$view->addStyle( $app->f1css . 'layout.css'           );
+$view->addStyle( $app->f1css . 'menu.css'             );
+$view->addStyle( $app->f1css . 'menu__mobile.css'     );
+$view->addStyle( $app->f1css . 'menu__control.css'    );
+$view->addStyle( $app->f1css . 'menu__activeitem.css' );
+$view->addStyle( $app->f1css . 'submenu.css'          );
+$view->addStyle( $app->f1css . 'submenu__control.css' );
+$view->addStyle( $app->f1css . 'form.css'             );
+$view->addStyle( $app->f1css . 'modal.css'            );
+$view->addStyle( $app->f1css . 'select.css'           );
 
-$view->addStyle( 'css/vendors/f1css/reset.css'          );
-$view->addStyle( 'css/vendors/f1css/layout.css'         );
-$view->addStyle( 'css/vendors/f1css/menu.css'           );
-$view->addStyle( 'css/vendors/f1css/form.css'           );
-$view->addStyle( 'css/vendors/f1css/modal.css'          );
-$view->addStyle( 'css/vendors/f1css/select.css'         );
 $view->addStyle( 'css/vendors/vanilla/calendar.min.css' );
-$view->addStyle( 'app/themes/salon/styles.css'          );
-
 $view->addScript( 'js/vendors/vanilla/calendar.min.js'  );
+
+$view->addStyle( 'app/themes/salon/styles.css' );
+
+include 'bookings.model.php';
+$view->model = new Models\DayViewModel( $db, $view );
 
 include $view->getFile();

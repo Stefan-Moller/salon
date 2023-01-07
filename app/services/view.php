@@ -16,6 +16,16 @@ include $app->vendorsDir . '/f1/view/view.php';
 use F1\View;
 
 
+class MenuItem {
+  public function __construct( $label, $type = 'item', $class = null, $subitems = null ) {
+    $this->label = $label;
+    $this->class = $class;
+    $this->type = $type;
+    $this->subitems = $subitems;
+  }
+}
+
+
 $view = new View( [
   'name'      => $app->controller->name,
   'viewDir'   => $app->controller->controllerDir, 
@@ -23,7 +33,9 @@ $view = new View( [
 ] );
 
 
-$view->menu = [ 'home' => 'Home' ];
+$view->menu = [
+  'home' => new MenuItem( 'Home', 'item', 'home' )
+];
 
 
 $app->view = $view;

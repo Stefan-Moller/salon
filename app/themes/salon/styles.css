@@ -17,7 +17,7 @@
   --menu-color-acent: var(--doc-color-acent);
   --menu-color-text-highlight: var(--doc-color-secondary-highlight);
   --menu-color-acent-highlight: var(--doc-color-acent-highlight);
-  --submenu-color-background: var(--doc-color-dark);
+  --submenu-color-background: var(--doc-color-dark-highlight);
 }
 
 html {
@@ -68,11 +68,15 @@ html {
 }
 
 .menu a {
-  background-color: var(--doc-color-dark-highlight);
   font-size: 0.96rem;
-  border-radius: 4px;
   font-weight: bold;
   user-select: none;
+}
+
+.menu > li {
+  padding: calc(0.25*var(--menu-spacing)) var(--menu-spacing);
+  background-color: var(--doc-color-dark-highlight);
+  border-radius: var(--menu-border-radius);
 }
 
 #mobile-menu-control:checked ~ .menu {

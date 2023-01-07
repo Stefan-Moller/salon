@@ -147,3 +147,9 @@
   * All style includes must now be specified in code.
   * Modify doc-head scripts and script includes.
  - Update views affected by changes.
+
+ ## 07 Jan 2023 - FT - Ver 5.0.0
+  - New multi-level menu system (i.e. sub-menus)
+  - New file and styles naming convention (update all affected)
+  - Remove unused files.
+  - Change menu content.

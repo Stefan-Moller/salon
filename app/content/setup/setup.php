@@ -24,11 +24,23 @@ $submenu = [
 
 $view->menu[ 'bookings' ] = 'Bookings';
 $view->menu[ 'setup'    ] = [ 'Setup', $submenu ];
-$view->menu[ 'contact'  ] = 'Contact Us';
+
+
 
 // -----------
 // --- GET ---
 // -----------
 
+$app->f1css = 'css/vendors/f1css/';
+$view->addStyle( $app->f1css . 'reset.css'            );
+$view->addStyle( $app->f1css . 'layout.css'           );
+$view->addStyle( $app->f1css . 'menu.css'             );
+$view->addStyle( $app->f1css . 'menu__activeitem.css' );
+$view->addStyle( $app->f1css . 'menu__togglectrl.css' );
+$view->addStyle( $app->f1css . 'menu__toggleicon.css' );
+$view->addStyle( $app->f1css . 'menu__dropdown.css'   );
+$view->addStyle( $app->f1css . 'menu__mobile.css'     );
+
+$view->addStyle( 'app/themes/salon/styles.css'  );
 
 include $view->getFile();
