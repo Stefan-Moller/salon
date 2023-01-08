@@ -45,22 +45,22 @@
         </div>            
         <!-- /Time Labels Header -->
         <!-- Time Labels -->
-        <?php foreach( $view->model->open_hours as $hour ): ?>
+        <foreach x="$view->model->open_hours as $hour">
         <div class="flex-row row-header hour-group">
           <label class="hour"><?=$hour?></label>
           <div class="min">
-          <?php foreach( $view->model->slots_per_hour as $i => $min ): ?>
+            <foreach x="$view->model->slots_per_hour as $i => $min">
             <label class="time-slot"><?=$min?></label>
-          <?php endforeach; ?>
+            </foreach>
           </div>
         </div>
-        <?php endforeach; ?>
+        </foreach>
         <!-- /Time Labels -->
       </div>
       <!-- /Time Labels Column -->
       <!-- Station Columns -->
-      <?php foreach( $view->model->stations as $station ): ?>
-      <?php $station_id = 's'.$station->id; ?>
+      <foreach x="$view->model->stations as $station">
+      <eval>$station_id = 's'.$station->id</eval>
       <!-- Station <?=$station->no?> Column -->
       <div class="flex-col station-col" id="<?=$station_id?>">
         <!-- Station Column Header -->
@@ -68,15 +68,15 @@
           <label><?=$station->no?><br><?=$station->name?></label>
         </div>
         <!-- Station Column Time Slots -->
-        <?php foreach( $view->model->open_hours as $hour ): ?>
-        <?php foreach( $view->model->slots_per_hour as $min ): ?>
-        <?php $slot_id = $station_id.'-'.$hour.'h'.$min; ?>
+        <foreach x="$view->model->open_hours as $hour">
+        <foreach x="$view->model->slots_per_hour as $min">
+        <eval>$slot_id = $station_id.'-'.$hour.'h'.$min</eval>
         <div class="flex-row time-slot" id="<?=$slot_id?>"></div>
-        <?php endforeach; ?>
-        <?php endforeach; ?>
+        </foreach>
+        </foreach>
         <!-- /Station Column Time Slots -->
       </div>
-      <?php endforeach; ?>
+      </foreach>
       <!-- /Station Columns -->
     </div>
     <!-- /Bookings Day View -->

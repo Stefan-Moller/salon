@@ -153,3 +153,8 @@
   - New file and styles naming convention (update all affected)
   - Remove unused files.
   - Change menu content.
+
+ ## 08 Jan 2023 - FT - Ver 5.1.0
+  - Remove all `<?php` tags from the main view file, making it more
+    "Stupid IDE" friendly. Use special HTML tags `<include>`,`<foreach>`,
+    `<if>` and the NEW `<eval>` tag, to make the main view file HTML only. 

@@ -7,7 +7,7 @@
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 5.0.0 - FT - 07 Jan 2023
+ * @version 5.1.0 - FT - 08 Jan 2023
  *
  */
 
@@ -29,7 +29,7 @@ $view->data->date = $http->request->getUrlParam( 'date', date( 'Y-m-d' ) );
 $view->theme = 'salon';
 $view->title = 'Bookings';
 
-$submenu1 = new MenuItem( 'Setup', 'submenu', 'submenu__wrapper admin-submenu', [
+$view->submenu1 = new MenuItem( 'Setup', 'submenu', 'submenu__wrapper admin-submenu', [
   'clients'    => 'Clients',
   'therapists' => 'Therapists',
   'treatments' => 'Treatments',
@@ -37,14 +37,14 @@ $submenu1 = new MenuItem( 'Setup', 'submenu', 'submenu__wrapper admin-submenu', 
   'settings'   => 'Settings'
 ] );
 
-$submenu2 = new MenuItem( 'User', 'submenu', 'submenu__wrapper user-submenu', [
+$view->submenu2 = new MenuItem( 'User', 'submenu', 'submenu__wrapper user-submenu', [
   'profile' => 'Profile',
   'logout'  => 'Logout',
 ] );
 
 $view->menu[ 'bookings' ] = 'Bookings';
-$view->menu[ 'setup'    ] = $submenu1;
-$view->menu[ 'user'     ] = $submenu2;
+$view->menu[ 'setup'    ] = $view->submenu1;
+$view->menu[ 'user'     ] = $view->submenu2;
 
 
 $db->connect( $app->dbConnection[ 'salon' ] );
