@@ -148,13 +148,17 @@
   * Modify doc-head scripts and script includes.
  - Update views affected by changes.
 
- ## 07 Jan 2023 - FT - Ver 5.0.0
-  - New multi-level menu system (i.e. sub-menus)
-  - New file and styles naming convention (update all affected)
-  - Remove unused files.
-  - Change menu content.
+## 07 Jan 2023 - FT - Ver 5.0.0
+ - New multi-level menu system (i.e. sub-menus)
+ - New file and styles naming convention (update all affected)
+ - Remove unused files.
+ - Change menu content.
 
- ## 08 Jan 2023 - FT - Ver 5.1.0
-  - Remove all `<?php` tags from the main view file, making it more
-    "Stupid IDE" friendly. Use special HTML tags `<include>`,`<foreach>`,
-    `<if>` and the NEW `<eval>` tag, to make the main view file HTML only. 
+## 08 Jan 2023 - FT - Ver 5.1.0
+ - Remove all `<?php` tags from the main view file, making it more
+   "Stupid IDE" friendly. Use special HTML tags `<include>`,`<foreach>`,
+   `<if>` and the NEW `<eval>` tag, to make the main view file HTML only.
+
+## 09 Jan 2023 - FT - Ver 5.2.0
+ - Add a new group of admin pages.
+ - Rename content/setup to content/admin

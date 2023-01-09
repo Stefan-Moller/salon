@@ -7,7 +7,7 @@
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 5.1.0 - FT - 08 Jan 2023
+ * @version 5.2.0 - FT - 08 Jan 2023
  *
  */
 
@@ -29,7 +29,7 @@ $view->data->date = $http->request->getUrlParam( 'date', date( 'Y-m-d' ) );
 $view->theme = 'salon';
 $view->title = 'Bookings';
 
-$view->submenu1 = new MenuItem( 'Setup', 'submenu', 'submenu__wrapper admin-submenu', [
+$view->submenu1 = new MenuItem( 'Admin', 'submenu', 'submenu__wrapper admin-submenu', [
   'clients'    => 'Clients',
   'therapists' => 'Therapists',
   'treatments' => 'Treatments',
@@ -43,7 +43,7 @@ $view->submenu2 = new MenuItem( 'User', 'submenu', 'submenu__wrapper user-submen
 ] );
 
 $view->menu[ 'bookings' ] = 'Bookings';
-$view->menu[ 'setup'    ] = $view->submenu1;
+$view->menu[ 'admin'    ] = $view->submenu1;
 $view->menu[ 'user'     ] = $view->submenu2;
 
 

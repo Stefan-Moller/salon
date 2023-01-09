@@ -6,8 +6,10 @@
  - Change the "Client Edit" modal title when adding a new client - DONE
  - Hide the "Delete" link when adding a new client - DONE
  - Notes text doesn't clip to the available block - DONE
+ - Hide HOME menu option between 521px and 767px - DONE
+ - Fix issue with page GOTO not always working when changing pages fast.
  - Fix issue with global "ENTER KEY PRESS" event block.
- - Hide HOME menu option on 767px and less.
+ - Fix issue with submenus' tab focus not working.
 
 ## Features
  - Client CRUD on booking form - DONE

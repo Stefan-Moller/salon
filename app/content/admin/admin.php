@@ -1,18 +1,18 @@
 <?php
 
 /**
- * ./app/content/setup/setup.php
+ * ./app/content/admin/admin.php
  * 
- * Setup page controller - 22 Nov 2022
+ * Admin page controller - 22 Nov 2022
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 1.0.0 - 22 Nov 2022
+ * @version 1.0.0 - 09 Jan 2023
  * 
  */
 
 $view->theme = 'salon';
-$view->title = 'Setup';
+$view->title = 'Admin';
 
 $submenu = [
   'clients'    => 'Clients',
@@ -23,7 +23,7 @@ $submenu = [
 ];
 
 $view->menu[ 'bookings' ] = 'Bookings';
-$view->menu[ 'setup'    ] = [ 'Setup', $submenu ];
+$view->menu[ 'admin'    ] = [ 'Admin', $submenu ];
 
 
 
