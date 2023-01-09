@@ -91,6 +91,10 @@ main {
   .date-nav { width: 100%; }
 }
 
+@media (min-width: 521px) and (max-width: 767px) {
+  .menu .home { display: none; }
+}
+
 .flex-grid {
   display: flex;
   width: -moz-fit-content;
