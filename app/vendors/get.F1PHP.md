@@ -1,0 +1,1 @@
+Clone https://github.com/xaviertnc/F1PHP.git into "/app/vendors/f1"

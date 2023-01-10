@@ -14,6 +14,7 @@
 
 ## Features
  - Client CRUD on booking form - DONE
+ - Add F1 vendor repo placeholder / reminder files - DONE
  - Validate `Client Delete` requests.
   * The selected / target client must have no bookings.
   * Only supervisors can delete?
