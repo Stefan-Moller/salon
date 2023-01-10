@@ -16,26 +16,33 @@ include $app->vendorsDir . '/f1/view/view.php';
 use F1\View;
 
 
-class MenuItem {
-  public function __construct( $label, $type = 'item', $class = null, $subitems = null ) {
-    $this->label = $label;
-    $this->class = $class;
-    $this->type = $type;
-    $this->subitems = $subitems;
-  }
+function addCoreStyles( $view )
+{
+  $baseUri = 'css/vendors/f1css/';
+  $view->addStyle( 'reset.css'            , $baseUri );
+  $view->addStyle( 'layout.css'           , $baseUri );
+  $view->addStyle( 'menu.css'             , $baseUri );
+  $view->addStyle( 'menu__mobile.css'     , $baseUri );
+  $view->addStyle( 'menu__control.css'    , $baseUri );
+  $view->addStyle( 'menu__activeitem.css' , $baseUri );
+  $view->addStyle( 'submenu.css'          , $baseUri );
+  $view->addStyle( 'submenu__control.css' , $baseUri );
+}
+
+
+function addThemeStyles( $view )
+{
+  $view->addStyle( 'app/themes/' . $view->theme . '/styles.css' );
 }
 
 
 $view = new View( [
   'name'      => $app->controller->name,
+  'menus'     => [ 'main' => new Menu( [ new MenuItem( 'Home', 'home', 'home' ) ] ) ],
   'viewDir'   => $app->controller->controllerDir, 
-  'themesDir' => $app->themesDir
+  'themesDir' => $app->themesDir,
+  'theme'     => $app->theme
 ] );
-
-
-$view->menu = [
-  'home' => new MenuItem( 'Home', 'item', 'home' )
-];
 
 
 $app->view = $view;

@@ -17,7 +17,7 @@
       <button type="button" class="prev-slide">&lt;</button>
       <ul class="slides" role="presentation">
       <?php $i=0 ?>
-      <foreach x="$files as $file">
+      <foreach x="$view->data->files as $file">
         <li class="slide slide<?=($i==0)?$i.' show':$i?>"><img src="img/photos/<?=$file?>" alt="Slide <?=$i?>"></li>
       <?php $i++ ?>
       </foreach>

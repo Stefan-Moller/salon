@@ -2,14 +2,15 @@
 
 ## Fixes
  - Update the `Bookings Count` after adding OR deleting a booking - DONE
- - Fix incorrect showErrors() option spelling on Login form - DONE
  - Change the "Client Edit" modal title when adding a new client - DONE
+ - Fix incorrect showErrors() option spelling on Login form - DONE
+ - Fix issue with global "ENTER KEY PRESS" event block - DONE
  - Hide the "Delete" link when adding a new client - DONE
+ - Fix issue with submenus' tab focus not working - DONE
  - Notes text doesn't clip to the available block - DONE
  - Hide HOME menu option between 521px and 767px - DONE
  - Fix issue with page GOTO not always working when changing pages fast.
- - Fix issue with global "ENTER KEY PRESS" event block.
- - Fix issue with submenus' tab focus not working.
+ - Fix issues with modal dialog input focus and "tabbing OFF modal" when open.
 
 ## Features
  - Client CRUD on booking form - DONE

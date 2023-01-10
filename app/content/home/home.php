@@ -11,11 +11,16 @@
  * 
  */
 
-$view->theme = 'salon';
+
+// --------------
+// --- SETUP  ---
+// --------------
+
 $view->title = 'Welcome';
 
-$view->menu[ 'bookings' ] = 'Bookings';
-$view->menu[ 'contact' ] = 'Contact Us';
+$menu = $view->menus[ 'main' ];
+$menu->addItem( 'Bookings'   , 'bookings' );
+$menu->addItem( 'Contact Us' , 'contact'  );
 
 
 
@@ -68,21 +73,17 @@ if ( $http->request->isPost ) {
 // --- GET ---
 // -----------
 
-$files = array_diff( scandir( $app->photosDir . '' ), array( '.', '..' ) );
+addCoreStyles( $view );
 
-$app->f1css = 'css/vendors/f1css/';
-$view->addStyle( $app->f1css . 'reset.css'            );
-$view->addStyle( $app->f1css . 'layout.css'           );
-$view->addStyle( $app->f1css . 'menu.css'             );
-$view->addStyle( $app->f1css . 'menu__mobile.css'     );
-$view->addStyle( $app->f1css . 'menu__control.css'    );
-$view->addStyle( $app->f1css . 'menu__activeitem.css' );
-$view->addStyle( $app->f1css . 'submenu.css'          );
-$view->addStyle( $app->f1css . 'submenu__control.css' );
-$view->addStyle( $app->f1css . 'slides.css'           );
+$view->addStyle( 'css/vendors/f1css/slides.css' );
+
+addThemeStyles( $view );
+
 
 $view->addScript( 'js/vendors/jquery/jquery.min.js' );
 
-$view->addStyle( 'app/themes/salon/styles.css'  );
+
+$view->data->files = array_diff( scandir( $app->photosDir . '' ), array( '.', '..' ) );
+
 
 include $view->getFile();

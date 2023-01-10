@@ -22,7 +22,7 @@ require 'config.php';
 // Load and configure application core services.
 // Each service gets it's own file to keep things tidy and easy to follow.
 // PS: Vendor libs are loaded (if required) in the respective service files.
-// NB: The order of includes is VERY important!
+// **NB**: The order of includes is VERY important!
 // -----------------------------------------------------------------------
 
 include $app->servicesDir . '/debug.php';
@@ -31,6 +31,7 @@ include $app->servicesDir . '/session.php';
 include $app->servicesDir . '/database.php';
 include $app->servicesDir . '/controller.php';
 include $app->servicesDir . '/auth.php';
+include $app->servicesDir . '/menu.php';
 include $app->servicesDir . '/view.php';
 
 

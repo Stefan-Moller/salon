@@ -1,29 +1,26 @@
 <?php
 
 /**
- * ./app/content/admin/admin.php
+ * ./app/content/admin/staff/staff.php
  * 
- * Admin page controller - 22 Nov 2022
+ * Staff page controller - 09 Jan 2023
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 1.0.0 - 09 Jan 2023
+ * @version 1.0.0 - INIT - 09 Jan 2023
  * 
  */
 
-$view->theme = 'salon';
-$view->title = 'Admin';
+if ( ! $auth->logged_in() ) header( 'Location:login' );
 
-$submenu = [
-  'clients'    => 'Clients',
-  'therapists' => 'Therapists',
-  'treatments' => 'Treatments',
-  'stations'   => 'Stations',
-  'settings'   => 'Settings'
-];
 
-$view->menu[ 'bookings' ] = 'Bookings';
-$view->menu[ 'admin'    ] = [ 'Admin', $submenu ];
+// --------------
+// --- SETUP  ---
+// --------------
+
+$view->title = 'Therapists';
+
+$view->menus[ 'main' ]->addBackendItems();
 
 
 
@@ -31,16 +28,8 @@ $view->menu[ 'admin'    ] = [ 'Admin', $submenu ];
 // --- GET ---
 // -----------
 
-$app->f1css = 'css/vendors/f1css/';
-$view->addStyle( $app->f1css . 'reset.css'            );
-$view->addStyle( $app->f1css . 'layout.css'           );
-$view->addStyle( $app->f1css . 'menu.css'             );
-$view->addStyle( $app->f1css . 'menu__activeitem.css' );
-$view->addStyle( $app->f1css . 'menu__togglectrl.css' );
-$view->addStyle( $app->f1css . 'menu__toggleicon.css' );
-$view->addStyle( $app->f1css . 'menu__dropdown.css'   );
-$view->addStyle( $app->f1css . 'menu__mobile.css'     );
+addCoreStyles( $view );
+addThemeStyles( $view );
 
-$view->addStyle( 'app/themes/salon/styles.css'  );
 
 include $view->getFile();

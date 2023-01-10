@@ -26,25 +26,9 @@ $view->data->date = $http->request->getUrlParam( 'date', date( 'Y-m-d' ) );
 // --- SETUP  ---
 // --------------
 
-$view->theme = 'salon';
 $view->title = 'Bookings';
 
-$view->submenu1 = new MenuItem( 'Admin', 'submenu', 'submenu__wrapper admin-submenu', [
-  'clients'    => 'Clients',
-  'therapists' => 'Therapists',
-  'treatments' => 'Treatments',
-  'stations'   => 'Stations',
-  'settings'   => 'Settings'
-] );
-
-$view->submenu2 = new MenuItem( 'User', 'submenu', 'submenu__wrapper user-submenu', [
-  'profile' => 'Profile',
-  'logout'  => 'Logout',
-] );
-
-$view->menu[ 'bookings' ] = 'Bookings';
-$view->menu[ 'admin'    ] = $view->submenu1;
-$view->menu[ 'user'     ] = $view->submenu2;
+$view->menus[ 'main' ]->addBackendItems();
 
 
 $db->connect( $app->dbConnection[ 'salon' ] );
@@ -174,25 +158,20 @@ if ( $http->request->isPost ) {
 // --- GET ---
 // -----------
 
-$app->f1css = 'css/vendors/f1css/';
-$view->addStyle( $app->f1css . 'reset.css'            );
-$view->addStyle( $app->f1css . 'layout.css'           );
-$view->addStyle( $app->f1css . 'menu.css'             );
-$view->addStyle( $app->f1css . 'menu__mobile.css'     );
-$view->addStyle( $app->f1css . 'menu__control.css'    );
-$view->addStyle( $app->f1css . 'menu__activeitem.css' );
-$view->addStyle( $app->f1css . 'submenu.css'          );
-$view->addStyle( $app->f1css . 'submenu__control.css' );
-$view->addStyle( $app->f1css . 'form.css'             );
-$view->addStyle( $app->f1css . 'modal.css'            );
-$view->addStyle( $app->f1css . 'select.css'           );
+addCoreStyles( $view );
+
+$view->addStyle( 'css/vendors/f1css/form.css'   );
+$view->addStyle( 'css/vendors/f1css/modal.css'  );
+$view->addStyle( 'css/vendors/f1css/select.css' );
 
 $view->addStyle( 'css/vendors/vanilla/calendar.min.css' );
-$view->addScript( 'js/vendors/vanilla/calendar.min.js'  );
+$view->addScript( 'js/vendors/vanilla/calendar.min.js' );
 
-$view->addStyle( 'app/themes/salon/styles.css' );
+addThemeStyles( $view );
+
 
 include 'bookings.model.php';
 $view->model = new Models\DayViewModel( $db, $view );
+
 
 include $view->getFile();

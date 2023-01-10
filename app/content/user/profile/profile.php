@@ -1,13 +1,13 @@
 <?php
 
 /**
- * ./app/content/admin/stations/stations.php
+ * ./app/content/user/profile/profile.php
  * 
- * Stations page controller - 09 Jan 2023
+ * Users page controller - 10 Jan 2023
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 1.0.0 - INIT - 09 Jan 2023
+ * @version 1.0.0 - INIT - 10 Jan 2023
  * 
  */
 
@@ -18,7 +18,7 @@ if ( ! $auth->logged_in() ) header( 'Location:login' );
 // --- SETUP  ---
 // --------------
 
-$view->title = 'Stations';
+$view->title = 'User Profile';
 
 $view->menus[ 'main' ]->addBackendItems();
 

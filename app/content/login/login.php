@@ -11,7 +11,6 @@
  * 
  */
 
-$view->theme = 'salon';
 $view->title = 'User Authentication';
 
 
@@ -70,17 +69,11 @@ if ( $http->request->isPost ) {
 // --- GET ---
 // -----------
 
-$app->f1css = 'css/vendors/f1css/';
-$view->addStyle( $app->f1css . 'reset.css'            );
-$view->addStyle( $app->f1css . 'layout.css'           );
-$view->addStyle( $app->f1css . 'menu.css'             );
-$view->addStyle( $app->f1css . 'menu__mobile.css'     );
-$view->addStyle( $app->f1css . 'menu__control.css'    );
-$view->addStyle( $app->f1css . 'menu__activeitem.css' );
-$view->addStyle( $app->f1css . 'submenu.css'          );
-$view->addStyle( $app->f1css . 'submenu__control.css' );
-$view->addStyle( $app->f1css . 'form.css'             );
+addCoreStyles( $view );
 
-$view->addStyle( 'app/themes/salon/styles.css'  );
+$view->addStyle( 'css/vendors/f1css/form.css' );
+
+addThemeStyles( $view );
+
 
 include $view->getFile();
