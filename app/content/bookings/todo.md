@@ -26,6 +26,7 @@
  - Add repeating appointments.
  - Create a booking with the currently selected as template.
  - Show who's the owner of a booking (only if you're a super?)
+ - Change the logo text back to an image...
 
 ### Admin Page
  * User CRUD
