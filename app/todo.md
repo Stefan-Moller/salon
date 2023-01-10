@@ -19,14 +19,18 @@
   * The selected / target client must have no bookings.
   * Only supervisors can delete?
  - Don't show a `Delete Link` on INSERT forms - 25%
- - Popup calendar option on date fields.
+ - Implement date fields with Popup Datepickers.
+    * Considder using another 3rd party date picker lib for this.
  - Booking edit / update permissions.
  - Logged in user icon and menu - 50%
- - Dropdown Submenus - 50%
- - Add repeating appointments.
+ - Submenus - 50%
+   * Close OPEN submenus when we click "off" the menu.
+   * Expand "Active Item" JS & CSS to apply to submenu items too.
+   * Improve submenu and submenu items CSS.
  - Create a booking with the currently selected as template.
  - Show who's the owner of a booking (only if you're a super?)
  - Change the logo text back to an image...
+ - Add repeating appointments.
 
 ### Admin Page
  * User CRUD
@@ -34,3 +38,7 @@
  * Therapist CRUD
  * Treatment CRUD
  * Station CRUD
+
+### Profile Page
+ * Profile CRUD
+ * Change password

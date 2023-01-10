@@ -59,7 +59,8 @@ class Menu {
       new MenuItem( 'Therapists' , 'admin/staff'    ),
       new MenuItem( 'Treatments' , 'admin/services' ),
       new MenuItem( 'Stations'   , 'admin/stations' ),
-      new MenuItem( 'Clients'    , 'admin/clients'  )
+      new MenuItem( 'Clients'    , 'admin/clients'  ),
+      new MenuItem( 'Users'      , 'admin/users'    )
     ] ) );
 
     $this->items[] = new MenuItem( 'User', 'javascript:void(0)', 'user-submenu', '', new static( [
