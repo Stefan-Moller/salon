@@ -24,7 +24,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
   document.documentElement.style.setProperty( '--scrollbar-width', scrollbarWidth + 'px' );
 
   const menuCtrl = new Menu();
-  menuCtrl.setActive( F1.page );
+  menuCtrl.setActive( F1.pageHref );
   menuCtrl.initSubmenus();
 
   if ( F1.DEBUG ) console.log( 'Page initialized.', 

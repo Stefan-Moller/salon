@@ -17,4 +17,4 @@
 </head>
 
 <body class="window">
-  <script>F1.DEBUG = <?=__DEBUG_ON__?>; F1.page = '<?=$view->name?>';</script>
+  <script>F1.DEBUG = <?=__DEBUG_ON__?>; F1.page = '<?=$view->name?>'; F1.pageHref = '<?=$view->href?>';</script>

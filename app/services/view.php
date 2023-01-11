@@ -9,7 +9,8 @@ include $app->vendorsDir . '/f1/view/view.php';
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 1.7.0 - 28 Sep 2022
+ * @version 2.0.0 - 11 Jan 2023
+ *   - Add 'view->href' so "Menu Active Item" can work.
  * 
  */
 
@@ -38,6 +39,7 @@ function addThemeStyles( $view )
 
 $view = new View( [
   'name'      => $app->controller->name,
+  'href'      => $app->controller->controllerHref,
   'menus'     => [ 'main' => new Menu( [ new MenuItem( 'Home', 'home', 'home' ) ] ) ],
   'viewDir'   => $app->controller->controllerDir, 
   'themesDir' => $app->themesDir,

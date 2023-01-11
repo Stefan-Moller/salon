@@ -18,6 +18,7 @@
   --menu-color-text-highlight: var(--doc-color-secondary-highlight);
   --menu-color-acent-highlight: var(--doc-color-acent-highlight);
   --submenu-color-background: var(--doc-color-dark-highlight);
+  --submenu-color-text: var(--doc-color-secondary);
 }
 
 html {
