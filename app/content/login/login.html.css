@@ -1,9 +1,5 @@
 /* View Specific CSS */
 
-.main-header {
-  background-color: var(--doc-color-primary);
-}
-
 main {
   background-color: var(--doc-color-light);
 }

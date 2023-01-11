@@ -74,8 +74,7 @@ html {
   user-select: none;
 }
 
-.menu > li {
-  padding: calc(0.25*var(--menu-spacing)) var(--menu-spacing);
+.menu > li > a {
   background-color: var(--doc-color-dark-highlight);
   border-radius: var(--menu-border-radius);
 }
@@ -90,8 +89,23 @@ html {
   z-index: 30;
 }
 
+.main-header {
+  background-color: var(--doc-color-primary);
+}
+
+.main-header {
+  flex-wrap: nowrap;
+}
+
 .back-to-top {
   display: none;
+}
+
+.site-footer code {
+  background-color: var(--doc-color-dark-highlight);
+  color: var(--doc-color-secondary);
+  font-size: 0.85em;
+  padding: 0.15em;
 }
 
 @media (max-width:767px) {

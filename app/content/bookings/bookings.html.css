@@ -1,9 +1,5 @@
 /* View Specific CSS */
 
-.main-header {
-  background-color: var(--doc-color-primary);
-}
-
 main {
   --flexgrid-cell-color: white;
   --flexgrid-lines-color: gainsboro;
@@ -16,10 +12,6 @@ main {
   overflow: auto;    
   background-color: var(--flexgrid-lines-color);
   border: 3px solid var(--flexgrid-lines-color);
-}
-
-.main-header {
-  flex-wrap: nowrap;
 }
 
 .prev-day,
