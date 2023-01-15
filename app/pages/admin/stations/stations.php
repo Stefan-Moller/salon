@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ./app/content/admin/stations/stations.php
+ * ./app/pages/admin/stations/stations.php
  * 
  * Stations page controller - 09 Jan 2023
  *

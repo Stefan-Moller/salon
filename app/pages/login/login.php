@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ./app/content/login/login.php
+ * ./app/pages/login/login.php
  * 
  * Home page controller - 23 Sep 2022
  *

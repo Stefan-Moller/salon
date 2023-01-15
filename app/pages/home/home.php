@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ./app/content/home/home.php
+ * ./app/pages/home/home.php
  * 
  * Home page controller - 23 Sep 2022
  *

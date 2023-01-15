@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ./app/content/admin/staff/staff.php
+ * ./app/pages/admin/staff/staff.php
  * 
  * Staff page controller - 09 Jan 2023
  *

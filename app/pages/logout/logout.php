@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ./app/content/logout/logout.php
+ * ./app/pages/logout/logout.php
  * 
  * Home page controller - 28 Sep 2022
  *

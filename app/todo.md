@@ -15,6 +15,7 @@
 ## Features
  - Client CRUD on booking form - DONE
  - Add F1 vendor repo placeholder / reminder files - DONE
+ - Change the logo text back to an image(s) - DONE
  - Validate `Client Delete` requests.
   * The selected / target client must have no bookings.
   * Only supervisors can delete?
@@ -25,11 +26,10 @@
  - Logged in user icon and menu - 50%
  - Submenus - 50%
    * Close OPEN submenus when we click "off" the menu.
-   * Expand "Active Item" JS & CSS to apply to submenu items too.
-   * Improve submenu and submenu items CSS.
+   * Expand "Active Item" JS & CSS to apply to submenu items too - DONE
+   * Improve submenu and submenu items CSS - DONE
  - Create a booking with the currently selected as template.
  - Show who's the owner of a booking (only if you're a super?)
- - Change the logo text back to an image...
  - Add repeating appointments.
 
 ### Admin Page

@@ -1,13 +1,13 @@
 <?php
 
 /**
- * ./app/content/bookings/bookings.php
+ * ./app/pages/bookings/bookings.php
  * 
  * Salon bookings page controller - 08 Jul 2022
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 5.2.0 - FT - 08 Jan 2023
+ * @version 8.0.0 - FT - 15 Jan 2023
  *
  */
 

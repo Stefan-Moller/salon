@@ -162,3 +162,12 @@
 ## 09 Jan 2023 - FT - Ver 5.2.0
  - Add a new group of admin pages.
  - Rename content/setup to content/admin
+
+## 15 Jan 2023 - FT - Ver 8.0.0
+ - Rename app/content to app/pages!
+ - Remove Google Font header includes.
+ - Add new favicon.ico with the correct image.
+ - Change real text logo back to image text logos.
+ - Fix CSS and responsive styles related to new logo structure.
+ - Change the `<body>` tag class name from `window` to `max-height-100`.
+ - Jump a few version numbers to sync with the project's GIT commit version.

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * ./app/content/admin/services/services.php
+ * ./app/pages/admin/users/users.php
  * 
- * Services page controller - 09 Jan 2023
+ * Users page controller - 09 Jan 2023
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
@@ -18,7 +18,7 @@ if ( ! $auth->logged_in() ) header( 'Location:login' );
 // --- SETUP  ---
 // --------------
 
-$view->title = 'Treatments';
+$view->title = 'Users';
 
 $view->menus[ 'main' ]->addBackendItems();
 

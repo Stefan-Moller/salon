@@ -26,6 +26,12 @@ html {
   color: var(--doc-color-light);
 }
 
+h2 {
+  font-weight: normal;
+  font-family: sans;
+  font-style: italic;
+}
+
 .mb0 {
   margin-bottom: 0;
 }
@@ -48,7 +54,7 @@ html {
   width: 100%;
 }
 
-.brand img {
+.brand .logo {
   user-select: none;
   border: 1px solid #aaa;
   border-radius: 4px;
@@ -56,16 +62,14 @@ html {
   padding: 3px;
 }
 
-.brand h1 {
-  user-select: none;
-  white-space: nowrap;
-  font-family: 'Cookie', 'Passions Conflict';
-  font-weight: normal;
-  font-style: italic;
-  font-size: 3rem;
-  max-height: 3rem;
-  line-height: 3rem;
-  width: 0;
+.brand .logo-text {
+  display: flex;
+  max-width: 320px;
+  flex: none;
+}
+
+.brand .logo-text img {
+  height: 45px;
 }
 
 .menu a {
@@ -108,23 +112,25 @@ html {
   padding: 0.15em;
 }
 
+
 @media (max-width:767px) {
-  .site-header nav { min-height: 4rem; }  
-  .brand img { width: 4rem; }
-  .brand h1 { font-size: 2.8rem; }
+  .site-header nav { min-height: 3.5rem; }
+  .brand .logo { width: 4rem; }
+  .brand .logo-text img { height: 36px; }
   .menu a { font-size: 0.9em; }
 }
 
-@media (max-width:580px) {
-  .site-header nav { min-height: 3.5rem; }  
-  .brand img { width: 3.5rem; }
-  .brand h1 { display: block; font-size: 2.67rem; }
+@media (max-width:420px) {
+  .site-footer { display: none; }
+  .brand .logo { width: 3.5rem; }
+  .brand .logo-text img { height: 27px; }
 }
 
 @media (max-width:320px) {
-  .brand h1 span { display: none; }
-  .site-footer { display: none; }
+  .brand .logo-text img { height: 21px; }
+  .brand .logo-text img:first-child { display: none; }
 }
+
 
 /* Button */
 
