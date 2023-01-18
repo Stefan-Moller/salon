@@ -7,7 +7,7 @@
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 8.0.0 - FT - 15 Jan 2023
+ * @version 9.0.0 - FT - 18 Jan 2023
  *
  */
 
@@ -170,7 +170,7 @@ $view->addScript( 'js/vendors/vanilla/calendar.min.js' );
 addThemeStyles( $view );
 
 
-include 'bookings.model.php';
+include 'bookings.vm.php';
 $view->model = new Models\DayViewModel( $db, $view );
 
 

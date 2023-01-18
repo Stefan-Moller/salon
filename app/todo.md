@@ -11,6 +11,7 @@
  - Hide HOME menu option between 521px and 767px - DONE
  - Fix issue with page GOTO not always working when changing pages fast.
  - Fix issues with modal dialog input focus and "tabbing OFF modal" when open.
+ - Validate new booking times to ensure they don't overlap!
 
 ## Features
  - Client CRUD on booking form - DONE

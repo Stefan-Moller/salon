@@ -2,7 +2,7 @@
 <div id="edit-booking-modal" class="modal">
   <div class="modal-inner">
     <header>
-      <h3>Book Appointment</h3>
+      <h3 class="modal-title">Edit Appointment</h3>
       <a class="modal-close">Close X</a>
     </header>
     <form class="modal-body" method="post" novalidate>
@@ -27,9 +27,11 @@
           </select>
         </div>
         <div class="flex">
-          <button class="button button-edit button-icon button-sm" type="button" onclick="F1.onEditClient(event)">
-            <img src="img/edit-24.png" width="12" height="12"></button>
-          <button class="button button-add button-icon button-sm" type="button" onclick="F1.onNewClient(event)">+</button>
+          <button class="button button-edit button-icon button-sm" 
+              type="button" onclick="F1.onEditClient(event)">
+            <img src="img/edit-24.png"></button>
+          <button class="button button-add button-icon button-sm"
+              type="button" onclick="F1.onNewClient(event)">+</button>
         </div>
       </div>
       <div class="form-row">

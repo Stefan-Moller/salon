@@ -2,7 +2,7 @@
 <div id="view-booking-modal" class="modal">
   <div class="modal-inner">
     <header>
-      <h3>Appointment</h3>
+      <h3 class="modal-title">Appointment</h3>
       <a class="modal-close">Close X</a>
     </header>
     <div class="modal-body"></div>

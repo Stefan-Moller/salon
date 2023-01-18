@@ -1,11 +1,37 @@
 <include>doc__head</include>
 
+  <template id="row-template">
+    <include>station__row</include>    
+  </template>
+
   <include>site__header</include>
 
   <include>admin__header</include>
 
   <main>
-    <p>Stations page content goes here...</p>
+    <!-- Stations List View -->
+    <div id="stations-list" class="list">
+      <div class="list-header">
+        <div class="list-row">
+          <div>#</div>
+          <div>Station</div>
+          <div>Therapist</div>
+          <div>Colour</div>
+          <div>Notes</div>
+        </div>
+      </div>
+      <div class="list-body">
+        <foreach x="$view->model->stations as $station">
+        <include data="station">station__row</include>
+        </foreach>
+      </div>
+      <div class="list-footer">
+        <include id="tsd-switch" title="Show delete:" onchange=";F1.onToggleShowDelete(event)">
+            comp__slideswitch</include>
+      </div>
+    </div>
+    <!-- /Stations List View -->
+    <include>station__form</include>    
   </main>
 
   <include>site__footer</include>

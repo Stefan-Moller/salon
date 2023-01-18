@@ -18,7 +18,7 @@ if ( ! $auth->logged_in() ) header( 'Location:login' );
 // --- SETUP  ---
 // --------------
 
-$view->title = 'User Profile';
+$view->title = 'My Profile';
 
 $view->menus[ 'main' ]->addBackendItems();
 

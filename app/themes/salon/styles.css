@@ -28,8 +28,9 @@ html {
 
 h2 {
   font-weight: normal;
-  font-family: sans;
-  font-style: italic;
+  font-size: 1.34rem;
+  letter-spacing: 2px;
+  padding: 0.2em;
 }
 
 .mb0 {
@@ -50,7 +51,7 @@ h2 {
 
 .site-header nav {
   justify-content: space-between;
-  min-height: 5rem;
+  min-height: 4.5rem;
   width: 100%;
 }
 
@@ -58,7 +59,7 @@ h2 {
   user-select: none;
   border: 1px solid #aaa;
   border-radius: 4px;
-  width: 5rem;
+  width: 4.5rem;
   padding: 3px;
 }
 
@@ -105,10 +106,13 @@ h2 {
   display: none;
 }
 
+.site-footer {
+  font-size: 0.9rem;
+}
+
 .site-footer code {
   background-color: var(--doc-color-dark-highlight);
   color: var(--doc-color-secondary);
-  font-size: 0.85em;
   padding: 0.15em;
 }
 
@@ -144,7 +148,7 @@ h2 {
   justify-content: center;
   -webkit-appearance: button;
   background-color: transparent;
-  padding: 0.5rem 0.67rem;
+  padding: 0.34rem 0.67rem;
   border: 1px solid;
   font-family: sans-serif;
   white-space: nowrap;
@@ -169,6 +173,10 @@ h2 {
 .button-icon {
   width: 1.5rem;
   height: 1.5rem;
+}
+
+.button-icon img {
+  width: 79%;
 }
 
 .button-sm {

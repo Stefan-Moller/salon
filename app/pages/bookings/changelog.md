@@ -171,3 +171,10 @@
  - Fix CSS and responsive styles related to new logo structure.
  - Change the `<body>` tag class name from `window` to `max-height-100`.
  - Jump a few version numbers to sync with the project's GIT commit version.
+
+## 18 Jan 2023 - FT - Ver 9.0.0
+ - Improve F1 VIEW PHP compile function. 
+  * Can now `<include>` components with `props` and `data`.
+ - Change many file names again! (New convention)
+ - Update Edit/Create dialog title and button text dynamically.
+ - Get admin/stations 80% complete.

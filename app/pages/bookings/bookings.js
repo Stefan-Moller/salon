@@ -22,7 +22,7 @@ F1.deferred.push( function initPage() {
 
   /* Global Variable Aliases */
 
-  const baseUrl = F1.page;
+  const baseUrl = F1.pageHref;
 
 
   /* Global Service Aliases */
@@ -90,6 +90,11 @@ F1.deferred.push( function initPage() {
     formCtrl.elm.parentElement.insertBefore( elSummary, formCtrl.elm );
   }
 
+  function updateBookingModal( modalCtrl ) {
+    const elSubmit = modalCtrl.elm.querySelector( 'footer button' );
+    elSubmit.innerHTML = modalCtrl.title === 'Edit Appointment' ? 'Save' : 'Submit';
+  }
+
   function updateClientModal( modalCtrl ) {
     const elDelete = modalCtrl.elm.querySelector( 'footer a' );
     elDelete.classList.toggle( 'hidden',  modalCtrl.title === 'Add Client' );
@@ -134,7 +139,7 @@ F1.deferred.push( function initPage() {
   }
 
   function updateClientEditButton() {
-    elEditClientBtn.classList.toggle( 'hidden', ! elClientField.MODEL.getValue() );
+    elEditClientBtn.classList.toggle( 'hidden', ! elBookingClientField.MODEL.getValue() );
   }
 
   function clearDayViewContent() {
@@ -228,7 +233,8 @@ F1.deferred.push( function initPage() {
     booking.time = padNum(booking.start_hour) + ':' + padNum(booking.start_min);
     booking.elSlot = findBookingSlotElm( booking );
     booking.elm = booking.elSlot.firstElementChild;
-    modalCtrl_bookingForm.show( { data: booking } ); 
+    const afterShow = updateBookingModal;
+    modalCtrl_bookingForm.show( { data: booking, title: 'Edit Appointment', afterShow } ); 
     hideLoadingIndicator();
   }
 
@@ -312,7 +318,7 @@ F1.deferred.push( function initPage() {
     }
     modalCtrl_clientForm.close();
     const savedClient = savedResp;
-    const clientSelectCtrl = elClientField.MODEL.controller;
+    const clientSelectCtrl = elBookingClientField.MODEL.controller;
     const existingOpt = clientSelectCtrl.options.filter(opt => opt.value == savedClient.id)[0];
     if ( existingOpt ) {
       /* NB: We assume BookingFormModal is open! */
@@ -353,7 +359,7 @@ F1.deferred.push( function initPage() {
       alert( deleteResp.error );
     } else {
       /* NB: We assume BookingFormModal is open! */
-      const clientSelectCtrl = elClientField.MODEL.controller;
+      const clientSelectCtrl = elBookingClientField.MODEL.controller;
       const deletedClient = modalCtrl_clientForm.ENTITY;
       clientSelectCtrl.options = clientSelectCtrl.options.filter(opt => opt.value != deletedClient.id);
       clientSelectCtrl.toggleSelect(0); /* Clears the selected option. */
@@ -424,8 +430,9 @@ F1.deferred.push( function initPage() {
 
   F1.onNewBooking = function( event ) {
     log( 'onNewBooking', event );
+    const afterShow = updateBookingModal;
     const newBookingBase = { date: selectedDateYmd, duration: '0', elm: undefined };
-    modalCtrl_bookingForm.show( { data: newBookingBase } );
+    modalCtrl_bookingForm.show( { data: newBookingBase, title: 'Book Appointment', afterShow } );
   };
 
   F1.onEditBooking = function( event ) {
@@ -459,7 +466,7 @@ F1.deferred.push( function initPage() {
 
   F1.onEditClient = function( event ) {
     log( 'onEditClient', event );
-    const id = elClientField.MODEL.getValue();
+    const id = elBookingClientField.MODEL.getValue();
     fetchClient( id, fetchClientToEditSuccess );
   };
 
@@ -539,7 +546,7 @@ F1.deferred.push( function initPage() {
   function initClientEditForm() {
     log( 'initClientEditForm' );
     const showErrorSummary = true;
-    return new Form({ elm: elClientEditForm, fieldTypes, validatorTypes,
+    return new Form({ elm: elEditClientForm, fieldTypes, validatorTypes,
       showErrorSummary, mountErrorSummary });
   }
 
@@ -547,7 +554,7 @@ F1.deferred.push( function initPage() {
     log( 'initBookingEditForm' );
     const showErrorSummary = true;
     const afterInit = updateClientEditButton;
-    return new Form({ elm: elBookingEditForm, fieldTypes, validatorTypes,
+    return new Form({ elm: elEditBookingForm, fieldTypes, validatorTypes,
       afterInit, showErrorSummary, mountErrorSummary });
   }
 
@@ -583,9 +590,11 @@ F1.deferred.push( function initPage() {
     F1.components.elDateSelectModal = elDateSelectModal;
     F1.components.elViewBookingModal = elViewBookingModal;
     F1.components.elEditBookingModal = elEditBookingModal;
+    F1.components.elEditBookingForm = elEditBookingForm;
     F1.components.elEditClientModal = elEditClientModal;
+    F1.components.elEditClientForm = elEditClientForm;
     F1.components.elEditClientBtn = elEditClientBtn;
-    F1.components.elClientField = elClientField;
+    F1.components.elBookingClientField = elBookingClientField;
     /* Controllers */
     F1.controllers.formCtrl_clientForm = formCtrl_clientForm;
     F1.controllers.formCtrl_bookingForm = formCtrl_bookingForm;
@@ -617,16 +626,16 @@ F1.deferred.push( function initPage() {
 
   selectedDateYmd = getSelectedDateYmd();
 
-  const elHeader           = document.getElementById( 'main-header' );
-  const elDateNavCalendar  = document.getElementById( 'date-nav-calendar'  );
-  const elDateSelectModal  = document.getElementById( 'date-select-modal'  );
-  const elEditClientModal  = document.getElementById( 'edit-client-modal'  );
-  const elEditBookingModal = document.getElementById( 'edit-booking-modal' );
-  const elViewBookingModal = document.getElementById( 'view-booking-modal' );
-  const elBookingEditForm  = elEditBookingModal.querySelector( 'form ' );
-  const elClientEditForm   = elEditClientModal.querySelector( 'form ' );
-  const elClientField      = elBookingEditForm.querySelector( '.client .field' );
-  const elEditClientBtn    = elClientField.parentElement.querySelector( '.button-edit' );
+  const elHeader              = document.getElementById( 'main-header' );
+  const elDateNavCalendar     = document.getElementById( 'date-nav-calendar'  );
+  const elDateSelectModal     = document.getElementById( 'date-select-modal'  );
+  const elEditClientModal     = document.getElementById( 'edit-client-modal'  );
+  const elEditBookingModal    = document.getElementById( 'edit-booking-modal' );
+  const elViewBookingModal    = document.getElementById( 'view-booking-modal' );
+  const elEditBookingForm     = elEditBookingModal.querySelector( 'form ' );
+  const elEditClientForm      = elEditClientModal.querySelector( 'form ' );
+  const elBookingClientField  = elEditBookingForm.querySelector( '.client .field' );
+  const elEditClientBtn       = elBookingClientField.parentElement.querySelector( '.button-edit' );
 
   const calCtrl_dateNavCal    = initDateNavCalendar();
   const formCtrl_clientForm   = initClientEditForm(); 
