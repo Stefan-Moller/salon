@@ -25,16 +25,74 @@ F1.deferred.push(function initPage() {
   const logError = console.error;
   const urlParams = new URLSearchParams( window.location.search );
 
-
-  function mountErrorSummary( formCtrl, elSummary ) {
-    formCtrl.elm.parentElement.insertBefore( elSummary, formCtrl.elm );
+  function reduceData( data, use ) { 
+    return use.reduce( (o, k) => { o[k] = data[k]; return o; }, {} );
   }
 
-  function updateListView( station ) {}
+  function makeRow( data ) {
+    const use = [ 'id', 'no', 'name', 'therapist', 'colour', 'notes' ];
+    const viewData = reduceData( data, use );
+    const rowTemplate = elRowTemplate.innerHTML;
+    const elTempRowContainer = document.createElement( 'div' );
+    elTempRowContainer.innerHTML = renderHtmlTemplate( rowTemplate, viewData );
+    const elRow = elTempRowContainer.firstElementChild;
+    const elDelete = elRow.querySelector( '.button-delete' );
+    elDelete.classList.toggle( 'hidden', ! elToggleDelete.checked );
+    return elRow;
+  }
+
+  function findRow( id ) {
+    return document.getElementById( 'row-' + id );
+  }
+
+  function addListRow( data ) {
+    log( 'addListRow', { data } );
+    const elRow = makeRow( data );
+    elList.querySelector( '.list-body' ).append( elRow );
+  }
+
+  function updateListRow( data ) {
+    log( 'updateListRow', { data } );
+    const elNewRow = makeRow( data );
+    const elRow = findRow( data.id );
+    elRow.innerHTML = elNewRow.innerHTML;
+  }
+
+  function removeListRow( id ) {
+    log( 'removeListRow', { id } );    
+    const elRow = findRow( id );
+    elRow.remove();
+  }
 
   function updateModalAfterShow( modalCtrl ) {
     const elSubmit = modalCtrl.elm.querySelector( 'footer button' );
     elSubmit.innerHTML = modalCtrl.title === 'Edit Station' ? 'Save' : 'Submit';
+  }
+
+  function showLoadingIndicator() {
+    log( 'showLoadingIndicator' );
+    document.documentElement.classList.add( 'loading' );
+  }
+
+  function hideLoadingIndicator() {
+    log( 'hideLoadingIndicator' );
+    document.documentElement.classList.remove( 'loading' );
+  }
+
+  function renderHtmlTemplate( htmlTemplate, data ) {
+    log( 'renderHtmlTemplate', { htmlTemplate, data } );
+    let html = htmlTemplate;
+    for ( const propName in data ) {
+      log( 'propName =', propName );
+      const regex = new RegExp( '\\[data\\.' + propName + '\\]', 'g' );
+      html = html.replace( regex, data[ propName ] );
+    }
+    log( 'renderHtmlTemplate', { html } );
+    return html;
+  }
+
+  function mountErrorSummary( formCtrl, elSummary ) {
+    formCtrl.elm.parentElement.insertBefore( elSummary, formCtrl.elm );
   }
 
   function ajaxError( method = 'get', error ) {
@@ -70,24 +128,14 @@ F1.deferred.push(function initPage() {
     hideLoadingIndicator();
   }
 
-  function showLoadingIndicator() {
-    log( 'showLoadingIndicator' );
-    document.documentElement.classList.add( 'loading' );
-  }
-
-  function hideLoadingIndicator() {
-    log( 'hideLoadingIndicator' );
-    document.documentElement.classList.remove( 'loading' );
-  }
-
   function saveStation( station ) {
     log( 'saveStation', station );
     const formData = new FormData( elEditForm ).entries();
     const postData = { __action__: 'save', ...Object.fromEntries( formData ) };
-    ajaxSubmit( baseUrl, postData, saveResp => saveStationDone( saveResp ) );
+    ajaxSubmit( baseUrl, postData, saveResp => saveStationDone( saveResp, station ) );
   }
 
-  function saveStationDone( savedResp ) {
+  function saveStationDone( savedResp, station ) {
     log( 'saveStationDone', savedResp );
     if ( savedResp.error ) {
       const errors = [];
@@ -98,28 +146,47 @@ F1.deferred.push(function initPage() {
     }
     modalCtrl_editForm.close();
     const savedStation = savedResp;
-    updateListView( savedStation );
+    if ( station.id ) updateListRow( savedStation );
+    else addListRow( savedStation );
     hideLoadingIndicator();
+  }
+
+  function deleteStation( id ) {
+    log( 'deleteStation', id );
+    const postData = { __action__: 'delete', id };
+    ajaxSubmit( baseUrl, postData, deleteStationDone );    
+  }
+
+  function deleteStationDone( deleteResp ) {
+    log( 'deleteStationDone', deleteResp );
+    if ( deleteResp.error ) {
+      const errors = [];
+      logError( 'deleteStationDone', deleteResp.error );
+      alert( deleteResp.error );
+      return hideLoadingIndicator();
+    }
+    removeListRow( deleteResp.id );
+    hideLoadingIndicator();    
   }
 
 
   /* Global Event Handlers */
 
-  F1.onToggleShowDelete = function( event ) {
-    log( 'onToggleShowDelete', event );
-    const deleteButtons = elList.querySelectorAll( '.button-delete' );
-    deleteButtons.forEach( elBtn => elBtn.classList.toggle( 'hidden' ) );
+  F1.onEdit = function( event, id ) {
+    log( 'onEdit', event, id );
+    fetchItem( id, fetchItemSuccess );
+  };
+  
+  F1.onDelete = function( event, id ) {
+    log( 'onDelete', event, id );
+    if ( confirm( 'DELETE this station... Are you sure?' ) )
+      deleteStation( id );
   };
 
   F1.onAddNew = function( event, id ) {
     log( 'onEdit', event, id );
     const newStationBase = { elm: undefined };
     modalCtrl_editForm.show( { data: newStationBase, title: 'Add Station' } ); 
-  };
-
-  F1.onEdit = function( event, id ) {
-    log( 'onEdit', event, id );
-    fetchItem( id, fetchItemSuccess );
   };
 
   F1.onSubmit = function( event, id ) {
@@ -133,15 +200,21 @@ F1.deferred.push(function initPage() {
     saveStation( modalCtrl_editForm.ENTITY );
   };
 
+  F1.onToggleShowDelete = function( event ) {
+    log( 'onToggleShowDelete', event );
+    const deleteButtons = elList.querySelectorAll( '.button-delete' );
+    deleteButtons.forEach( elBtn => elBtn.classList.toggle( 'hidden' ) );
+  };
+
 
   /* Init */
 
   function initEditForm() {
     log( 'initEditForm' );
     const showErrorSummary = true;
-    const afterInit = () => {};
+    /* const afterInit = () => {}; */
     return new Form({ elm: elEditForm, fieldTypes, validatorTypes,
-      afterInit, showErrorSummary, mountErrorSummary });
+      /* afterInit ,*/ showErrorSummary, mountErrorSummary });
   }
 
   function initEditModal() {
@@ -178,6 +251,8 @@ F1.deferred.push(function initPage() {
   const elList = document.getElementById( 'stations-list' );
   const elEditModal = document.getElementById( 'edit-modal' );
   const elEditForm  = elEditModal.querySelector( 'form ' );
+  const elRowTemplate = document.getElementById( 'row-template' );
+  const elToggleDelete = document.getElementById( 'tsd-switch' );
 
   const formCtrl_editForm = initEditForm();
   const modalCtrl_editForm = initEditModal();

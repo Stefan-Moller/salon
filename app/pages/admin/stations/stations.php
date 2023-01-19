@@ -7,7 +7,7 @@
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 1.1.0 - FT - 18 Jan 2023
+ * @version 1.2.0 - FT - 19 Jan 2023
  * 
  */
 
@@ -54,7 +54,9 @@ if ( $http->request->isAjax ) {
           include $app->modelsDir . '/station.model.php';
           $stationModel = new Models\StationModel( $db, $http, $auth );
           $stationID = $stationModel->save();
-          $response = $stationModel->getById( $stationID );
+          include 'stations.vm.php';
+          $stationsViewModel = new Models\StationsViewModel( $db, $http, $auth );
+          $response = $stationsViewModel->getStation( $stationID );
           debug_log( 'After save. BookingID = ' . $stationID );
           break;
         }
@@ -64,7 +66,8 @@ if ( $http->request->isAjax ) {
           $stationID = $http->request->getPostVal( 'id' );
           $stationModel = new Models\StationModel( $db, $http, $auth );
           $stationModel->delete( $stationID );
-          $response = "Booking {$stationID} DELETED.";
+          $response->ok = "Booking {$stationID} DELETED.";
+          $response->id = $stationID;
           break;
         }
 
@@ -74,10 +77,10 @@ if ( $http->request->isAjax ) {
       else {
 
         if ( $do == 'getStation'  ) {
-          include $app->modelsDir . '/station.model.php';
-          $stationModel = new Models\StationModel( $db, $http, $auth );
+          include 'stations.vm.php';
+          $stationsViewModel = new Models\StationsViewModel( $db, $http, $auth, $view );
           $stationID = $http->request->getUrlParam( 'id' );
-          $response = $stationModel->getById( $stationID );
+          $response = $stationsViewModel->getStation( $stationID );
           break;
         }
 
@@ -128,7 +131,7 @@ addThemeStyles( $view );
 
 
 include 'stations.vm.php';
-$view->model = new Models\StationsViewModel( $db, $view );
+$view->model = new Models\StationsViewModel( $db, $http, $auth, $view );
 
 include $view->getFile();
 

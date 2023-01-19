@@ -14,3 +14,9 @@
   - Add comp__slideswitch
   - Add list-row `<template>` section
   - Add controller logic
+
+## 19 Jan 2023 - FT - Ver 1.2.0
+  - Get all CRUD functions working
+  - Implement JS template parsing + Adding new elements to the stations list.
+  - Sort stations by their `no` field.
+  - Change the `no` field type from `varchar` to `smallint`

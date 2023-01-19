@@ -1,8 +1,6 @@
 <include>doc__head</include>
 
-  <template id="row-template">
-    <include>station__row</include>    
-  </template>
+  <template id="row-template"><include>station__row</include></template>
 
   <include>site__header</include>
 
@@ -22,7 +20,7 @@
       </div>
       <div class="list-body">
         <foreach x="$view->model->stations as $station">
-        <include data="station">station__row</include>
+        <include data-obj="$station">station__row</include>
         </foreach>
       </div>
       <div class="list-footer">

@@ -1,0 +1,68 @@
+          Salon Allure v9.1.0 - FT  - pages/admin/stations: First fully functional version. Add `therapist.model.php`. Add GIT changelog.txt + move `todo.md` to the project root. Change `stations` db table `no` field type. View PHP Service, minor tweak.
+* 7418c33 Salon Allure v9.0.0 - FT  - f1/view + admin/stations: New and improved F1 VIEW PHP compile function. Can now <include> components with props and data! Change file names again. Get admin/stations 80% complete. Update Edit/Create dialog title and submit button text dynamically.
+* d3e76c3 Salon Allure v8.0.0 - FT  - favicon + images + config.php: Change app->contentDir to app->pagesDir and rename app/content to app/pages. Add a new favicon. Change the logo-text to logo-text-images. Update Todo's. Remove google font includes. Change body tag class name.
+* 4581733 Salon Allure v7.2.0 - FT  - salon/doc_footer.html.php + index.php: Add application version setting and display. Add new `admin__header` theme template + Update affected views. Continue to improve menu styles.
+* 675b29b Salon Allure v7.1.0 - FT  - services/view: Add `view->href` and `F1.pageHref` so "Menu Active Item" can work. Improve submenu CSS.
+* 77e50fa Salon Allure v7.0.1 - UPD - todos: Move the `todo.md` file to the app base dir. Fix and add the Users admin page to the Admin menu.
+* 28fca89 Salon Allure v7.0.0 - DEV - image: Move unused images under "img/misc". Reduce the number and size of images. Rename `logo-00.jpg` to `logo.jpg` and update header view. Add a new TODO item.
+* 6a3956f Salon Allure v6.0.1 - UPD - vendors: Add F1 vendor repo placeholder / reminder files.
+* 0c34515 Salon Allure v6.0.0 - FT  - services/menu.php: Add new `Menu service`! Add global `View helpers`. Update all affected pages.  Fix `Admin pages` base content.
+* cdee187 Salon Allure v5.3.0 - FT  - content/admin: New group of pages. Initial commit.  Rename content/setup to content/admin.
+* a76d308 Salon Allure v5.2.0 - DEV - content/bookings: Hide HOME menu option between 521px and 767px
+* 59c7dfe Salon Allure v5.1.0 - FT  - content/bookings: Remove all `<?php` tags from the main view file, making it more "Stupid IDE" friendly. Use special HTML tags `<include>`,`<foreach>`, `<if>` and the NEW `<eval>` tag, to make the main view file HTML only.
+* 1c6ff9e Salon Allure v5.0.0 - FT  - themes/site__menu + general: New multi-level menu system (i.e. sub-menus) + New file and styles naming convention (update all affected) + Remove unused files.
+* 4084b2c Salon Allure v4.0.2 - FIX - content/bookings: Update the `Bookings Count` after adding OR deleting a booking + Change the Client Edit modal title and hide the "Delete link" when adding a new client + Clip overflow text on booking summaries.
+* 0ab1c62 Salon Allure v4.0.1 - FIX - content/login: Fix regression. Change form option name from `showSummary` to `showErrorSummary`.
+* 0b8ef23 Salon Allure v4.0.0 - FT  - Add `Client CRUD` support and icons to the Booking Form + Add new ClientModel class + Improve SelectJS, FormJS, ViewPHP and AuthPHP. Change JS and CSS vendor files structure + Move booking modals from `app/themes` to `app/content/bookings` + Re-factor `doc-head.html.php`.
+* 65e849a Salon Allure v3.4.2 - DEV - content/login: Completely re-factor HTML and CSS again. Use new form CSS classes and HTML markup. e.g `.form-rows` and `.form-row`
+* 719b2c3 Salon Allure v3.4.1 - DEV - templates/modal-booking-edit.php: Remove `two column selects` row from the booking form. Set tabindex="0" in some inputs to see if it fixes tab order on mobile.
+* bdb4bda Salon Allure v3.4.0 - DEV - content/bookings: Refactor the booking form HTML and styles to be more responsive. Change CSS media breakpoints.
+* 0f8df8c Salon Allure v3.3.0 - FT  - mobile menu: Implement a basic `mobile menu` with `hamburger button` toggle. Shorten home page header title to "Welcome" only. Further improve the responsive behaviour of the site header. Change 404 page back link.
+* 7051218 Salon Allure v3.2.0 - DEV - content/bookings: Shrinking date- and add-buttons with ellipsis! Main logo and menu responsive behaviors. New brand font.
+* e9c6e37 Salon Allure v3.1.1 - FIX - models/booking.model.php: Fix regression due to namespace change.
+* aa6b3b4 Salon Allure v3.1.0 - DEV - content/bookings: Rename and change location of model files used. Change the model file namespace to `Models`.
+* d814248 Salon Allure v3.0.2 - FIX - Fix `loading indicator` CSS after HTML tag changes.
+* fa72195 Salon Allure v3.0.1 - FIX - Fix `$req->path`error on the `404 Error` page + Change header and footer template names back to `site-*`. Move `salon-theme.css` to `themes/salon` folder.
+* e612e09 Salon Allure v3.0.0 - FT  - New HTML core structure + Fixed `position.sticky` grid + Totally refactored Bookings page HTML + More CSS vars + New color scheme + Improved responsive behavior + Renamed some templates.
+* 4fcf4b4 Salon Allure v2.7.2 - RC2 - Fix stupid bug!!!
+* b3e1fdf Salon Allure v2.7.1 - RC  - Commit minor changes before upload to decent demos.
+* d04e871 Salon Allure v2.7.0 - FT  - content/login: Complete ES6 module conversion. Add try/catch block to Auth service to catch login auth errors.
+* 55d5264 Salon Allure v2.6.0 - FT  - services/debug.php: Update to reflect changes in F1 Debug and the addition of __DEBUG_LV__ to config.php
+* 2c45830 Salon Allure v2.5.8 - FIX - bookings.html.css: Fix a `mobile view` regression causing the grid to expand outside of the app window.
+* 30a120d Salon Allure v2.5.7 - FIX - content/bookings: Fix issues with remaining `$http->req`s + Fix issue with calendar date not updating when we change the date without the calendar.
+* fcd99bf Salon Allure v2.5.6 - DEV - content/setup: Add changelog.md
+* c34704f Salon Allure v2.5.5 - DEV - content/login: Update code to reflect changes in F1PHP services.
+* 2a156ae Salon Allure v2.5.4 - DEV - content/home: Update code to reflect changes in F1PHP services.
+* 1f7a810 Salon Allure v2.5.3 - DEV - themes/salon/doc-foot.html.php: Rename `getScriptsFile` to `getInlineScriptsFile`. Remove "js/" prefix from style include src's. Remove `scriptInfo` idea.
+* 9cdfb08 Salon Allure v2.5.2 - DEV - themes/salon/doc-head.html.php: Rename `getStylesFile` to `getInlineStylesFile`. Remove "css/" prefix from style include href's.
+* 9af74f1 Salon Allure v2.5.1 - DEV - content/bookings: Update code to reflect changes in F1PHP services.
+* add7ffc Salon Allure v2.5.1 - UPD - F1PHP: Move `widgets/listview.php` to the `HTTP` service class.
+* c3c1d1e Salon Allure v2.5.0 - DEV - F1JS: Change F1JS modules to ES6. Update affected app code to match. Remove unused code and theme files. Rename vars in bookings.html.js
+* a97ea35 Salon Allure v2.4.2 - UPD - app/config-example.php:
+* f346130 Salon Allure v2.4.1 - FIX - content/bookings: Fix issues around F1.Modal and the ENTITY prop. bookingFormModalCtrl.ENTITY vs. elBookingFormModal.ENTITY
+* 6823c08 Salon Allure v2.4.0 - FT  - content/bookings: Totally refactor f1js.Modal! Update all affected code. Fix a number of bugs.
+* 7ba4ab4 Salon Allure v2.3.2 - FIX - content/bookings/bookings.html.js: Fix bug with baseUrl having a slash in-front of it.
+* 561bb4a Salon Allure v2.3.1 - FIX - models/booking.model.php: Fix bug in validation logic.
+* 35a4cc9 Salon Allure v2.3.0 - FT  - content/bookings: Major update! Full AJAX CRUD and DAY VIEW + Data selector popup + Server-side validations and feedback + Sticky headers + F1JS improvements and more...
+* 9ff8a6d Salon Allure v2.2.1 - UPD - Add content/bookings/bookings.view.sql
+* dcc395e Salon Allure v2.2.1 - UPD - js/vendors/vanilla-calendar.js: Add file info comment at top.
+* 66ea231 Salon Allure v2.2.0 - FT  - content/setup: Properly initialize the new setup page.
+* a477733 Salon Allure v2.1.1 - DEV - services/debug.php: Add onError handler, in addition to the onShutdown exception handler.
+* 3bd89ee Salon Allure v2.1.0 - FT  - Add multiple validators support to booking form + Add ID field for updates + Click on time-slot + Long DateNavFmt.
+* 7e7e001 Salon Allure v2.0.1 - FIX - booking.model.php: Fix typo in variable name!
+* 0cd91d2 Salon Allure v2.0.0 - FT  - Complete bookings page HTML design + Full JS & CSS refactoring/cleanup + New total bookings indicator feature.
+* 3316d99 Salon Allure v1.3.4 - UPD - JS & CSS includes: Update page controllers to use the new JS and CSS include paths.
+* 844e50d Salon Allure v1.3.3 - DEV - calendar.model.php: Remove `$appointments` and `getAppointments()` + Remove `$today` from constructor.
+* c1d8a0e Salon Allure v1.3.2 - DEV - login.html.css: Improve the login page appearance. Limit the width to an aesthetically pleasing size.
+* c30ce8e Salon Allure v1.3.1 - DEV - 404.html: Return the propper HTTP code + Return nothing if the request is for a missing file instead of a page.
+* effa74a Salon Allure v1.3.0 - FT  - themes/salon/booking-modal.html.php: Rename modal file + Add `booking-view-model.html.php`
+* 2d2dfa1 Salon Allure v1.2.5 - DEV - themes/salon/404.html: Remove. Cannot have a theme 404 file for now, due to how the page init seq works.
+* 9731f33 Salon Allure v1.2.4 - DEV - appointment.model.php: Change appointment.model.php to booking.model.php. Rename vars and class name too.
+* b8a32da Salon Allure v1.2.3 - DEV - air-datepicker.js: Create new vendor folders for air-datepicker + Move files.
+* 789aa3c Salon Allure v1.2.2 - DEV - Public CSS: Move common files to vendors/f1css
+* fe4f367 Salon Allure v1.2.1 - DEV - Public JS: Move common lib files to vendors/f1js.
+* d9f36f1 Salon Allure v1.2.0 - DEV - Added appointments DB view + Js to display appointments. Can also add new appointments.  New model files. Dynamic menu content depending on auth state and page.
+* 01eee27 Salon Allure v1.1.0 - DEV - Major update. Added Home + Auth + Login + Logout. Removed Multi-demo code bits. Add `menu` to F1/View. New F1/Session class.
+* 4541943 Salon Allure v1.0.1 - UPD - index.php: Update header comment.
+* c51232d Salon Allure v1.0.0 - INI - Initial commit
+* dbf3cf9 Initial commit

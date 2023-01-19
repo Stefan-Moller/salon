@@ -73,7 +73,7 @@ CREATE TABLE `clients` (
 DROP TABLE IF EXISTS `stations`;
 CREATE TABLE `stations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `no` varchar(6) NOT NULL,
+  `no` smallint NOT NULL,
   `name` varchar(255) NOT NULL,
   `def_therapist_id` int(11) DEFAULT NULL,
   `colour` varchar(20) NOT NULL,

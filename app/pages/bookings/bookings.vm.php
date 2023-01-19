@@ -60,7 +60,7 @@ class DayViewModel {
 
   public function getStations()
   {
-    return $this->db->query( 'stations' )->getAll();
+    return $this->db->query( 'stations' )->orderBy( 'no' )->getAll();
   }
 
 

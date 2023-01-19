@@ -29,3 +29,9 @@ order by
   `b`.`date`, 
   `b`.`start_hour`, 
   `b`.`start_min`
+
+
+/* ---- */
+
+ALTER TABLE `stations`
+CHANGE `no` `no` smallint NOT NULL AFTER `id`;

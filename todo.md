@@ -32,6 +32,7 @@
  - Create a booking with the currently selected as template.
  - Show who's the owner of a booking (only if you're a super?)
  - Add repeating appointments.
+ - Add table with allowed colors for stations and staff to pick from.
 
 ### Admin Page
  * User CRUD
