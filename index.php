@@ -35,7 +35,7 @@ include $app->servicesDir . '/menu.php';
 include $app->servicesDir . '/view.php';
 
 
-$app->version = '9.1';
+$app->version = '9.2';
 
 // $debug->dump( $app );
 $debug->log( "Mem: {$mem_kb}, Time: 0ms", 'START' );

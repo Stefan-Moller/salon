@@ -57,7 +57,7 @@ if ( $http->request->isAjax ) {
           include 'stations.vm.php';
           $stationsViewModel = new Models\StationsViewModel( $db, $http, $auth );
           $response = $stationsViewModel->getStation( $stationID );
-          debug_log( 'After save. BookingID = ' . $stationID );
+          debug_log( 'After save. StationID = ' . $stationID );
           break;
         }
 
@@ -66,7 +66,7 @@ if ( $http->request->isAjax ) {
           $stationID = $http->request->getPostVal( 'id' );
           $stationModel = new Models\StationModel( $db, $http, $auth );
           $stationModel->delete( $stationID );
-          $response->ok = "Booking {$stationID} DELETED.";
+          $response->ok = "Station {$stationID} DELETED.";
           $response->id = $stationID;
           break;
         }
@@ -134,7 +134,6 @@ include 'stations.vm.php';
 $view->model = new Models\StationsViewModel( $db, $http, $auth, $view );
 
 include $view->getFile();
-
 
 /*
 stdClass Object

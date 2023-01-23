@@ -33,6 +33,7 @@
  - Show who's the owner of a booking (only if you're a super?)
  - Add repeating appointments.
  - Add table with allowed colors for stations and staff to pick from.
+ - "Clear value" button on F1 Select elements.
 
 ### Admin Page
  * User CRUD

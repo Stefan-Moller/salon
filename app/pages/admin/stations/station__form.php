@@ -13,19 +13,25 @@
         </div>
       </div>
       <div class="form-row">
-        <div class="field">
+        <div class="field required">
           <label>No</label>
           <input class="input" type="text" name="no" value="">
         </div>
       </div>      
       <div class="form-row">
-        <div class="field">
+        <div class="field required">
           <label>Name</label>
           <input class="input" type="text" name="name" value="">
         </div>
-      </div>      
+      </div>
       <div class="form-row">
-        <div class="field required" data-type="Select">
+        <div class="field required">
+          <label>Colour</label>
+          <input class="input" type="text" name="colour" value="">
+        </div>
+      </div>  
+      <div class="form-row">
+        <div class="field" data-type="Select">
           <label>Therapist</label>
           <select 
             name="def_therapist_id" 
@@ -37,13 +43,7 @@
             <?php endforeach; ?>
           </select>           
         </div>
-      </div>
-      <div class="form-row">
-        <div class="field">
-          <label>Colour</label>
-          <input class="input" type="text" name="colour" value="">
-        </div>
-      </div>      
+      </div>  
       <div class="form-row">
         <div class="field" data-type="Memo">
           <label>Note</label>

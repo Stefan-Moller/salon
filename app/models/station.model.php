@@ -30,7 +30,8 @@ class StationModel {
     if ( $id ) $station->id = $id;
     $station->no = $this->getPostVal( 'no' );
     $station->name = $this->getPostVal( 'name' );
-    $station->def_therapist_id = $this->getPostVal( 'def_therapist_id' );
+    $therapist_id = $this->getPostVal( 'def_therapist_id' );
+    if ( $therapist_id ) $station->def_therapist_id = $therapist_id;
     $station->colour = $this->getPostVal( 'colour' );
     $station->notes = $this->getPostVal( 'notes' );
     return $station;
