@@ -12,10 +12,10 @@ $mem_kb = round( $mem_usage / 1024 ) . 'KB';
  ***********************************/
 
 // -----------------------------------------------------------------------
-// Fetch application environment, services and instance specific settings.
+// Fetch application hosting environment and instance specific settings.
 // -----------------------------------------------------------------------
 
-require 'config.php';
+require '.env-local';
 
 
 // -----------------------------------------------------------------------

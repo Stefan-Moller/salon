@@ -34,6 +34,7 @@
  - Add repeating appointments.
  - Add table with allowed colors for stations and staff to pick from.
  - "Clear value" button on F1 Select elements.
+ - `htmlspecialchars(strip_tags($_FILES['uploadFile']['name']))`
 
 ### Admin Page
  * User CRUD

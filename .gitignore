@@ -1,4 +1,4 @@
-config.php
+.env-local
 app/storage/logs/*.log
 css/vendors/f1css
 js/vendors/f1js
