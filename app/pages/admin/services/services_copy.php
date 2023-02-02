@@ -1,30 +1,31 @@
 <?php
+die("hello poop");
 
 /**
- * ./app/pages/admin/staff/staff.php
+ * ./app/pages/admin/stations/stations.php
  * 
- * Staff page controller - 25 Jan 2023
+ * Services page controller - 25 Jan 2023
  *
  * @author C. Moller <xavier.tnc@gmail.com>
  * 
- * @version 1.0.0 - INIT -  25 Jan 2023
+ * @version 1.0.0 - FT - 25 Jan 2023
  * 
  */
 
 if ( ! $auth->logged_in() ) header( 'Location:login' );
 
 
+
 // --------------
 // --- SETUP  ---
 // --------------
 
-$view->title = 'Therapists';
+$view->title = 'Services';
 
 $view->menus[ 'main' ]->addBackendItems();
 
 
 $db->connect( $app->dbConnection[ 'salon' ] );
-
 
 
 // -------------
@@ -51,23 +52,23 @@ if ( $http->request->isAjax ) {
       if ( $http->request->isPost ) { 
 
         if ( $do == 'save' ) {
-          include $app->modelsDir . '/staff.model.php';
-          $staffModel = new Models\StaffModel( $db, $http, $auth );
-          $staffID = $staffModel->save();
-          include 'staff.vm.php';
-          $staffViewModel = new Models\StaffViewModel( $db, $http, $auth );
-          $response = $stationsViewModel->getStaff( $staffID );
-          debug_log( 'After save. StaffID = ' . $staffID );
+          include $app->modelsDir . '/services.model.php';
+          $serviceModel = new Models\ServiceModel( $db, $http, $auth );
+          $serviceID = $serviceModel->save();
+          include 'services.vm.php';
+          $servicesViewModel = new Models\ServicesViewModel( $db, $http, $auth );
+          $response = $servicesViewModel->getService( $serviceID );
+          debug_log( 'After save. ServiceID = ' . $serviceID );`
           break;
         }
 
         if ( $do == 'delete' ) {
-          include $app->modelsDir . '/staff.model.php';
-          $staffID = $http->request->getPostVal( 'id' );
-          $staffModel = new Models\StaffModel( $db, $http, $auth );
-          $staffModel->delete( $staffID );
-          $response->ok = "Staff {$staffID} DELETED.";
-          $response->id = $staffID;
+          include $app->modelsDir . '/services.model.php';
+          $serviceID = $http->request->getPostVal( 'id' );
+          $serviceModel = new Models\ServiceModel( $db, $http, $auth );
+          $serviceModel->delete( $serviceID );
+          $response->ok = "Service {$serviceID} DELETED.";
+          $response->id = $serviceID;
           break;
         }
 
@@ -76,11 +77,11 @@ if ( $http->request->isAjax ) {
       // AJAX GET
       else {
 
-        if ( $do == 'getStaff'  ) {
-          include 'staff.vm.php';
-          $stationsViewModel = new Models\StaffViewModel( $db, $http, $auth, $view );
-          $stationID = $http->request->getUrlParam( 'id' );
-          $response = $stationsViewModel->getStaff( $staffID );
+        if ( $do == 'getService'  ) {
+          include 'services.vm.php';
+          $servicesViewModel = new Models\ServicesViewModel( $db, $http, $auth, $view );
+          $serviceID = $http->request->getUrlParam( 'id' );
+          $response = $servicesViewModel->getService( $serviceID );
           break;
         }
 
@@ -130,8 +131,8 @@ $view->addStyle( 'css/vendors/f1css/list.css'          );
 addThemeStyles( $view );
 
 
-include 'staff.vm.php';
-$view->model = new Models\StaffViewModel( $db, $http, $auth, $view );
+include 'services.vm.php';
+$view->model = new Models\ServicesViewModel( $db, $http, $auth, $view );
 
 include $view->getFile();
 

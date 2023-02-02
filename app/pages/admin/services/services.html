@@ -1,11 +1,34 @@
 <include>doc__head</include>
 
+  <template id="row-template"><include>services__row</include></template>
+
   <include>site__header</include>
 
   <include>admin__header</include>
 
   <main>
-    <p>Treatments page content goes here...</p>
+    <!-- Services List View -->
+    <div id="service-list" class="list">
+      <div class="list-header">
+        <div class="list-row">
+          <div>Treatments</div>
+          <div>Duration</div>
+          <div>Price</div>
+          <div>Unit</div>
+        </div>
+      </div>
+      <div class="list-body">
+        <foreach x="$view->model->services as $service">
+        <include data-obj="$service">services__row</include>
+        </foreach>
+      </div>
+      <div class="list-footer">
+        <include id="tsd-switch" title="Show delete:" onchange=";F1.onToggleShowDelete(event)">
+            comp__slideswitch</include>
+      </div>
+    </div>
+    <!-- /Services List View -->
+    <include>services__form</include>    
   </main>
 
   <include>site__footer</include>

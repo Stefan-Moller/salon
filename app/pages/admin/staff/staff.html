@@ -1,11 +1,35 @@
 <include>doc__head</include>
 
+  <template id="row-template"><include>staff__row</include></template>
+
   <include>site__header</include>
 
   <include>admin__header</include>
 
   <main>
-    <p>Therapists page content goes here...</p>
+    <!-- Staff List View -->
+    <div id="staff-list" class="list">
+      <div class="list-header">
+        <div class="list-row">
+          <div>Name</div>
+          <div>Cell</div>
+          <div>Email</div>
+          <div>Colour</div>
+          <div>Notes</div>
+        </div>
+      </div>
+      <div class="list-body">
+        <foreach x="$view->model->therapists as $therapist">
+        <include data-obj="$therapist">staff__row</include>
+        </foreach>
+      </div>
+      <div class="list-footer">
+        <include id="tsd-switch" title="Show delete:" onchange=";F1.onToggleShowDelete(event)">
+            comp__slideswitch</include>
+      </div>
+    </div>
+    <!-- /Staff List View -->
+    <include>staff__form</include>    
   </main>
 
   <include>site__footer</include>
